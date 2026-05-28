@@ -19,9 +19,9 @@ everything else works without one.
    (Host is almost always `localhost`.)
 
 ## Step 2 — Add your DB details to the app
-1. Open `includes/config.php` (edit it on your computer before upload, or via hPanel
-   File Manager after upload).
-2. Fill in:
+1. Copy `includes/config.sample.php` to `includes/config.php` (the real config is
+   git-ignored so your credentials never end up in the repo).
+2. Open `includes/config.php` and fill in:
    ```php
    define('DB_NAME', 'your_db_name');
    define('DB_USER', 'your_db_user');
@@ -38,10 +38,10 @@ everything else works without one.
 3. Upload **all** the files and folders from this package, keeping the structure:
    ```
    index.php  login.php  logout.php  dashboard.php  account.php  install.php
-   study.php  study_generate.php  study_chapter.php
+   study.php  study_generate.php  study_chapter.php  study_edit.php  study_review.php  chapters_manage.php
    questionbank.php  paper_new.php  paper_review.php  question_edit.php
    examzone.php  test_new.php  test_attempt.php  test_result.php
-   reports.php
+   reports.php  selftest.php  export.php
    includes/   api/   assets/   sql/   uploads/   .htaccess
    ```
    (Tip: upload the `.zip`, then use File Manager's **Extract** option.)
@@ -90,6 +90,16 @@ Log in as each, open **Account**, and set new passwords you'll remember.
 **Reports**
 - Scores over time, accuracy by subject and chapter, and engaged (idle-free) time by area
   and per day — as inline charts. Admin can pick which student to view.
+
+**Extras**
+- **Math rendering**: formulas are written as LaTeX and rendered with KaTeX everywhere.
+- **Diagrams**: questions that depend on a figure show the source page image inline.
+- **Practice my mistakes**: one click builds a test from questions you previously got wrong.
+- **Full NEET mock**: 180 questions (45 each subject), 200 minutes, NEET marking.
+- **Flashcard review**: spaced repetition (SM-2) across all generated flashcards.
+- **Resumable tests**: answers autosave, so a reload mid-test keeps your progress.
+- **Admin tools**: edit generated content (`study_edit`), manage/reorder chapters
+  (`chapters_manage`), self-diagnostic (`selftest.php`), and one-click SQL backup (`export.php`).
 
 ## Using AI features
 The Study-Material generator and Question extractor call the Anthropic API. Add your key in

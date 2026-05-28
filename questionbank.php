@@ -13,6 +13,7 @@ $admin = is_admin();
 $fSubject = (int)($_GET['subject'] ?? 0);
 $fChapter = (int)($_GET['chapter'] ?? 0);
 $fPaper   = (int)($_GET['paper'] ?? 0);
+$fQ       = trim($_GET['q'] ?? '');
 
 // canonical subjects for the filter
 $subjOpts = [];
@@ -74,14 +75,17 @@ $papers   = qa("SELECT * FROM papers ORDER BY exam_date DESC, id DESC");
       <option value="<?php echo $p['id']; ?>" <?php echo $fPaper===(int)$p['id']?'selected':''; ?>><?php echo e($p['exam_name']); ?></option>
     <?php endforeach; ?>
   </select>
-  <?php if ($fSubject||$fChapter||$fPaper): ?><a class="btn ghost sm" href="questionbank.php">Reset</a><?php endif; ?>
+  <input type="text" name="q" value="<?php echo e($fQ); ?>" placeholder="Search text…" style="max-width:200px">
+  <button class="btn sm" type="submit">Search</button>
+  <?php if ($fSubject||$fChapter||$fPaper||$fQ!==''): ?><a class="btn ghost sm" href="questionbank.php">Reset</a><?php endif; ?>
 </form>
 
 <?php
-$where = ["status='published'"]; $args = [];
-if ($fSubject) { $where[] = 'subject_id=?'; $args[] = $fSubject; }
-if ($fChapter) { $where[] = 'chapter_id=?'; $args[] = $fChapter; }
-if ($fPaper)   { $where[] = 'paper_id=?';   $args[] = $fPaper; }
+$where = ["q.status='published'"]; $args = [];
+if ($fSubject) { $where[] = 'q.subject_id=?'; $args[] = $fSubject; }
+if ($fChapter) { $where[] = 'q.chapter_id=?'; $args[] = $fChapter; }
+if ($fPaper)   { $where[] = 'q.paper_id=?';   $args[] = $fPaper; }
+if ($fQ!=='')  { $where[] = 'q.stem LIKE ?';  $args[] = '%' . $fQ . '%'; }
 $sql = "SELECT q.*, ch.name AS chapter, s.name AS subject, p.exam_name
         FROM questions q
         LEFT JOIN chapters ch ON ch.id=q.chapter_id
@@ -102,6 +106,7 @@ $rows = qa($sql, $args);
   <div class="qcard" style="margin-bottom:12px">
     <div class="qno"><?php echo e($q['subject'] ?: 'General'); ?><?php echo $q['chapter']?' · '.e($q['chapter']):''; ?><?php echo $q['exam_name']?' · '.e($q['exam_name']):''; ?></div>
     <div class="qtext" style="font-size:1.02rem"><?php echo e($q['stem']); ?></div>
+    <?php echo question_image_html($q['paper_id'], $q['image_ref']); ?>
     <?php if ($q['qtype']==='mcq'): foreach ($opts as $oi=>$o): ?>
       <div class="opt ans-opt" data-correct="<?php echo ((int)$q['correct_index']===$oi)?1:0; ?>" style="cursor:default"><?php echo e($o); ?></div>
     <?php endforeach; else: ?>

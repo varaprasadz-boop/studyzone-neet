@@ -1,5 +1,10 @@
 <?php
-require_once __DIR__ . '/config.php';
+$__cfg = __DIR__ . '/config.php';
+if (!file_exists($__cfg)) {
+    http_response_code(500);
+    die('Setup needed: copy <code>includes/config.sample.php</code> to <code>includes/config.php</code> and fill in your database details.');
+}
+require_once $__cfg;
 function db() {
     static $pdo = null;
     if ($pdo === null) {

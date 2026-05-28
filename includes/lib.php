@@ -95,6 +95,34 @@ const NEET_CORRECT = 4;
 const NEET_WRONG   = -1;
 const NEET_SKIP    = 0;
 
+/* Ensure the spaced-repetition table exists (for installs whose install.php
+   predates this feature / was deleted after setup). Cheap CREATE IF NOT EXISTS. */
+function ensure_sr() {
+    db()->exec("CREATE TABLE IF NOT EXISTS flashcard_reviews (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      chapter_id INT NOT NULL,
+      card_index INT NOT NULL,
+      reps INT DEFAULT 0,
+      ease DECIMAL(4,2) DEFAULT 2.50,
+      interval_days INT DEFAULT 0,
+      due_date DATE NOT NULL,
+      UNIQUE KEY uniq_card (user_id, chapter_id, card_index),
+      INDEX(user_id), INDEX(due_date)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+}
+
+/* Inline figure for a question that relies on a diagram on its source page.
+   Served through the login-gated api/file.php. */
+function question_image_html($paperId, $imageRef) {
+    if (!$paperId || !$imageRef) return '';
+    $f = basename($imageRef);
+    if (!preg_match('/^p\d+\.(jpg|jpeg|png|webp|gif)$/i', $f)) return '';
+    $url = 'api/file.php?paper=' . (int)$paperId . '&f=' . e($f);
+    return '<a href="' . $url . '" target="_blank" class="qimg-wrap" title="open full page">'
+         . '<img class="qimg" src="' . $url . '" alt="question figure" loading="lazy"></a>';
+}
+
 function fmt_hms($seconds) {
     $seconds = max(0, (int)$seconds);
     $h = intdiv($seconds, 3600); $m = intdiv($seconds % 3600, 60); $s = $seconds % 60;

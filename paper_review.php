@@ -132,7 +132,7 @@ require __DIR__.'/includes/header.php';
       <div class="opt correct" style="cursor:default">Answer: <?php echo e($q['correct_value'] ?: '—'); ?></div>
     <?php endif; ?>
     <?php if ($q['explanation']): ?><div class="ex"><?php echo e($q['explanation']); ?></div><?php endif; ?>
-    <?php if ($q['image_ref']): ?><div class="hint">⚠ relies on a diagram — <a href="api/file.php?paper=<?php echo $paperId; ?>&f=<?php echo e(basename($q['image_ref'])); ?>" target="_blank">view page</a></div><?php endif; ?>
+    <?php if ($q['image_ref']): ?><div class="hint">⚠ relies on a diagram:</div><?php echo question_image_html($paperId, $q['image_ref']); ?><?php endif; ?>
   </div>
 <?php endforeach; ?>
 </div>

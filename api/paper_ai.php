@@ -25,10 +25,11 @@ $ref = 'papers/' . $paperId . '/' . $file;
 $subjectNames = array_column(qa("SELECT DISTINCT name FROM subjects ORDER BY name"), 'name');
 $subjList = implode(', ', $subjectNames);
 
-$system = "You are an expert at reading scanned/photographed NEET (India) exam papers and digitising "
-        . "Multiple-Choice and integer/numeric questions accurately. Transcribe maths and symbols faithfully "
-        . "(use unicode like ², ½, →, °, Ω). Respond with ONLY a valid JSON array, no markdown or commentary. "
-        . "If a question relies on a diagram you cannot read, still transcribe its text and set \"needs_image\": true.";
+$system = 'You are an expert at reading scanned/photographed NEET (India) exam papers and digitising '
+        . 'Multiple-Choice and integer/numeric questions accurately. Transcribe every mathematical or chemical '
+        . 'expression as LaTeX between single dollar signs (e.g. $v=u+at$, $\frac{1}{2}mv^2$, $H_2SO_4$). '
+        . 'Respond with ONLY a valid JSON array, no markdown or commentary. '
+        . 'If a question relies on a diagram you cannot read, still transcribe its text and set "needs_image": true.';
 
 $prompt = "This image is one page of a question paper. Extract EVERY complete question on it.\n"
         . "Classify each question's subject as one of: {$subjList}.\n"

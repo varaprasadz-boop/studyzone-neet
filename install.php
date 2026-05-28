@@ -174,6 +174,19 @@ $tables = [
   started_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   INDEX(user_id), INDEX(chapter_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"flashcard_reviews" => "CREATE TABLE IF NOT EXISTS flashcard_reviews (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  chapter_id INT NOT NULL,
+  card_index INT NOT NULL,
+  reps INT DEFAULT 0,
+  ease DECIMAL(4,2) DEFAULT 2.50,
+  interval_days INT DEFAULT 0,
+  due_date DATE NOT NULL,
+  UNIQUE KEY uniq_card (user_id, chapter_id, card_index),
+  INDEX(user_id), INDEX(due_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
 ];
 
 foreach ($tables as $name => $sql) {

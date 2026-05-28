@@ -38,10 +38,14 @@ require __DIR__.'/includes/header.php';
   <h1><?php echo e($chap['name']); ?></h1>
   <?php if (!empty($concepts['tagline'])): ?><p><?php echo e($concepts['tagline']); ?></p><?php endif; ?>
 </div>
+<?php if ($admin): ?>
+  <div class="toolbar"><a class="btn sm ghost" href="study_edit.php?chapter=<?php echo $chapId; ?>">✏ Edit content</a>
+    <a class="btn sm ghost" href="study_generate.php?subject=<?php echo $chap['subject_id']; ?>">⚡ Regenerate</a></div>
+<?php endif; ?>
 
 <?php if (!$concepts && !$formulas && !$flash && !$quiz): ?>
   <div class="note">No material generated yet for this chapter.
-  <?php if ($admin): ?> <a href="study_generate.php?subject=<?php echo $chap['subject_id']; ?>">Generate it →</a><?php endif; ?></div>
+  <?php if ($admin): ?> <a href="study_generate.php?subject=<?php echo $chap['subject_id']; ?>">Generate with AI →</a> or <a href="study_edit.php?chapter=<?php echo $chapId; ?>">author manually →</a><?php endif; ?></div>
 <?php else: ?>
 
 <div class="ctabs" id="ctabs">

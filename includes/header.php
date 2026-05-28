@@ -19,6 +19,7 @@ $nav = [
 <title><?php echo e($PAGE); ?> · <?php echo APP_NAME; ?></title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Spline+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="assets/css/app.css">
 </head><body data-screen="<?php echo e($ACTIVE); ?>" data-role="<?php echo e($u['role']); ?>" data-subject="<?php echo e($TRACK_SUBJECT); ?>" data-chapter="<?php echo e($TRACK_CHAPTER); ?>">
 <header class="topbar">

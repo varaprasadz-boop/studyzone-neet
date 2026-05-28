@@ -1,3 +1,6 @@
+# Real config with DB credentials & API key — copy from config.sample.php
+includes/config.php
+
 # Uploaded paper page images (user content, created at runtime)
 uploads/papers/
 

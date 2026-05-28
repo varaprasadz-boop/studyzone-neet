@@ -16,6 +16,31 @@ $selSubject = (int)($_GET['subject'] ?? $_POST['subject'] ?? 0);
 $chapters = $selSubject ? qa("SELECT id, name FROM chapters WHERE subject_id=? ORDER BY name", [$selSubject]) : [];
 
 $err = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'mock') {
+    require_csrf();
+    $perSubject = 45;
+    $picked = [];
+    foreach (['Physics','Chemistry','Botany','Zoology'] as $nm) {
+        $sid = resolve_subject_id($nm);
+        if (!$sid) continue;
+        foreach (qa("SELECT id FROM questions WHERE status='published' AND subject_id=? ORDER BY RAND() LIMIT $perSubject", [$sid]) as $r) {
+            $picked[] = (int)$r['id'];
+        }
+    }
+    if (!$picked) { $err = 'No published questions yet — build the question bank first.'; }
+    else {
+        $n = count($picked);
+        db()->prepare("INSERT INTO tests (name, config, summary, duration_min, created_by) VALUES (?,?,?,?,?)")
+            ->execute(['Full NEET Mock — ' . date('d M Y'), json_encode(['kind' => 'mock']), "$n Qs · all subjects · NEET pattern", 200, current_user()['id']]);
+        $tid = (int)db()->lastInsertId();
+        $ins = db()->prepare("INSERT INTO test_questions (test_id, question_id, sort) VALUES (?,?,?)");
+        foreach ($picked as $i => $qid) { $ins->execute([$tid, $qid, $i]); }
+        flash("Full mock created with $n questions (200 min).");
+        redirect('examzone.php');
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'create') {
     require_csrf();
     $name   = trim($_POST['name'] ?? '');
@@ -58,6 +83,18 @@ require __DIR__.'/includes/header.php';
 <div class="crumbs"><a href="examzone.php">Exam Zone</a> › <span>New test</span></div>
 <div class="phead"><h1>＋ Generate test</h1><p>Draws random questions from the published bank. <b><?php echo $availTotal; ?></b> published question(s) available<?php echo $selSubject?' in '.e($subjOpts[$selSubject] ?? ''):''; ?>.</p></div>
 <?php if ($err): ?><div class="err"><?php echo e($err); ?></div><?php endif; ?>
+
+<?php if (isset($_GET['mock'])): ?>
+<div class="note" style="margin-bottom:18px">
+  <b>Full NEET mock.</b> Up to 45 questions each from Physics, Chemistry, Botany and Zoology (180 total), 200 minutes,
+  NEET marking. Drawn at random from your published bank.
+  <form method="post" style="margin-top:10px"><?php echo csrf_field(); ?>
+    <input type="hidden" name="action" value="mock">
+    <button class="btn green" type="submit">⚡ Generate full mock now</button>
+    <a class="btn ghost sm" href="test_new.php">Custom test instead</a>
+  </form>
+</div>
+<?php endif; ?>
 
 <form method="get" style="margin-bottom:4px">
   <label>Subject</label>

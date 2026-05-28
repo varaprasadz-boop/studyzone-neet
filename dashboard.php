@@ -23,7 +23,17 @@ $cTests    = (int)db()->query("SELECT COUNT(*) c FROM tests")->fetch()['c'];
     <p><?php echo $admin?'Student analytics':'Your progress'; ?></p></a>
 </div>
 
-<div class="note" style="margin-top:18px">
+<div class="toolbar" style="margin-top:18px">
+  <?php if ($admin): ?>
+    <a class="btn ghost sm" href="selftest.php">🩺 Self-test</a>
+    <a class="btn ghost sm" href="export.php">💾 Backup database</a>
+  <?php else: ?>
+    <a class="btn ghost sm" href="study_review.php">🔁 Flashcard review</a>
+    <a class="btn ghost sm" href="examzone.php">🎯 Practice mistakes</a>
+  <?php endif; ?>
+</div>
+
+<div class="note" style="margin-top:8px">
   <b>All phases live:</b> Study Material (AI-generated from a syllabus image), Question Bank (AI-extracted from paper photos),
   Exam Zone (timed tests with NEET marking &amp; reshuffled options) and Reports (scores, accuracy and idle-free time).
   <?php if ($admin): ?><br><br><b>Reminders:</b> change the default passwords in <a href="account.php">Account</a><?php echo ai_enabled()?'':', and add your <code>ANTHROPIC_API_KEY</code> in <code>includes/config.php</code> to enable AI generation/extraction'; ?>.<?php endif; ?>

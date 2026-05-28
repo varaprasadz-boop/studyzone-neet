@@ -53,7 +53,10 @@ function nameOf($pdo,$table,$id){ $st=$pdo->prepare("SELECT name FROM $table WHE
   <div class="phead"><h1><?php echo $subj['icon'].' '.e($subj['name']); ?></h1>
     <p><?php echo e(nameOf($pdo,'classes',$classId)).' · '.e(nameOf($pdo,'syllabi',$sylId)); ?></p></div>
   <?php if ($admin): ?>
-    <a class="btn full" href="study_generate.php?subject=<?php echo $subjId; ?>" style="margin-bottom:14px">+ Create study material from syllabus image</a>
+    <div class="toolbar">
+      <a class="btn" href="study_generate.php?subject=<?php echo $subjId; ?>">+ Create study material from syllabus image</a>
+      <?php if ($chs): ?><a class="btn ghost" href="chapters_manage.php?subject=<?php echo $subjId; ?>">Manage chapters</a><?php endif; ?>
+    </div>
   <?php endif; ?>
 
   <?php if (!$chs): ?>

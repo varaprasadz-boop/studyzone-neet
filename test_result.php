@@ -21,7 +21,7 @@ $acc   = ($att['correct_count'] + $att['wrong_count']) > 0
        ? round($att['correct_count'] / ($att['correct_count'] + $att['wrong_count']) * 100)
        : 0;
 
-$rows = qa("SELECT aa.*, q.qtype, q.stem, q.options, q.correct_index, q.correct_value, q.explanation
+$rows = qa("SELECT aa.*, q.qtype, q.stem, q.options, q.correct_index, q.correct_value, q.explanation, q.image_ref, q.paper_id
             FROM attempt_answers aa JOIN questions q ON q.id=aa.question_id
             WHERE aa.attempt_id=? ORDER BY aa.id", [$attemptId]);
 
@@ -60,6 +60,7 @@ require __DIR__.'/includes/header.php';
   <div class="keyq <?php echo $cls; ?>">
     <div class="qno">Q<?php echo $i+1; ?> · <?php echo $cls==='skip'?'skipped':($isCorrect?'correct':'wrong'); ?></div>
     <div class="qtext"><?php echo e($r['stem']); ?></div>
+    <?php echo question_image_html($r['paper_id'], $r['image_ref']); ?>
     <?php if ($r['qtype']==='mcq'): foreach ($shuf as $pos=>$orig):
         $isAns = ((int)$r['correct_index'] === (int)$orig);
         $isPick = ($given !== null && (int)$given === $pos);

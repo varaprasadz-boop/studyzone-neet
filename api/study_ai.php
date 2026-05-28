@@ -20,11 +20,11 @@ if (!$subj)        json_out(['ok' => false, 'error' => 'Unknown subject'], 404);
 if ($chapName === '') json_out(['ok' => false, 'error' => 'Missing chapter name'], 400);
 if (!ai_enabled())  json_out(['ok' => false, 'error' => 'No API key — add ANTHROPIC_API_KEY in includes/config.php.'], 400);
 
-$system = "You are an expert NEET (India) tutor and content author. You produce dense, exam-focused, "
-        . "factually accurate study material for Class 11/12 NEET aspirants. "
-        . "You ALWAYS respond with a single valid JSON object and nothing else — no markdown, no commentary. "
-        . "Inside text fields you may wrap formulas/symbols in <span class=\"f\">...</span>. Escape any literal "
-        . "less-than/greater-than that are not HTML as &lt; / &gt;.";
+$system = 'You are an expert NEET (India) tutor and content author. You produce dense, exam-focused, '
+        . 'factually accurate study material for Class 11/12 NEET aspirants. '
+        . 'You ALWAYS respond with a single valid JSON object and nothing else — no markdown, no commentary. '
+        . 'Write EVERY mathematical or chemical expression as LaTeX between single dollar signs, e.g. '
+        . '$v = u + at$, $\frac{1}{f} = \frac{1}{v} - \frac{1}{u}$, $E^\circ_{cell}$. Do not use HTML tags for math.';
 
 $schema = <<<TXT
 Generate complete study material for this chapter.
@@ -43,7 +43,7 @@ Return JSON with EXACTLY this shape:
   "tagline": "one short line describing the chapter's scope",
   "concepts": [
     { "g": "Group/section name",
-      "pts": [ { "t": "point title", "d": "explanation (may include <span class=\"f\">formula</span>)", "e": "a short example or memory hook, or empty string" } ]
+      "pts": [ { "t": "point title", "d": "explanation; write math as LaTeX in $...$", "e": "a short example or memory hook, or empty string" } ]
     }
   ],
   "formulas": [ { "t": "what it is", "v": "the formula in plain text/unicode" } ],
