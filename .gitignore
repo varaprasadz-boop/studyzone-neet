@@ -1,0 +1,8 @@
+# Uploaded paper page images (user content, created at runtime)
+uploads/papers/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
