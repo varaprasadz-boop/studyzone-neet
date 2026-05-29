@@ -9,6 +9,7 @@ require_once __DIR__ . '/../includes/lib.php';
 require_once __DIR__ . '/../includes/ai.php';
 require_admin();
 if (!csrf_ok()) json_out(['ok' => false, 'error' => 'Bad token'], 400);
+@set_time_limit(0);   // host gateway is the real ceiling; don't let PHP cut it first
 
 $paperId = (int)($_POST['paper'] ?? 0);
 $file    = $_POST['page'] ?? '';
@@ -43,7 +44,7 @@ $prompt = "This image is one page of a question paper. Extract EVERY complete qu
         . "If the page has no questions, return [].";
 
 $content = [ai_image_block($path), ai_text_block($prompt)];
-$res = ai_call([['role' => 'user', 'content' => $content]], $system, 8192);
+$res = ai_call([['role' => 'user', 'content' => $content]], $system, 6000, 110);
 if (!$res['ok']) json_out(['ok' => false, 'error' => $res['error']], 502);
 
 $items = ai_json($res['text']);

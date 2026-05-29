@@ -37,7 +37,7 @@ function ai_text_block($text) {
    $messages : array of ['role'=>'user'|'assistant','content'=>string|array-of-blocks]
    $system   : string system prompt (cached)
    Returns ['ok'=>bool, 'text'=>string, 'error'=>string]                       */
-function ai_call($messages, $system = '', $maxTokens = 8192) {
+function ai_call($messages, $system = '', $maxTokens = 8192, $timeout = 120) {
     if (!ai_enabled()) {
         return ['ok' => false, 'text' => '', 'error' => 'No Anthropic API key set in includes/config.php.'];
     }
@@ -75,7 +75,7 @@ function ai_call($messages, $system = '', $maxTokens = 8192) {
             'anthropic-beta: prompt-caching-2024-07-31',
         ],
         CURLOPT_POSTFIELDS     => json_encode($body),
-        CURLOPT_TIMEOUT        => 180,
+        CURLOPT_TIMEOUT        => $timeout,
         CURLOPT_CONNECTTIMEOUT => 20,
     ]);
     $raw = curl_exec($ch);

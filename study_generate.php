@@ -141,7 +141,7 @@ require __DIR__.'/includes/header.php';
 </div>
 
 <?php if ($extracted): ?>
-<div class="sect"><h2>Chapters to generate</h2><p>Pick chapters, then generate. Each takes ~30–60s. Existing chapters with the same name are updated.</p></div>
+<div class="sect"><h2>Chapters to generate</h2><p>Pick chapters, then generate. Each chapter runs in two quick steps (concepts, then questions) to stay within the host's time limit. Existing chapters with the same name are updated.</p></div>
 <div class="toolbar">
   <button class="btn sm ghost" type="button" id="selAll">Select all</button>
   <button class="btn sm ghost" type="button" id="selNone">Clear</button>
@@ -201,6 +201,14 @@ require __DIR__.'/includes/header.php';
     prog.style.display='block';
     var done=0,ok=0;
     function setProg(){progBar.style.width=Math.round(done/rows.length*100)+'%';}
+    function callPart(row,part){
+      var fd=new FormData();
+      fd.append('_csrf',CSRF);fd.append('subject',SUBJ);
+      fd.append('chapter',row.getAttribute('data-name'));
+      fd.append('topics',row.getAttribute('data-topics')||'');
+      fd.append('part',part);
+      return fetch('api/study_ai.php',{method:'POST',body:fd}).then(function(r){return r.json();});
+    }
     function next(i){
       if(i>=rows.length){
         genBtn.textContent='✓ Generated '+ok+'/'+rows.length;
@@ -208,17 +216,20 @@ require __DIR__.'/includes/header.php';
         return;
       }
       var row=rows[i],st=row.querySelector('.status');
-      st.className='status pill';st.innerHTML='<span class="spin"></span> writing…';
-      var fd=new FormData();
-      fd.append('_csrf',CSRF);fd.append('subject',SUBJ);
-      fd.append('chapter',row.getAttribute('data-name'));
-      fd.append('topics',row.getAttribute('data-topics')||'');
-      fetch('api/study_ai.php',{method:'POST',body:fd}).then(r=>r.json()).then(function(j){
-        done++;setProg();
-        if(j.ok){ok++;st.className='status pill pub';st.textContent='✓ '+j.counts.points+'pts · '+j.counts.quiz+'Q';}
-        else{st.className='status pill hard';st.textContent='✗ '+(j.error||'failed');}
-        next(i+1);
-      }).catch(function(){done++;setProg();st.className='status pill hard';st.textContent='✗ network';next(i+1);});
+      st.className='status pill';st.innerHTML='<span class="spin"></span> concepts…';
+      callPart(row,'core').then(function(c){
+        if(!c.ok) throw new Error(c.error||'concepts failed');
+        st.innerHTML='<span class="spin"></span> questions…';
+        return callPart(row,'practice').then(function(p){
+          done++;setProg();ok++;
+          var qn=(p.ok&&p.counts)?p.counts.quiz:0;
+          st.className='status pill pub';
+          st.textContent='✓ '+c.counts.points+'pts'+(p.ok?(' · '+qn+'Q'):' · (quiz failed)');
+          next(i+1);
+        });
+      }).catch(function(e){
+        done++;setProg();st.className='status pill hard';st.textContent='✗ '+(e.message||'network');next(i+1);
+      });
     }
     next(0);
   };
