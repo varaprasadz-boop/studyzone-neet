@@ -5,6 +5,7 @@
    page-by-page, then lets you review & publish.
    ============================================================ */
 require_once __DIR__ . '/includes/lib.php';
+require_once __DIR__ . '/includes/ai.php';
 $ACTIVE = 'questionbank'; $PAGE = 'Add Paper';
 require_admin();
 

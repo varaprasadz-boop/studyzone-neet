@@ -8,21 +8,18 @@ require_once __DIR__ . '/includes/lib.php';
 $ACTIVE = 'study'; $PAGE = 'Flashcard Review';
 require_login();
 ensure_sr();
+ensure_study_items();
 $uid = current_user()['id'];
 $today = date('Y-m-d');
 $NEW_CAP = 20;
 
-// all flashcards across chapters with generated content
+// every study item with an answer becomes a flashcard (Question → Explanation)
 $cards = [];
-foreach (qa("SELECT sc.chapter_id, sc.data, ch.name AS chapter
-             FROM study_content sc JOIN chapters ch ON ch.id=sc.chapter_id
-             WHERE sc.kind='flashcards'") as $r) {
-    $list = json_decode($r['data'], true);
-    if (!is_array($list)) continue;
-    foreach ($list as $i => $fc) {
-        if (!is_array($fc) || count($fc) < 2) continue;
-        $cards[] = ['chapter_id' => (int)$r['chapter_id'], 'chapter' => $r['chapter'], 'idx' => $i, 'q' => $fc[0], 'a' => $fc[1]];
-    }
+foreach (qa("SELECT si.id, si.chapter_id, si.question, si.explanation, ch.name AS chapter
+             FROM study_items si JOIN chapters ch ON ch.id=si.chapter_id
+             WHERE si.explanation IS NOT NULL AND si.explanation <> ''") as $r) {
+    $cards[] = ['chapter_id' => (int)$r['chapter_id'], 'chapter' => $r['chapter'],
+                'idx' => (int)$r['id'], 'q' => $r['question'], 'a' => $r['explanation']];
 }
 
 // existing schedule

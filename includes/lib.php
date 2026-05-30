@@ -50,10 +50,63 @@ function study_content_save($chapterId, $kind, $dataArray, $userId) {
     }
 }
 
-/* Does this chapter have anything to study (hub file or generated content)? */
+/* ---------- study items (bulk-uploaded Q&A material, Phase 2 redesign) ---------- */
+function ensure_study_items() {
+    db()->exec("CREATE TABLE IF NOT EXISTS study_items (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      chapter_id INT NOT NULL,
+      topic VARCHAR(180) DEFAULT '',
+      subtopic VARCHAR(180) DEFAULT '',
+      question TEXT NOT NULL,
+      explanation MEDIUMTEXT,
+      image VARCHAR(220) DEFAULT NULL,
+      qhash CHAR(40) NOT NULL,
+      sort INT DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY uniq_chap_q (chapter_id, qhash),
+      INDEX(chapter_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+}
+
+/* Hash used for duplicate detection — duplicates are judged on the QUESTION
+   text only (topic/subtopic ignored), case- and whitespace-insensitive. */
+function question_hash($question) {
+    $n = strip_tags((string)$question);
+    $n = preg_replace('/\s+/u', ' ', $n);
+    $n = trim(function_exists('mb_strtolower') ? mb_strtolower($n, 'UTF-8') : strtolower($n));
+    return sha1($n);
+}
+
+/* URL for a study item's image (uploaded file under uploads/study/{chapter},
+   or a pasted web URL). */
+function study_image_url($chapterId, $image) {
+    $image = trim((string)$image);
+    if ($image === '') return '';
+    if (preg_match('#^https?://#i', $image)) return $image;
+    return 'api/file.php?study=' . (int)$chapterId . '&f=' . rawurlencode(basename($image));
+}
+
+function chapter_item_count($chapterId) {
+    return qcount("SELECT COUNT(*) FROM study_items WHERE chapter_id=?", [(int)$chapterId]);
+}
+
+/* Does this chapter have anything to study (hub file or uploaded items)? */
 function chapter_has_content($chapter) {
     if (!empty($chapter['hub_file'])) return true;
-    return qcount("SELECT COUNT(*) FROM study_content WHERE chapter_id=?", [(int)$chapter['id']]) > 0;
+    return chapter_item_count((int)$chapter['id']) > 0;
+}
+
+/* Distinct subjects for a class, ignoring syllabus. Returns one canonical row
+   per subject name (prefers the NCERT row), so the UI can go Class → Subject. */
+function study_subjects_for_class($classId) {
+    $rows = qa("SELECT s.*, y.sort AS ysort FROM subjects s
+                JOIN syllabi y ON y.id = s.syllabus_id
+                WHERE s.class_id=? ORDER BY y.sort, s.sort, s.id", [(int)$classId]);
+    $byName = [];
+    foreach ($rows as $r) {
+        if (!isset($byName[$r['name']])) $byName[$r['name']] = $r;  // first = lowest syllabus sort (NCERT)
+    }
+    return array_values($byName);
 }
 
 /* ---------- subjects list for AI auto-classification (Phase 3) ---------- */

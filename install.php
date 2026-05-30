@@ -175,6 +175,21 @@ $tables = [
   INDEX(user_id), INDEX(chapter_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
 
+"study_items" => "CREATE TABLE IF NOT EXISTS study_items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  chapter_id INT NOT NULL,
+  topic VARCHAR(180) DEFAULT '',
+  subtopic VARCHAR(180) DEFAULT '',
+  question TEXT NOT NULL,
+  explanation MEDIUMTEXT,
+  image VARCHAR(220) DEFAULT NULL,
+  qhash CHAR(40) NOT NULL,
+  sort INT DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_chap_q (chapter_id, qhash),
+  INDEX(chapter_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
 "flashcard_reviews" => "CREATE TABLE IF NOT EXISTS flashcard_reviews (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,

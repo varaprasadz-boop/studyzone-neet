@@ -38,7 +38,7 @@ everything else works without one.
 3. Upload **all** the files and folders from this package, keeping the structure:
    ```
    index.php  login.php  logout.php  dashboard.php  account.php  install.php
-   study.php  study_generate.php  study_chapter.php  study_edit.php  study_review.php  chapters_manage.php
+   study.php  study_chapter.php  study_edit.php  study_upload.php  study_review.php
    questionbank.php  paper_new.php  paper_review.php  question_edit.php
    examzone.php  test_new.php  test_attempt.php  test_result.php
    reports.php  selftest.php  export.php
@@ -67,12 +67,16 @@ Log in as each, open **Account**, and set new passwords you'll remember.
 - Mobile-friendly navigation (hamburger drawer on phones, sidebar on desktop).
 - A 5-minute idle lock on every screen; idle time is never counted in reports.
 
-**Study Material** (admin authors, student reads)
-- Browse Class 11/12 → NCERT/State → Subject → Chapter.
-- The six seeded Class-12 NCERT chapters open the full interactive hub.
-- Admin → "Create study material from syllabus image": upload the syllabus photo, the
-  AI lists the chapters, and generates concepts, formulas, flashcards and a self-test for
-  each — rendered in-app. (Or type chapter names manually / create empty shells.)
+**Study Material** (admin uploads, student reads)
+- Browse Class → Subject → Chapter (no syllabus step).
+- The six seeded Class-12 chapters open the full interactive hub.
+- Admin manages chapters in a list (add / rename / reorder / delete), then for each chapter
+  **bulk-uploads** an Excel (`.xlsx`) or `.csv` with columns **Topic · Sub-topic · Question ·
+  Explanation · Image**. A header row is auto-detected; duplicate **questions** are skipped.
+  Images are attached in the same form and matched by filename (or paste a web URL).
+  Items can also be added/edited by hand on the Manage screen.
+- Student reads each chapter grouped by Topic → Sub-topic; the same Q&A feed the spaced-
+  repetition flashcard review. (No API key needed for Study Material.)
 
 **Question Bank**
 - Admin → "Add new paper": upload up to 25 page photos; the AI reads every question and
@@ -98,8 +102,8 @@ Log in as each, open **Account**, and set new passwords you'll remember.
 - **Full NEET mock**: 180 questions (45 each subject), 200 minutes, NEET marking.
 - **Flashcard review**: spaced repetition (SM-2) across all generated flashcards.
 - **Resumable tests**: answers autosave, so a reload mid-test keeps your progress.
-- **Admin tools**: edit generated content (`study_edit`), manage/reorder chapters
-  (`chapters_manage`), self-diagnostic (`selftest.php`), and one-click SQL backup (`export.php`).
+- **Admin tools**: manage chapter items (`study_edit`), bulk upload (`study_upload`),
+  self-diagnostic (`selftest.php`), and one-click SQL backup (`export.php`).
 
 ## Using AI features
 The Study-Material generator and Question extractor call the Anthropic API. Add your key in
