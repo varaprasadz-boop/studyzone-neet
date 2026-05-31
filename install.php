@@ -202,6 +202,64 @@ $tables = [
   UNIQUE KEY uniq_card (user_id, chapter_id, card_index),
   INDEX(user_id), INDEX(due_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+/* ---- Phase 1 RBAC + audit + consent foundations ---- */
+"roles" => "CREATE TABLE IF NOT EXISTS roles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(40) NOT NULL UNIQUE,
+  name VARCHAR(80) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"permissions" => "CREATE TABLE IF NOT EXISTS permissions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(60) NOT NULL UNIQUE,
+  description VARCHAR(160) DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"role_permissions" => "CREATE TABLE IF NOT EXISTS role_permissions (
+  role_id INT NOT NULL,
+  permission_id INT NOT NULL,
+  PRIMARY KEY (role_id, permission_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"user_roles" => "CREATE TABLE IF NOT EXISTS user_roles (
+  user_id INT NOT NULL,
+  role_id INT NOT NULL,
+  PRIMARY KEY (user_id, role_id),
+  INDEX(role_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"user_scopes" => "CREATE TABLE IF NOT EXISTS user_scopes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  scope_type ENUM('class','subject','chapter','student','tenant') NOT NULL,
+  scope_id INT DEFAULT NULL,
+  INDEX(user_id), INDEX(scope_type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"audit_log" => "CREATE TABLE IF NOT EXISTS audit_log (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  actor_user_id INT DEFAULT NULL,
+  action VARCHAR(80) NOT NULL,
+  entity VARCHAR(60) DEFAULT NULL,
+  entity_id INT DEFAULT NULL,
+  meta_json TEXT,
+  ip VARCHAR(45) DEFAULT NULL,
+  ua VARCHAR(255) DEFAULT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX(actor_user_id), INDEX(action), INDEX(created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"user_consents" => "CREATE TABLE IF NOT EXISTS user_consents (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  kind VARCHAR(40) NOT NULL,
+  granted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  ip VARCHAR(45) DEFAULT NULL,
+  evidence VARCHAR(255) DEFAULT NULL,
+  INDEX(user_id), INDEX(kind)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
 ];
 
 foreach ($tables as $name => $sql) {
@@ -273,6 +331,111 @@ if ($already === 0) {
     $seeded = false;
     $messages[] = "Users already exist — skipped seeding (tables verified).";
 }
+
+/* ============================================================
+   3. MIGRATIONS (always run — idempotent).
+   Adds new columns to existing tables, seeds permissions/roles
+   and backfills the legacy users.role ENUM into user_roles.
+   Safe to re-run any time.
+   ============================================================ */
+
+function col_exists($pdo, $table, $col) {
+    $r = $pdo->prepare("SELECT COUNT(*) c FROM information_schema.columns
+                        WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?");
+    $r->execute([$table, $col]);
+    return (int)$r->fetch()['c'] > 0;
+}
+function add_col($pdo, $table, $col, $def, &$msgs) {
+    if (!col_exists($pdo, $table, $col)) {
+        $pdo->exec("ALTER TABLE `$table` ADD COLUMN `$col` $def");
+        $msgs[] = "Added $table.$col";
+    }
+}
+
+/* 3a. users — new SaaS columns */
+add_col($pdo, 'users', 'email',                "VARCHAR(190) DEFAULT NULL", $messages);
+add_col($pdo, 'users', 'status',               "ENUM('active','disabled','pending') NOT NULL DEFAULT 'active'", $messages);
+add_col($pdo, 'users', 'must_change_password', "TINYINT(1) NOT NULL DEFAULT 0", $messages);
+add_col($pdo, 'users', 'created_by',           "INT DEFAULT NULL", $messages);
+add_col($pdo, 'users', 'dob',                  "DATE DEFAULT NULL", $messages);
+
+// unique index on email (multiple NULLs allowed in MySQL UNIQUE)
+$r = $pdo->prepare("SELECT COUNT(*) c FROM information_schema.statistics
+                    WHERE table_schema=DATABASE() AND table_name='users' AND index_name='uniq_users_email'");
+$r->execute();
+if ((int)$r->fetch()['c'] === 0) {
+    $pdo->exec("ALTER TABLE users ADD UNIQUE KEY uniq_users_email (email)");
+    $messages[] = "Added unique index users.email";
+}
+
+/* 3b. tenant_id on every content/user/attempt table (single tenant for now;
+   future B2B / school sign-ups become an UPDATE of this column only). */
+foreach (['users','classes','syllabi','subjects','chapters','topics','study_items','study_content',
+          'papers','questions','tests','test_questions','attempts','attempt_answers',
+          'activity_log','study_sessions','flashcard_reviews'] as $t) {
+    add_col($pdo, $t, 'tenant_id', "INT NOT NULL DEFAULT 1", $messages);
+}
+
+/* 3c. Permissions catalogue (idempotent INSERT IGNORE by code). */
+$perms = [
+    ['study.view',        'Browse study material'],
+    ['study.edit',        'Add / edit / upload study items'],
+    ['paper.upload',      'Upload past-paper images'],
+    ['paper.extract',     'Run AI extraction on uploaded pages'],
+    ['question.publish',  'Edit & publish question bank items'],
+    ['test.create',       'Create tests from the question bank'],
+    ['test.attempt',      'Attempt tests'],
+    ['test.delete',       'Delete tests and their attempts'],
+    ['users.manage',      'Create / edit / disable users; assign roles & scopes'],
+    ['reports.view_self', 'View own performance reports'],
+    ['reports.view_all',  'View all students\' reports'],
+    ['billing.manage',    'Manage plans / subscriptions / coupons'],
+    ['system.diagnose',   'Run self-test, exports and diagnostic tools'],
+];
+$pi = $pdo->prepare("INSERT IGNORE INTO permissions (code, description) VALUES (?,?)");
+foreach ($perms as $p) $pi->execute($p);
+
+/* 3d. Roles catalogue (idempotent). */
+$roles = [
+    ['superadmin', 'Super Admin'],
+    ['org_admin',  'Organisation Admin'],
+    ['tutor',      'Tutor'],
+    ['parent',     'Parent / Guardian'],
+    ['student',    'Student'],
+];
+$ri = $pdo->prepare("INSERT IGNORE INTO roles (code, name) VALUES (?,?)");
+foreach ($roles as $r) $ri->execute($r);
+
+/* 3e. Role → permission mapping (additive: INSERT IGNORE never strips
+   custom rows an admin might add later via SQL). */
+$roleMap = [
+    'superadmin' => array_column($perms, 0),  // everything
+    'org_admin'  => ['study.view','study.edit','paper.upload','paper.extract','question.publish',
+                     'test.create','test.delete','users.manage','reports.view_all','system.diagnose'],
+    'tutor'      => ['study.view','study.edit','paper.upload','paper.extract','question.publish',
+                     'test.create','reports.view_all'],
+    'parent'     => ['study.view','reports.view_self'],
+    'student'    => ['study.view','test.attempt','reports.view_self'],
+];
+$ins = $pdo->prepare(
+    "INSERT IGNORE INTO role_permissions (role_id, permission_id)
+     SELECT r.id, p.id FROM roles r, permissions p WHERE r.code=? AND p.code=?"
+);
+foreach ($roleMap as $rcode => $codes) {
+    foreach ($codes as $pcode) $ins->execute([$rcode, $pcode]);
+}
+
+/* 3f. Backfill: every legacy user with users.role gets a user_roles row. */
+if (col_exists($pdo, 'users', 'role')) {
+    $pdo->exec(
+        "INSERT IGNORE INTO user_roles (user_id, role_id)
+         SELECT u.id, r.id FROM users u JOIN roles r ON r.code = u.role"
+    );
+    $messages[] = "Backfilled user_roles from legacy users.role";
+}
+
+$messages[] = "Migrations + RBAC seed complete (idempotent).";
+
 ?><!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Install · <?php echo APP_NAME; ?></title>

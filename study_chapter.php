@@ -12,6 +12,10 @@ ensure_study_items();
 $chapId = (int)($_GET['chapter'] ?? 0);
 $chap = q1("SELECT ch.*, s.name AS subject, s.color, s.icon, s.id AS subject_id, s.class_id
             FROM chapters ch JOIN subjects s ON s.id=ch.subject_id WHERE ch.id=?", [$chapId]);
+// Phase 1: scoped users see only their allowed chapters; foreign deep links
+// look identical to a stale link (no permission-leaking 403 message).
+$allowedChapIds = scoped_chapter_ids();
+if ($allowedChapIds !== null && $chap && !in_array((int)$chap['id'], $allowedChapIds, true)) $chap = null;
 if (!$chap) { require __DIR__.'/includes/header.php'; echo '<div class="note">Chapter not found.</div>'; require __DIR__.'/includes/footer.php'; exit; }
 
 // hub chapters open as the standalone interactive file

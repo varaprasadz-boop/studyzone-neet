@@ -4,6 +4,12 @@
    ============================================================ */
 require_once __DIR__ . '/auth.php';
 
+/* Safety net for the page-lifecycle convention (POST handlers / redirects
+   must precede includes/header.php). An accidental late header() — common
+   when adding new permission guards — would otherwise emit a warning and
+   leave the user on a broken page. Buffering covers that mistake. */
+if (!ob_get_level()) ob_start();
+
 function redirect($url) { header('Location: ' . $url); exit; }
 
 /* ---------- one-shot flash messages ---------- */
@@ -22,7 +28,7 @@ function flash_render() {
 /* ---------- small DB conveniences ---------- */
 function q1($sql, $params = []) { $st = db()->prepare($sql); $st->execute($params); return $st->fetch(); }
 function qa($sql, $params = []) { $st = db()->prepare($sql); $st->execute($params); return $st->fetchAll(); }
-function qcount($sql, $params = []) { $r = q1($sql, $params); return (int)(reset($r) ?: 0); }
+function qcount($sql, $params = []) { $r = q1($sql, $params); return $r ? (int)reset($r) : 0; }
 function name_of($table, $id) {
     $allowed = ['classes','syllabi','subjects','chapters','topics'];
     if (!in_array($table, $allowed, true)) return '';
@@ -141,6 +147,114 @@ function resolve_chapter_id($subjectId, $chapName, $create = true) {
     db()->prepare("INSERT INTO chapters (subject_id, name, sort) VALUES (?,?,?)")
         ->execute([(int)$subjectId, $chapName, (int)$n['n']]);
     return (int)db()->lastInsertId();
+}
+
+/* ============================================================
+   Phase 1 — query scoping helpers.
+   A user with no user_scopes rows OR the users.manage permission
+   is "unrestricted" (helper returns null) — every existing query
+   stays unchanged for that case. For scoped users the helpers
+   return the int list to AND into the page's WHERE.
+
+   Semantics: class + subject scopes intersect ("Class 12 AND
+   Physics"); chapter scopes further narrow within those subjects.
+   ============================================================ */
+function _user_has_any_scope($uid) {
+    return qcount("SELECT COUNT(*) FROM user_scopes WHERE user_id=?", [(int)$uid]) > 0;
+}
+function _scope_ids($uid, $type) {
+    return array_map('intval', array_column(
+        qa("SELECT scope_id FROM user_scopes WHERE user_id=? AND scope_type=? AND scope_id IS NOT NULL",
+           [(int)$uid, $type]),
+        'scope_id'));
+}
+
+function scoped_subject_ids($user = null) {
+    $u = $user ?: current_user();
+    if (!$u) return [];
+    if (has_permission('users.manage')) return null;        // admins see everything
+    if (!_user_has_any_scope($u['id'])) return null;        // scope-free users see everything
+    $classes  = _scope_ids($u['id'], 'class');
+    $subjects = _scope_ids($u['id'], 'subject');
+    $where = [];
+    if ($classes)  $where[] = 'class_id IN (' . implode(',', $classes) . ')';
+    if ($subjects) $where[] = 'id IN ('       . implode(',', $subjects) . ')';
+    if (!$where) return null;                               // only chapter scopes — subjects unrestricted
+    return array_map('intval', array_column(
+        qa("SELECT id FROM subjects WHERE " . implode(' AND ', $where)),
+        'id'));
+}
+
+function scoped_chapter_ids($user = null) {
+    $u = $user ?: current_user();
+    if (!$u) return [];
+    if (has_permission('users.manage')) return null;
+    if (!_user_has_any_scope($u['id'])) return null;
+    $explicit = _scope_ids($u['id'], 'chapter');
+    $subjIds  = scoped_subject_ids($u);
+    if ($explicit) {
+        if ($subjIds === null) return $explicit;
+        if (!$subjIds) return [];
+        $in = implode(',', $explicit);
+        $sIn = implode(',', $subjIds);
+        return array_map('intval', array_column(
+            qa("SELECT id FROM chapters WHERE id IN ($in) AND subject_id IN ($sIn)"),
+            'id'));
+    }
+    if ($subjIds === null) return null;
+    if (!$subjIds) return [];
+    $in = implode(',', $subjIds);
+    return array_map('intval', array_column(
+        qa("SELECT id FROM chapters WHERE subject_id IN ($in)"),
+        'id'));
+}
+
+function scoped_class_ids($user = null) {
+    $u = $user ?: current_user();
+    if (!$u) return [];
+    if (has_permission('users.manage')) return null;
+    if (!_user_has_any_scope($u['id'])) return null;
+    $classes = _scope_ids($u['id'], 'class');
+    if ($classes) return $classes;
+    $subjIds = scoped_subject_ids($u);
+    if ($subjIds === null) return null;
+    if (!$subjIds) return [];
+    $in = implode(',', $subjIds);
+    return array_map('intval', array_column(
+        qa("SELECT DISTINCT class_id FROM subjects WHERE id IN ($in)"),
+        'class_id'));
+}
+
+/* Render an `AND col IN (…)` clause from a scope list, or empty string
+   if the user is unrestricted. Safe — ids are intval'd upstream. */
+function scope_clause($col, $ids) {
+    if ($ids === null) return '';
+    if (!$ids) return " AND 1=0 ";
+    return " AND $col IN (" . implode(',', array_map('intval', $ids)) . ") ";
+}
+
+/* ============================================================
+   Phase 1 — audit log helper. Best-effort: never fatals a request
+   on a write failure (audit table might not exist on very old installs).
+   ============================================================ */
+/* Readable random temp-password (no look-alike chars). */
+function gen_temp_password($len = 10) {
+    $chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789';
+    $max = strlen($chars) - 1; $out = '';
+    for ($i = 0; $i < $len; $i++) $out .= $chars[random_int(0, $max)];
+    return $out;
+}
+
+function audit($action, $entity = null, $entityId = null, $meta = []) {
+    try {
+        $uid = current_user()['id'] ?? null;
+        $ip  = $_SERVER['REMOTE_ADDR'] ?? null;
+        $ua  = substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255);
+        db()->prepare(
+            "INSERT INTO audit_log (actor_user_id, action, entity, entity_id, meta_json, ip, ua)
+             VALUES (?,?,?,?,?,?,?)"
+        )->execute([$uid, $action, $entity, $entityId, ($meta ? json_encode($meta) : null), $ip, $ua]);
+    } catch (Throwable $e) { /* swallow — never block on audit failure */ }
 }
 
 /* NEET marking */

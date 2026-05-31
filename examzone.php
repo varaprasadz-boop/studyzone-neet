@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         db()->prepare("DELETE FROM attempts WHERE test_id=?")->execute([$tid]);
         db()->prepare("DELETE FROM tests WHERE id=?")->execute([$tid]);
+        audit('test.delete', 'test', $tid);
         flash('Test deleted.');
         redirect('examzone.php');
     }

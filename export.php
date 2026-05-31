@@ -7,6 +7,8 @@
    ============================================================ */
 require_once __DIR__ . '/includes/lib.php';
 require_admin();
+audit('backup.download');
+while (ob_get_level()) ob_end_clean();   // disable any buffering for the streamed dump
 
 $tables = ['users','settings','classes','syllabi','subjects','chapters','topics','study_content',
            'papers','questions','tests','test_questions','attempts','attempt_answers',

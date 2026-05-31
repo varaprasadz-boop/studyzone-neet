@@ -6,13 +6,20 @@ $ACTIVE = $ACTIVE ?? '';
 $PAGE   = $PAGE ?? APP_NAME;
 $TRACK_SUBJECT = $TRACK_SUBJECT ?? '';
 $TRACK_CHAPTER = $TRACK_CHAPTER ?? '';
-$nav = [
-  'dashboard'    => ['Dashboard',       'dashboard.php',     '🏠'],
-  'study'        => ['Study Material',  'study.php',         '📘'],
-  'questionbank' => ['Question Bank',   'questionbank.php',  '🗂️'],
-  'examzone'     => ['Exam Zone',       'examzone.php',      '📝'],
-  'reports'      => ['Reports',         'reports.php',       '📊'],
-];
+// Phase 1: build nav from permissions, not the legacy hardcoded role.
+$nav = ['dashboard' => ['Dashboard', 'dashboard.php', '🏠']];
+$nav['study']        = ['Study Material',  'study.php',         '📘'];
+if (function_exists('has_permission')) {
+    if (has_permission('study.view') || has_permission('study.edit'))            $nav['questionbank'] = ['Question Bank',  'questionbank.php', '🗂️'];
+    if (has_permission('test.attempt') || has_permission('test.create'))         $nav['examzone']     = ['Exam Zone',      'examzone.php',     '📝'];
+    if (has_permission('reports.view_self') || has_permission('reports.view_all')) $nav['reports']    = ['Reports',        'reports.php',      '📊'];
+    if (has_permission('users.manage'))                                          $nav['users']        = ['Users',          'users.php',        '👥'];
+} else {
+    // header.php is included by login.php-less pages too — fall back to the legacy nav set
+    $nav['questionbank'] = ['Question Bank',  'questionbank.php', '🗂️'];
+    $nav['examzone']     = ['Exam Zone',      'examzone.php',     '📝'];
+    $nav['reports']      = ['Reports',        'reports.php',      '📊'];
+}
 ?><!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -21,15 +28,29 @@ $nav = [
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Spline+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="assets/css/app.css">
-</head><body data-screen="<?php echo e($ACTIVE); ?>" data-role="<?php echo e($u['role']); ?>" data-subject="<?php echo e($TRACK_SUBJECT); ?>" data-chapter="<?php echo e($TRACK_CHAPTER); ?>">
+<?php
+// Display role: pick the highest-priority role the user holds. Falls back to the
+// legacy `users.role` ENUM if the new permission helpers aren't loaded (e.g.
+// header.php included by a page that doesn't require lib.php).
+$_roleLabels = ['superadmin'=>['ADMIN','Super Admin'], 'org_admin'=>['ADMIN','Organisation Admin'],
+                'tutor'=>['TUTOR','Tutor'], 'parent'=>['PARENT','Parent'], 'student'=>['STUDENT','Student']];
+$_short = strtoupper($u['role'] === 'superadmin' ? 'ADMIN' : 'STUDENT');
+$_long  = $u['role'] === 'superadmin' ? 'Super Admin' : 'Student';
+if (function_exists('has_role')) {
+    foreach ($_roleLabels as $code => $labels) {
+        if (has_role($code)) { $_short = $labels[0]; $_long = $labels[1]; break; }
+    }
+}
+?>
+</head><body data-screen="<?php echo e($ACTIVE); ?>" data-role="<?php echo e(strtolower($_short)); ?>" data-subject="<?php echo e($TRACK_SUBJECT); ?>" data-chapter="<?php echo e($TRACK_CHAPTER); ?>">
 <header class="topbar">
   <button class="burger" id="burger" aria-label="Menu">☰</button>
   <div class="brand"><?php echo APP_NAME; ?></div>
-  <div class="who"><?php echo e($u['name']); ?><span class="role"><?php echo $u['role']==='superadmin'?'ADMIN':'STUDENT'; ?></span></div>
+  <div class="who"><?php echo e($u['name']); ?><span class="role"><?php echo e($_short); ?></span></div>
 </header>
 <div class="scrim" id="scrim"></div>
 <nav class="drawer" id="drawer">
-  <div class="dhead"><?php echo $u['role']==='superadmin'?'Super Admin':'Student'; ?></div>
+  <div class="dhead"><?php echo e($_long); ?></div>
   <?php foreach ($nav as $k=>$item): ?>
     <a href="<?php echo $item[1]; ?>" class="<?php echo $ACTIVE===$k?'on':''; ?>"><span class="ic"><?php echo $item[2]; ?></span><?php echo $item[0]; ?></a>
   <?php endforeach; ?>

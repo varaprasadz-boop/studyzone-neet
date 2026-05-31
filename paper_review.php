@@ -17,7 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_csrf();
     $a = $_POST['action'] ?? '';
     if ($a === 'publish_all') {
-        db()->prepare("UPDATE questions SET status='published' WHERE paper_id=? AND status='draft'")->execute([$paperId]);
+        $st = db()->prepare("UPDATE questions SET status='published' WHERE paper_id=? AND status='draft'");
+        $st->execute([$paperId]);
+        audit('paper.publish_all', 'paper', $paperId, ['count' => $st->rowCount()]);
         flash('All draft questions published.');
     } elseif ($a === 'unpublish_all') {
         db()->prepare("UPDATE questions SET status='draft' WHERE paper_id=?")->execute([$paperId]);

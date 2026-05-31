@@ -1,6 +1,8 @@
-<?php $ACTIVE='dashboard'; $PAGE='Dashboard';
-require_once __DIR__.'/includes/ai.php';
-require __DIR__.'/includes/header.php';
+<?php
+require_once __DIR__ . '/includes/lib.php';      // brings in auth + ob_start safety net
+require_once __DIR__ . '/includes/ai.php';
+$ACTIVE = 'dashboard'; $PAGE = 'Dashboard';
+require __DIR__ . '/includes/header.php';
 $admin = is_admin();
 // quick counts for a live feel
 $cChapters = (int)db()->query("SELECT COUNT(*) c FROM chapters")->fetch()['c'];

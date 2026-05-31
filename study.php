@@ -18,6 +18,17 @@ $subjId  = (int)($_GET['subject'] ?? $_POST['subject'] ?? 0);
 $subj = $subjId ? q1("SELECT * FROM subjects WHERE id=?", [$subjId]) : null;
 if ($subj) $classId = (int)$subj['class_id'];
 
+/* Phase 1 — per-user scoping: a student restricted to Class 12 + Physics
+   shouldn't see anything else, even via direct URL. */
+$allowedClassIds   = scoped_class_ids();
+$allowedSubjectIds = scoped_subject_ids();
+if ($classId && $allowedClassIds !== null && !in_array($classId, $allowedClassIds, true)) {
+    $classId = 0; $subj = null; $subjId = 0;
+}
+if ($subj && $allowedSubjectIds !== null && !in_array((int)$subj['id'], $allowedSubjectIds, true)) {
+    $subj = null; $subjId = 0;
+}
+
 /* ---- admin chapter actions (before any output) ---- */
 if ($admin && $subj && $_SERVER['REQUEST_METHOD'] === 'POST') {
     require_csrf();
@@ -29,6 +40,7 @@ if ($admin && $subj && $_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($name !== '' && !q1("SELECT id FROM chapters WHERE subject_id=? AND name=?", [$subjId, $name])) {
             $n = q1("SELECT COALESCE(MAX(sort),0)+1 AS n FROM chapters WHERE subject_id=?", [$subjId]);
             db()->prepare("INSERT INTO chapters (subject_id, name, sort) VALUES (?,?,?)")->execute([$subjId, $name, (int)$n['n']]);
+            audit('chapter.create', 'chapter', (int)db()->lastInsertId(), ['name' => $name, 'subject_id' => $subjId]);
             flash('Chapter added.');
         }
     } elseif ($action === 'rename_chapter') {
@@ -51,6 +63,7 @@ if ($admin && $subj && $_SERVER['REQUEST_METHOD'] === 'POST') {
         db()->prepare("DELETE FROM flashcard_reviews WHERE chapter_id=?")->execute([$cid]);
         db()->prepare("UPDATE questions SET chapter_id=NULL WHERE chapter_id=?")->execute([$cid]);
         db()->prepare("DELETE FROM chapters WHERE id=? AND subject_id=?")->execute([$cid, $subjId]);
+        audit('chapter.delete', 'chapter', $cid, ['subject_id' => $subjId]);
         flash('Chapter deleted.');
     }
     redirect('study.php?subject=' . $subjId);
@@ -68,15 +81,18 @@ require __DIR__.'/includes/header.php';
 <?php if (!$classId): /* ---------- pick class ---------- */ ?>
   <div class="phead"><h1>📘 Study Material</h1><p>Choose a class.</p></div>
   <div class="grid">
-  <?php foreach (qa("SELECT * FROM classes ORDER BY sort") as $c): ?>
+  <?php foreach (qa("SELECT * FROM classes WHERE 1=1 " . scope_clause('id', $allowedClassIds) . " ORDER BY sort") as $c): ?>
     <a class="tile" href="study.php?class=<?php echo $c['id']; ?>"><span class="ic">🎓</span><h3><?php echo e($c['name']); ?></h3></a>
   <?php endforeach; ?>
   </div>
 
-<?php elseif (!$subj): /* ---------- pick subject ---------- */ ?>
+<?php elseif (!$subj): /* ---------- pick subject ---------- */
+  $subs = study_subjects_for_class($classId);
+  if ($allowedSubjectIds !== null) $subs = array_values(array_filter($subs, fn($s) => in_array((int)$s['id'], $allowedSubjectIds, true)));
+?>
   <div class="phead"><h1><?php echo e(name_of('classes', $classId)); ?></h1><p>Choose a subject.</p></div>
   <div class="grid">
-  <?php foreach (study_subjects_for_class($classId) as $sub):
+  <?php foreach ($subs as $sub):
         $n = qcount("SELECT COUNT(*) FROM chapters WHERE subject_id=?", [$sub['id']]); ?>
     <a class="tile" href="study.php?subject=<?php echo $sub['id']; ?>" style="--tc:<?php echo e($sub['color']); ?>">
       <span class="ic"><?php echo $sub['icon']; ?></span><h3><?php echo e($sub['name']); ?></h3>
@@ -85,7 +101,8 @@ require __DIR__.'/includes/header.php';
   </div>
 
 <?php else: /* ---------- chapter list for a subject ---------- */
-  $chs = qa("SELECT * FROM chapters WHERE subject_id=? ORDER BY sort, id", [$subjId]);
+  $allowedChapIds = scoped_chapter_ids();
+  $chs = qa("SELECT * FROM chapters WHERE subject_id=? " . scope_clause('id', $allowedChapIds) . " ORDER BY sort, id", [$subjId]);
 ?>
   <div class="phead"><h1><?php echo $subj['icon'].' '.e($subj['name']); ?></h1>
     <p><?php echo e(name_of('classes', $classId)); ?> · <?php echo count($chs); ?> chapter<?php echo count($chs)==1?'':'s'; ?></p></div>

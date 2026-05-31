@@ -1,17 +1,24 @@
-<?php $ACTIVE='account'; $PAGE='Account'; require __DIR__.'/includes/header.php';
+<?php
+require_once __DIR__ . '/includes/lib.php';
+$ACTIVE='account'; $PAGE='Account';
 $msg=''; $err='';
 if ($_SERVER['REQUEST_METHOD']==='POST') {
+    require_login();
+    $u = current_user();
     $cur=$_POST['current']??''; $new=$_POST['new']??''; $cf=$_POST['confirm']??'';
     $st=db()->prepare("SELECT password_hash FROM users WHERE id=?"); $st->execute([$u['id']]); $row=$st->fetch();
     if (!$row || !password_verify($cur,$row['password_hash'])) { $err='Current password is incorrect.'; }
     elseif (strlen($new) < 5) { $err='New password must be at least 5 characters.'; }
     elseif ($new !== $cf) { $err='New passwords do not match.'; }
     else {
-        $up=db()->prepare("UPDATE users SET password_hash=? WHERE id=?");
-        $up->execute([password_hash($new,PASSWORD_DEFAULT), $u['id']]);
+        db()->prepare("UPDATE users SET password_hash=?, must_change_password=0 WHERE id=?")
+            ->execute([password_hash($new, PASSWORD_DEFAULT), $u['id']]);
+        $_SESSION['user']['must_change_password'] = 0;
+        audit('password.change', 'user', $u['id']);
         $msg='Password updated.';
     }
 }
+require __DIR__.'/includes/header.php';
 ?>
 <div class="phead"><h1>⚙️ Account</h1><p>Signed in as <b><?php echo e($u['username']); ?></b> (<?php echo $u['role']==='superadmin'?'Super Admin':'Student'; ?>).</p></div>
 <div style="max-width:420px">

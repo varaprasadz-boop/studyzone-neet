@@ -86,6 +86,12 @@ if ($fSubject) { $where[] = 'q.subject_id=?'; $args[] = $fSubject; }
 if ($fChapter) { $where[] = 'q.chapter_id=?'; $args[] = $fChapter; }
 if ($fPaper)   { $where[] = 'q.paper_id=?';   $args[] = $fPaper; }
 if ($fQ!=='')  { $where[] = 'q.stem LIKE ?';  $args[] = '%' . $fQ . '%'; }
+
+/* Phase 1 — per-user scoping: scoped users only see questions in their allowed subjects/chapters. */
+$_allowedSubj = scoped_subject_ids();
+$_allowedChap = scoped_chapter_ids();
+if ($_allowedSubj !== null) $where[] = $_allowedSubj ? ('q.subject_id IN (' . implode(',', $_allowedSubj) . ')') : '1=0';
+if ($_allowedChap !== null) $where[] = $_allowedChap ? ('q.chapter_id IN (' . implode(',', $_allowedChap) . ')') : '1=0';
 $sql = "SELECT q.*, ch.name AS chapter, s.name AS subject, p.exam_name
         FROM questions q
         LEFT JOIN chapters ch ON ch.id=q.chapter_id

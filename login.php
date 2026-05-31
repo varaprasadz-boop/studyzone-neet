@@ -1,13 +1,22 @@
 <?php
-require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/lib.php';
 if (current_user()) { header('Location: dashboard.php'); exit; }
 
 $err = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usr = $_POST['username'] ?? '';
     $pwd = $_POST['password'] ?? '';
-    if (attempt_login($usr, $pwd)) { header('Location: dashboard.php'); exit; }
-    $err = 'Wrong username or password.';
+    if (attempt_login($usr, $pwd)) {
+        audit('login.success', 'user', current_user()['id']);
+        // first-login / reset users land on Account to set a real password
+        if (!empty($_SESSION['user']['must_change_password'])) {
+            flash('Please set a new password to continue.');
+            header('Location: account.php'); exit;
+        }
+        header('Location: dashboard.php'); exit;
+    }
+    audit('login.fail', null, null, ['username' => trim($usr)]);
+    $err = 'Wrong username or password, or the account is disabled.';
 }
 ?><!DOCTYPE html>
 <html lang="en"><head>
