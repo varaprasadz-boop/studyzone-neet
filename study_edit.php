@@ -62,7 +62,7 @@ require __DIR__.'/includes/header.php';
   <a href="study.php?subject=<?php echo $chap['subject_id']; ?>"><?php echo e($chap['subject']); ?></a> ›
   <a href="study_chapter.php?chapter=<?php echo $chapId; ?>"><?php echo e($chap['name']); ?></a> › <span>Manage</span>
 </div>
-<div class="phead"><h1>✏ Manage — <?php echo e($chap['name']); ?></h1>
+<div class="phead"><h1><?php echo icon('edit','lg'); ?> Manage — <?php echo e($chap['name']); ?></h1>
   <p><?php echo count($items); ?> item<?php echo count($items)==1?'':'s'; ?>. Math goes in <code>$…$</code> (LaTeX).</p></div>
 <?php echo flash_render(); ?>
 

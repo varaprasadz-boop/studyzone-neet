@@ -237,6 +237,69 @@ function scope_clause($col, $ids) {
    Phase 1 — audit log helper. Best-effort: never fatals a request
    on a write failure (audit table might not exist on very old installs).
    ============================================================ */
+/* Earned-badge set for a student. Computed from existing data — no extra
+   tables. Cheap enough to recompute per dashboard load but session-cached
+   so it doesn't fire on every screen. */
+function user_badges($userId, $maxAgeSec = 300) {
+    if (isset($_SESSION['_badges'][$userId], $_SESSION['_badges_at'][$userId])
+        && (time() - (int)$_SESSION['_badges_at'][$userId]) < $maxAgeSec) {
+        return $_SESSION['_badges'][$userId];
+    }
+    $uid = (int)$userId;
+    $streak     = user_streak($uid);
+    $attempts   = qcount("SELECT COUNT(*) FROM attempts WHERE student_id=? AND status='completed'", [$uid]);
+    $bestPct    = (float)(q1("SELECT MAX(score / GREATEST(total,1) / ?) * 100 AS p
+                              FROM attempts WHERE student_id=? AND status='completed'", [NEET_CORRECT, $uid])['p'] ?? 0);
+    $reviews    = qcount("SELECT COUNT(*) FROM flashcard_reviews WHERE user_id=?", [$uid]);
+    $mockTaken  = qcount("SELECT COUNT(*) FROM attempts a JOIN tests t ON t.id=a.test_id
+                          WHERE a.student_id=? AND a.status='completed' AND t.config LIKE '%\"kind\":\"mock\"%'", [$uid]);
+    $practiced  = qcount("SELECT COUNT(*) FROM attempts a JOIN tests t ON t.id=a.test_id
+                          WHERE a.student_id=? AND a.status='completed' AND t.config LIKE '%\"kind\":\"practice\"%'", [$uid]);
+
+    $badges = [
+        ['code'=>'first_quiz',    'label'=>'First Quiz',     'icon'=>'check',  'achieved'=>$attempts>=1,    'hint'=>'Complete one test'],
+        ['code'=>'streak_3',      'label'=>'3-day Streak',   'icon'=>'flame',  'achieved'=>$streak>=3,      'hint'=>'Study 3 days in a row'],
+        ['code'=>'streak_7',      'label'=>'7-day Streak',   'icon'=>'flame',  'achieved'=>$streak>=7,      'hint'=>'Study 7 days in a row'],
+        ['code'=>'sharpshooter',  'label'=>'Sharpshooter',   'icon'=>'award',  'achieved'=>$bestPct>=80,    'hint'=>'Score 80%+ on a test'],
+        ['code'=>'card_crusher',  'label'=>'Card Crusher',   'icon'=>'zap',    'achieved'=>$reviews>=100,   'hint'=>'Review 100 flashcards'],
+        ['code'=>'mock_champion', 'label'=>'Mock Champion',  'icon'=>'shield', 'achieved'=>$mockTaken>=1,   'hint'=>'Finish a full NEET mock'],
+        ['code'=>'mistake_hunter','label'=>'Mistake Hunter', 'icon'=>'heart',  'achieved'=>$practiced>=1,   'hint'=>'Run one Practice-my-mistakes set'],
+    ];
+    $_SESSION['_badges'][$userId]    = $badges;
+    $_SESSION['_badges_at'][$userId] = time();
+    return $badges;
+}
+
+/* Human-readable label for an audit_log action code. Falls back to the raw code. */
+function audit_label($action) {
+    static $map = [
+        'login.success'        => 'Signed in',
+        'login.fail'           => 'Failed sign-in',
+        'password.change'      => 'Changed password',
+        'user.create'          => 'Created user',
+        'user.update'          => 'Updated user',
+        'user.password_reset'  => 'Reset user password',
+        'user.enable'          => 'Enabled user',
+        'user.disable'         => 'Disabled user',
+        'chapter.create'       => 'Added chapter',
+        'chapter.delete'       => 'Deleted chapter',
+        'paper.publish_all'    => 'Published paper',
+        'test.delete'          => 'Deleted test',
+        'backup.download'      => 'Downloaded backup',
+    ];
+    return $map[$action] ?? $action;
+}
+
+/* Human-readable time-ago. */
+function time_ago($ts) {
+    $s = max(0, time() - (is_string($ts) ? strtotime($ts) : (int)$ts));
+    if ($s < 60)     return $s . 's ago';
+    if ($s < 3600)   return intdiv($s, 60) . 'm ago';
+    if ($s < 86400)  return intdiv($s, 3600) . 'h ago';
+    if ($s < 604800) return intdiv($s, 86400) . 'd ago';
+    return date('d M', is_string($ts) ? strtotime($ts) : (int)$ts);
+}
+
 /* Daily-active streak ending today (or yesterday, if no activity yet today).
    Counts consecutive distinct days in activity_log. Session-cached for ~10 min. */
 function user_streak($userId, $maxAgeSec = 600) {

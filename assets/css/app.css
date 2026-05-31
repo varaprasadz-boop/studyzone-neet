@@ -70,12 +70,27 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn.full{display:block;width:100%;text-align:center}
 
-/* login */
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
-  background:var(--bg);background-image:linear-gradient(rgba(120,108,78,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,108,78,.05) 1px,transparent 1px);background-size:34px 34px}
-.login-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 26px;width:100%;max-width:380px;box-shadow:0 14px 40px rgba(60,50,30,.12)}
+/* login — split layout (hero left, form right on wide; stacked on phone) */
+.login-shell{min-height:100vh;display:grid;grid-template-columns:1fr;
+  background:var(--bg);
+  background-image:linear-gradient(rgba(120,108,78,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,108,78,.05) 1px,transparent 1px);
+  background-size:34px 34px}
+.login-shell .login-hero{display:none}
+.login-shell .login-side{display:flex;align-items:center;justify-content:center;padding:30px 16px}
+@media(min-width:880px){
+  .login-shell{grid-template-columns:1.05fr 1fr}
+  .login-shell .login-hero{display:flex;flex-direction:column;justify-content:center;padding:48px 60px;
+    background:linear-gradient(160deg,var(--brand-100) 0%,var(--brand-50) 60%,var(--panel) 100%)}
+  .login-shell .login-hero svg{max-width:380px;margin:24px 0;align-self:flex-start}
+  .login-shell .login-hero .foot{margin-top:auto;color:var(--brand-700);font-size:.78rem;opacity:.7;padding-top:30px}
+}
+.login-hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.05;margin:18px 0 12px;color:var(--brand-800);letter-spacing:-.01em}
+.login-hero p{color:var(--brand-700);font-size:1rem;max-width:380px;line-height:1.5;margin-top:4px}
+.login-hero .kick{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;color:var(--brand-600);text-transform:uppercase}
+.login-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px 28px;width:100%;max-width:380px;box-shadow:var(--shadow-lg)}
 .login-card .kick{font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;text-align:center}
 .login-card h1{font-family:var(--disp);font-weight:700;font-size:1.7rem;text-align:center;margin:8px 0 20px}
+.login-card .form-foot{text-align:center;font-size:.75rem;color:var(--dim);margin-top:14px}
 label{display:block;font-size:.82rem;color:var(--muted);margin:12px 0 5px;font-weight:500}
 input[type=text],input[type=password],input[type=date],select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;
   background:var(--bg);font-family:var(--body);font-size:1rem;color:var(--ink)}
@@ -240,3 +255,41 @@ textarea:focus{outline:none;border-color:var(--acc)}
 .sect{margin:26px 0 10px}
 .sect h2{font-family:var(--disp);font-weight:700;font-size:1.25rem}
 .sect p{color:var(--muted);font-size:.86rem}
+
+/* Dashboard: badges (student) + recent activity (admin) */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--r-pill);
+  background:var(--panel2);border:1px solid var(--line);color:var(--dim);font-family:var(--mono);font-size:.74rem;
+  transition:.15s var(--ease-out)}
+.badge.on{background:rgba(184,137,59,.14);border-color:var(--gold);color:var(--gold)}
+.badge.on .icn{color:var(--gold)}
+.badge .icn{width:.95em;height:.95em}
+.badge b{color:inherit;font-weight:700}
+
+.activity{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-3);padding:6px 16px;margin-top:14px}
+.row-act{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:.88rem}
+.row-act:last-child{border-bottom:none}
+.row-act .icn{color:var(--brand-500);width:1em;height:1em}
+.row-act .who-name{color:var(--ink);font-weight:600}
+.row-act .what{color:var(--muted)}
+.row-act .when{margin-left:auto;color:var(--dim);font-family:var(--mono);font-size:.72rem;white-space:nowrap}
+
+/* Study Chapter — sticky topic nav + polished Q&A cards */
+.topic-nav{position:sticky;top:56px;z-index:30;
+  background:rgba(243,238,227,.94);backdrop-filter:blur(8px);
+  margin:0 -16px 18px;padding:10px 16px;border-bottom:1px solid var(--line);
+  display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.topic-nav::-webkit-scrollbar{display:none}
+.topic-nav a{flex:0 0 auto;font-family:var(--mono);font-size:.74rem;color:var(--muted);
+  background:var(--panel);border:1px solid var(--line);padding:8px 14px;border-radius:var(--r-2);
+  text-decoration:none;transition:.18s var(--ease-out);white-space:nowrap}
+.topic-nav a:hover{color:var(--ink);border-color:var(--brand-400)}
+.topic-nav a.on{background:var(--brand-500);color:#fff;border-color:var(--brand-500);font-weight:700}
+.topic-sec{scroll-margin-top:120px}
+.subhdr{font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--ink);margin:16px 0 10px}
+.cpt.qa{padding:18px 20px}
+.cpt.qa:hover{transform:none;border-left-color:var(--brand-500);box-shadow:var(--shadow-md)}
+.qa .qa-q{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.qa-tag{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;color:#fff;font-family:var(--mono);font-weight:700;font-size:.7rem;flex:0 0 auto;line-height:1;margin-top:3px}
+.qa-text{font-family:var(--disp);font-weight:600;font-size:1.05rem;color:var(--ink);flex:1;line-height:1.45}
+.qa-a{color:var(--muted);font-size:.94rem;line-height:1.6;padding-left:34px}

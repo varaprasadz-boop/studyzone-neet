@@ -58,6 +58,14 @@ A private NEET (India medical entrance) study app for two users — a tutor/admi
 - **Audit log** (`audit_log`) is for security events (logins, role changes, deletes, downloads). The older `activity_log` is time-on-screen only — don't confuse them. Call `audit('action.kind', 'entity', $id, $meta=[])`; failures are swallowed.
 - **Force-change-password:** `require_login()` redirects to `account.php` when `must_change_password = 1`, except on `/api/` paths.
 
+### Visual surface (Phase 1 SaaS look)
+- Brand is **teal** (`--brand-500`); tokens live in `assets/css/tokens.css` and are loaded BEFORE `app.css` by `header.php`. `app.css` no longer redefines tokens.
+- Icons: use `icon($name)` from `includes/icons.php` (Lucide-style sprite at `assets/icons/sprite.svg`) instead of Unicode emoji. Add new symbols to that one sprite file.
+- Login uses a split-shell layout: `.login-shell` > `.login-hero` (brand + illustration) + `.login-side` (form). On mobile the hero hides; on ≥880px both columns show. The hero illustration is inlined via `file_get_contents('assets/illus/login.svg')` so its colors can be themed.
+- Study Chapter has a sticky `.topic-nav` (with scrollspy via IntersectionObserver) and polished `.cpt.qa` cards (Q-tag + question + indented explanation).
+- Dashboard surfaces `user_badges($uid)` (data-driven milestones — no extra table) for students and `audit_log` via `audit_label()` + `time_ago()` for admins.
+- Confetti on test completion fires only when the viewer is the student who took the attempt, `accuracy ≥ 60%`, and only once per `sessionStorage` key — also honors `prefers-reduced-motion`.
+
 ### Gotchas
 - `e()` escapes output, but `$…$` survives escaping so KaTeX still renders escaped text. Question/option text is escaped; generated study `concepts`/`flashcards` are echoed as raw HTML (admin-authored) — keep that trust boundary in mind.
 - In strings sent to the AI, write LaTeX with **single-quoted PHP strings** (or escape `$`) so `$v`, `$cell` etc. aren't interpreted as PHP variables.

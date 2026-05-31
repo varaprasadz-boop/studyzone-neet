@@ -69,7 +69,7 @@ $mistakeCount = $admin ? 0 : qcount(
 
 require __DIR__.'/includes/header.php';
 ?>
-<div class="phead"><h1>📝 Exam Zone</h1>
+<div class="phead"><h1><?php echo icon('list-checks','lg'); ?> Exam Zone</h1>
 <p><?php echo $admin?'Generate tests from the published question bank.':'Attempt tests with NEET marking (+4 / −1 / 0). Options reshuffle every attempt.'; ?></p></div>
 <?php echo flash_render(); ?>
 

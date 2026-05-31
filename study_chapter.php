@@ -43,13 +43,14 @@ require __DIR__.'/includes/header.php';
   <span><?php echo e($chap['name']); ?></span>
 </div>
 <div class="phead"><h1><?php echo e($chap['name']); ?></h1>
-  <p><?php echo count($items); ?> study item<?php echo count($items)==1?'':'s'; ?></p></div>
+  <p><?php echo count($items); ?> study item<?php echo count($items)==1?'':'s'; ?>
+    <?php if (count($groups) > 1): ?> · <?php echo count($groups); ?> topics<?php endif; ?></p></div>
 
 <?php if ($admin): ?>
   <div class="toolbar">
-    <a class="btn sm ghost" href="study_edit.php?chapter=<?php echo $chapId; ?>">✏ Manage items</a>
-    <a class="btn sm ghost" href="study_upload.php?chapter=<?php echo $chapId; ?>">⬆ Bulk upload</a>
-    <a class="btn sm ghost" href="study_review.php">🔁 Flashcard review</a>
+    <a class="btn sm ghost" href="study_edit.php?chapter=<?php echo $chapId; ?>"><?php echo icon('edit'); ?> Manage items</a>
+    <a class="btn sm ghost" href="study_upload.php?chapter=<?php echo $chapId; ?>"><?php echo icon('upload'); ?> Bulk upload</a>
+    <a class="btn sm ghost" href="study_review.php"><?php echo icon('zap'); ?> Flashcard review</a>
   </div>
 <?php endif; ?>
 
@@ -58,20 +59,53 @@ require __DIR__.'/includes/header.php';
     <?php if ($admin): ?> <a href="study_upload.php?chapter=<?php echo $chapId; ?>">Bulk upload →</a> or <a href="study_edit.php?chapter=<?php echo $chapId; ?>">add by hand →</a><?php endif; ?>
   </div>
 <?php else: ?>
-  <?php foreach ($groups as $topic => $subs): ?>
-    <div class="grouphdr" style="color:<?php echo e($color); ?>"><?php echo e($topic); ?></div>
-    <?php foreach ($subs as $sub => $list): ?>
-      <?php if ($sub !== ''): ?><h4 style="font-family:var(--disp);margin:10px 0 8px"><?php echo e($sub); ?></h4><?php endif; ?>
-      <?php foreach ($list as $it): ?>
-        <div class="cpt" style="border-left-color:<?php echo e($color); ?>">
-          <h4><?php echo e($it['question']); ?></h4>
-          <?php if (trim((string)$it['explanation']) !== ''): ?><p><?php echo nl2br(e($it['explanation'])); ?></p><?php endif; ?>
-          <?php $img = study_image_url($chapId, $it['image']); if ($img): ?>
-            <a href="<?php echo e($img); ?>" target="_blank" class="qimg-wrap"><img class="qimg" src="<?php echo e($img); ?>" alt="figure" loading="lazy"></a>
-          <?php endif; ?>
-        </div>
+  <?php if (count($groups) > 1): ?>
+    <nav class="topic-nav" id="topicNav">
+      <?php $ti = 0; foreach ($groups as $topic => $_): ?>
+        <a href="#t-<?php echo $ti; ?>" data-topic="t-<?php echo $ti; ?>" class="<?php echo $ti===0?'on':''; ?>"><?php echo e($topic); ?></a>
+      <?php $ti++; endforeach; ?>
+    </nav>
+  <?php endif; ?>
+  <?php $ti = 0; foreach ($groups as $topic => $subs): ?>
+    <section class="topic-sec" id="t-<?php echo $ti; ?>" data-topic-name="<?php echo e($topic); ?>">
+      <div class="grouphdr" style="color:<?php echo e($color); ?>"><?php echo e($topic); ?></div>
+      <?php foreach ($subs as $sub => $list): ?>
+        <?php if ($sub !== ''): ?><div class="subhdr"><?php echo e($sub); ?></div><?php endif; ?>
+        <?php foreach ($list as $it): ?>
+          <article class="cpt qa" style="border-left-color:<?php echo e($color); ?>">
+            <div class="qa-q"><span class="qa-tag" style="background:<?php echo e($color); ?>">Q</span>
+              <span class="qa-text"><?php echo e($it['question']); ?></span></div>
+            <?php if (trim((string)$it['explanation']) !== ''): ?>
+              <div class="qa-a"><?php echo nl2br(e($it['explanation'])); ?></div>
+            <?php endif; ?>
+            <?php $img = study_image_url($chapId, $it['image']); if ($img): ?>
+              <a href="<?php echo e($img); ?>" target="_blank" class="qimg-wrap" style="margin-left:34px"><img class="qimg" src="<?php echo e($img); ?>" alt="figure" loading="lazy"></a>
+            <?php endif; ?>
+          </article>
+        <?php endforeach; ?>
       <?php endforeach; ?>
-    <?php endforeach; ?>
-  <?php endforeach; ?>
+    </section>
+  <?php $ti++; endforeach; ?>
+  <?php if (count($groups) > 1): ?>
+  <script>
+  /* scrollspy: highlight the current topic in the sticky nav */
+  (function(){
+    var nav = document.getElementById('topicNav'); if (!nav) return;
+    var links = {};
+    nav.querySelectorAll('a[data-topic]').forEach(function(a){ links[a.getAttribute('data-topic')] = a; });
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          var id = en.target.getAttribute('id');
+          Object.keys(links).forEach(function(k){ links[k].classList.toggle('on', k === id); });
+          var a = links[id]; if (a) a.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+        }
+      });
+    }, {rootMargin:'-30% 0px -60% 0px', threshold:0});
+    document.querySelectorAll('.topic-sec').forEach(function(s){ io.observe(s); });
+  })();
+  </script>
+  <?php endif; ?>
 <?php endif; ?>
 <?php require __DIR__.'/includes/footer.php'; ?>

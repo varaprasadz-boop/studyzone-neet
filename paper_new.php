@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require __DIR__.'/includes/header.php';
 ?>
 <div class="crumbs"><a href="questionbank.php">Question Bank</a> › <span>Add paper</span></div>
-<div class="phead"><h1>🗂️ Add a paper</h1><p>Upload the question paper pages — the AI reads every question and sorts it by subject &amp; chapter.</p></div>
+<div class="phead"><h1><?php echo icon('upload','lg'); ?> Add a paper</h1><p>Upload the question paper pages — the AI reads every question and sorts it by subject &amp; chapter.</p></div>
 <?php echo flash_render(); ?>
 <?php if ($err): ?><div class="err"><?php echo e($err); ?></div><?php endif; ?>
 <?php if (!ai_enabled()): ?>

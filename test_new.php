@@ -8,9 +8,11 @@ require_once __DIR__ . '/includes/lib.php';
 $ACTIVE = 'examzone'; $PAGE = 'New Test';
 require_admin();
 
+$_allowSubj = scoped_subject_ids();
+$_allowChap = scoped_chapter_ids();
 $subjOpts = [];
 foreach (array_column(qa("SELECT DISTINCT name FROM subjects ORDER BY name"), 'name') as $nm) {
-    $sid = resolve_subject_id($nm); if ($sid) $subjOpts[$sid] = $nm;
+    $sid = resolve_subject_id($nm); if ($sid && ($_allowSubj === null || in_array((int)$sid, $_allowSubj, true))) $subjOpts[$sid] = $nm;
 }
 $selSubject = (int)($_GET['subject'] ?? $_POST['subject'] ?? 0);
 $chapters = $selSubject ? qa("SELECT id, name FROM chapters WHERE subject_id=? ORDER BY name", [$selSubject]) : [];
@@ -52,6 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
     $where = ["status='published'"]; $args = [];
     if ($selSubject) { $where[] = 'subject_id=?'; $args[] = $selSubject; }
     if ($chs)   { $where[] = 'chapter_id IN (' . implode(',', array_fill(0, count($chs), '?')) . ')'; array_push($args, ...$chs); }
+    // Phase 1 scope guard (no-op for admins; engages for scoped tutors)
+    if ($_allowSubj !== null) $where[] = $_allowSubj ? ('subject_id IN (' . implode(',', $_allowSubj) . ')') : '1=0';
+    if ($_allowChap !== null) $where[] = $_allowChap ? ('chapter_id IN (' . implode(',', $_allowChap) . ')') : '1=0';
     if ($diffs) { $where[] = 'difficulty IN (' . implode(',', array_fill(0, count($diffs), '?')) . ')'; array_push($args, ...$diffs); }
 
     $pool = qa("SELECT id FROM questions WHERE " . implode(' AND ', $where) . " ORDER BY RAND() LIMIT $count", $args);
@@ -81,7 +86,7 @@ $availTotal = qcount("SELECT COUNT(*) FROM questions WHERE status='published'" .
 require __DIR__.'/includes/header.php';
 ?>
 <div class="crumbs"><a href="examzone.php">Exam Zone</a> › <span>New test</span></div>
-<div class="phead"><h1>＋ Generate test</h1><p>Draws random questions from the published bank. <b><?php echo $availTotal; ?></b> published question(s) available<?php echo $selSubject?' in '.e($subjOpts[$selSubject] ?? ''):''; ?>.</p></div>
+<div class="phead"><h1><?php echo icon('plus','lg'); ?> Generate test</h1><p>Draws random questions from the published bank. <b><?php echo $availTotal; ?></b> published question(s) available<?php echo $selSubject?' in '.e($subjOpts[$selSubject] ?? ''):''; ?>.</p></div>
 <?php if ($err): ?><div class="err"><?php echo e($err); ?></div><?php endif; ?>
 
 <?php if (isset($_GET['mock'])): ?>

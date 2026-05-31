@@ -20,7 +20,16 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
 }
 require __DIR__.'/includes/header.php';
 ?>
-<div class="phead"><h1>⚙️ Account</h1><p>Signed in as <b><?php echo e($u['username']); ?></b> (<?php echo $u['role']==='superadmin'?'Super Admin':'Student'; ?>).</p></div>
+<?php
+$_lbl = 'User';
+foreach (['superadmin'=>'Super Admin','org_admin'=>'Organisation Admin','tutor'=>'Tutor','parent'=>'Parent','student'=>'Student'] as $rc => $rl) {
+    if (has_role($rc)) { $_lbl = $rl; break; }
+}
+?>
+<div class="phead"><h1><?php echo icon('settings','lg'); ?> Account</h1><p>Signed in as <b><?php echo e($u['username']); ?></b> (<?php echo e($_lbl); ?>).</p></div>
+<?php if (!empty($u['must_change_password'])): ?>
+  <div class="note" style="margin-bottom:12px;border-color:var(--gold);color:var(--gold)"><b>Set a new password to continue</b> — you've been signed in with a temporary password.</div>
+<?php endif; ?>
 <div style="max-width:420px">
   <form method="post" autocomplete="off">
     <?php if($err): ?><div class="err"><?php echo e($err); ?></div><?php endif; ?>

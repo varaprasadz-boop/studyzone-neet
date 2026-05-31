@@ -20,7 +20,7 @@ if ($admin) {
 }
 $student = $who ? q1("SELECT id, name FROM users WHERE id=?", [$who]) : null;
 ?>
-<div class="phead"><h1>📊 Reports</h1>
+<div class="phead"><h1><?php echo icon('bar-chart','lg'); ?> Reports</h1>
   <p><?php echo $admin?'Performance and idle-free study time.':'Your performance and study time.'; ?></p></div>
 
 <?php if ($admin): ?>

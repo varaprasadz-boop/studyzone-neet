@@ -104,7 +104,7 @@ require __DIR__.'/includes/header.php';
   <a href="study.php?subject=<?php echo $chap['subject_id']; ?>"><?php echo e($chap['subject']); ?></a> ›
   <a href="study_chapter.php?chapter=<?php echo $chapId; ?>"><?php echo e($chap['name']); ?></a> › <span>Bulk upload</span>
 </div>
-<div class="phead"><h1>⬆ Bulk upload — <?php echo e($chap['name']); ?></h1>
+<div class="phead"><h1><?php echo icon('upload','lg'); ?> Bulk upload — <?php echo e($chap['name']); ?></h1>
   <p>Upload an Excel (.xlsx) or .csv with columns: <b>Topic · Sub-topic · Question · Explanation · Image</b>.</p></div>
 <?php echo flash_render(); ?>
 <?php if ($err): ?><div class="err"><?php echo e($err); ?></div><?php endif; ?>

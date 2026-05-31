@@ -23,7 +23,7 @@ foreach (array_column(qa("SELECT DISTINCT name FROM subjects ORDER BY name"), 'n
 $chapters = $fSubject ? qa("SELECT id, name FROM chapters WHERE subject_id=? ORDER BY name", [$fSubject]) : [];
 $papers   = qa("SELECT * FROM papers ORDER BY exam_date DESC, id DESC");
 ?>
-<div class="phead"><h1>🗂️ Question Bank</h1>
+<div class="phead"><h1><?php echo icon('file-text','lg'); ?> Question Bank</h1>
 <p><?php echo $admin?'Upload papers, extract questions, publish for the student.':'Past-paper questions with answers & explanations.'; ?></p></div>
 <?php echo flash_render(); ?>
 

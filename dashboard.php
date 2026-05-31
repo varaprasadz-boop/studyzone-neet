@@ -49,6 +49,20 @@ $streak   = (int)user_streak($uid);
   <?php endif; ?>
 </div>
 
+<?php if (!$admin):
+  $badges = user_badges($uid);
+  $earned = array_sum(array_map(fn($b) => $b['achieved'] ? 1 : 0, $badges));
+  if ($badges): ?>
+  <div class="sect" style="margin:8px 0 8px"><h2 style="font-size:1rem;font-weight:600">Badges <span class="hint" style="font-family:var(--mono);font-size:.74rem">· <?php echo $earned; ?> / <?php echo count($badges); ?></span></h2></div>
+  <div class="badges">
+    <?php foreach ($badges as $b): ?>
+      <span class="badge <?php echo $b['achieved'] ? 'on' : ''; ?>" title="<?php echo e($b['hint']); ?>">
+        <?php echo icon($b['icon']); ?><b><?php echo e($b['label']); ?></b>
+      </span>
+    <?php endforeach; ?>
+  </div>
+<?php endif; endif; ?>
+
 <div class="grid">
   <a class="tile" href="study.php" style="--tc:var(--brand-500)">
     <span class="ic"><?php echo icon('book-open','xl'); ?></span><h3>Study Material</h3>
@@ -81,9 +95,26 @@ $streak   = (int)user_streak($uid);
 <?php endif; ?>
 </div>
 
+<?php if ($admin):
+  $recent = qa("SELECT al.action, al.entity, al.created_at, u.name AS who, u.username
+                FROM audit_log al LEFT JOIN users u ON u.id = al.actor_user_id
+                ORDER BY al.id DESC LIMIT 8");
+  if ($recent): ?>
+  <div class="sect" style="margin-top:22px"><h2 style="font-size:1rem;font-weight:600">Recent activity</h2></div>
+  <div class="activity">
+    <?php foreach ($recent as $r): ?>
+      <div class="row-act">
+        <?php echo icon('zap'); ?>
+        <span class="who-name"><?php echo e($r['who'] ?: $r['username'] ?: 'system'); ?></span>
+        <span class="what"><?php echo e(audit_label($r['action'])); ?><?php if ($r['entity']): ?> · <?php echo e($r['entity']); ?><?php endif; ?></span>
+        <span class="when"><?php echo e(time_ago($r['created_at'])); ?></span>
+      </div>
+    <?php endforeach; ?>
+  </div>
+<?php endif; endif; ?>
+
 <?php
-$defaultsActive = q1("SELECT 1 FROM users WHERE username='appa' AND password_hash IS NOT NULL");
-$onlyTwo        = qcount("SELECT COUNT(*) FROM users") <= 2;
+$onlyTwo = qcount("SELECT COUNT(*) FROM users") <= 2;
 if ($admin && $onlyTwo):
 ?>
   <div class="note" style="margin-top:18px">

@@ -42,7 +42,7 @@ shuffle($deck);
 require __DIR__.'/includes/header.php';
 ?>
 <div class="crumbs"><a href="study.php">Study</a> › <span>Flashcard review</span></div>
-<div class="phead"><h1>🔁 Flashcard review</h1>
+<div class="phead"><h1><?php echo icon('zap','lg'); ?> Flashcard review</h1>
   <p>Spaced repetition — rate each card and it comes back at the right time.</p></div>
 
 <div class="statcards">

@@ -42,6 +42,42 @@ require __DIR__.'/includes/header.php';
   <a class="btn" href="test_attempt.php?test=<?php echo $att['test_id']; ?>&fresh=1">Reattempt (reshuffled)</a>
   <a class="btn ghost" href="examzone.php">Back to tests</a>
 </div>
+<?php /* Confetti — fires once per attempt, only when this student took it. */
+if ((int)$att['student_id'] === $uid && $acc >= 60): ?>
+<script>
+(function(){
+  var k = 'confetti.attempt.<?php echo (int)$attemptId; ?>';
+  try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch(e) {}
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var COLORS = ['#1a9479','#3fb393','#b8893b','#c47b1e','#2f9e6e','#aae2cf'];
+  var N = 90, W = window.innerWidth, pieces = [];
+  var c = document.createElement('canvas');
+  c.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999';
+  c.width = W; c.height = window.innerHeight; document.body.appendChild(c);
+  var ctx = c.getContext('2d'), start = performance.now(), duration = 3500;
+  for (var i = 0; i < N; i++) pieces.push({
+    x: Math.random()*W, y: -20 - Math.random()*100,
+    vx: (Math.random()-0.5)*2, vy: 2.5 + Math.random()*3,
+    s: 5 + Math.random()*6, r: Math.random()*Math.PI*2, vr: (Math.random()-0.5)*0.2,
+    col: COLORS[i % COLORS.length]
+  });
+  function tick(t){
+    var elapsed = t - start;
+    ctx.clearRect(0,0,c.width,c.height);
+    pieces.forEach(function(p){
+      p.x += p.vx; p.y += p.vy; p.r += p.vr; p.vy += 0.02;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+      ctx.fillStyle = p.col; ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*0.55);
+      ctx.restore();
+    });
+    if (elapsed < duration) requestAnimationFrame(tick);
+    else { c.remove(); }
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+<?php endif; ?>
 
 <div class="sect"><h2>Answer key</h2></div>
 <?php foreach ($rows as $i=>$r):

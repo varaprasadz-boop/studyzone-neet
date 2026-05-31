@@ -63,7 +63,7 @@ require __DIR__.'/includes/header.php';
 $icon = ['ok' => '✓', 'warn' => '⚠', 'fail' => '✕'];
 $col  = ['ok' => 'var(--green)', 'warn' => 'var(--amber)', 'fail' => 'var(--red)'];
 ?>
-<div class="phead"><h1>🩺 Self-test</h1><p>Environment, database and API checks.</p></div>
+<div class="phead"><h1><?php echo icon('shield','lg'); ?> Self-test</h1><p>Environment, database and API checks.</p></div>
 <div class="tbl-wrap"><table class="tbl">
   <tr><th></th><th>Check</th><th>Detail</th></tr>
   <?php foreach ($checks as $c): ?>

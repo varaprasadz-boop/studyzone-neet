@@ -146,7 +146,7 @@ foreach ($rows as $r) {
 
 require __DIR__ . '/includes/header.php';
 ?>
-<div class="phead"><h1>👥 Users</h1>
+<div class="phead"><h1><?php echo icon('users','lg'); ?> Users</h1>
   <p>Create accounts and restrict each user's access to specific classes &amp; subjects.</p></div>
 <?php echo flash_render(); ?>
 <?php if ($tempPasswordToShow): ?>

@@ -79,7 +79,7 @@ require __DIR__.'/includes/header.php';
 <?php echo flash_render(); ?>
 
 <?php if (!$classId): /* ---------- pick class ---------- */ ?>
-  <div class="phead"><h1>📘 Study Material</h1><p>Choose a class.</p></div>
+  <div class="phead"><h1><?php echo icon('book-open','lg'); ?> Study Material</h1><p>Choose a class.</p></div>
   <div class="grid">
   <?php foreach (qa("SELECT * FROM classes WHERE 1=1 " . scope_clause('id', $allowedClassIds) . " ORDER BY sort") as $c): ?>
     <a class="tile" href="study.php?class=<?php echo $c['id']; ?>"><span class="ic">🎓</span><h3><?php echo e($c['name']); ?></h3></a>
