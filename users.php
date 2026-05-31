@@ -9,6 +9,7 @@
    the header include.
    ============================================================ */
 require_once __DIR__ . '/includes/lib.php';
+require_once __DIR__ . '/includes/mail.php';
 $ACTIVE = ''; $PAGE = 'Users';
 require_permission('users.manage');
 
@@ -91,8 +92,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         audit($isCreate ? 'user.create' : 'user.update', 'user', $uid,
               ['roles' => $roleIds, 'scopes' => ['class' => $classIds, 'subject' => $subjIds]]);
         if ($uid === (int)$me['id']) clear_perm_cache();   // editing self → refresh own session
-        flash($isCreate ? 'User created.' : 'User updated.');
-        // Show temp password on the list page once via session.
+
+        // On create with an email on file, also email a set-password link
+        // (valid 3 days). The temp password is still shown to admin as a fallback.
+        $emailSent = false;
+        if ($isCreate && $email !== '') {
+            $tok = gen_token();
+            db()->prepare("INSERT INTO password_resets (user_id, token, expires_at, ip)
+                           VALUES (?, ?, NOW() + INTERVAL 3 DAY, ?)")
+                ->execute([$uid, $tok, $_SERVER['REMOTE_ADDR'] ?? null]);
+            $link = app_url('reset.php?token=' . $tok);
+            $html = render_html_email(
+                'Welcome to ' . APP_NAME,
+                '<p>Hi ' . htmlspecialchars($name) . ',</p>'
+              . '<p>An account has been created for you with username <b>' . htmlspecialchars($username) . '</b>.</p>'
+              . '<p>Click the button to set your password — the link works for 3 days:</p>',
+                ['Set your password', $link]
+            );
+            $emailSent = send_email($email, 'Welcome to ' . APP_NAME, $html, "Welcome! Set your password: $link", $uid);
+        }
+
+        flash($isCreate
+            ? 'User created.' . ($emailSent ? ' Welcome email sent to ' . $email . '.' : '')
+            : 'User updated.');
         if ($tempPasswordToShow) $_SESSION['_temp_pw'] = $tempPasswordToShow;
         redirect('users.php');
     }
@@ -103,10 +125,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tmp = gen_temp_password();
             db()->prepare("UPDATE users SET password_hash=?, must_change_password=1 WHERE id=?")
                 ->execute([password_hash($tmp, PASSWORD_DEFAULT), $uid]);
+            $row = q1("SELECT username, email, name FROM users WHERE id=?", [$uid]);
+            $emailedTo = '';
+            if ($row && !empty($row['email'])) {
+                $tok = gen_token();
+                db()->prepare("INSERT INTO password_resets (user_id, token, expires_at, ip)
+                               VALUES (?, ?, NOW() + INTERVAL 1 HOUR, ?)")
+                    ->execute([$uid, $tok, $_SERVER['REMOTE_ADDR'] ?? null]);
+                $link = app_url('reset.php?token=' . $tok);
+                $html = render_html_email(
+                    'Password reset',
+                    '<p>Hi ' . htmlspecialchars($row['name']) . ',</p>'
+                  . '<p>An admin reset your password. Use the link to set a new one (valid 1 hour):</p>',
+                    ['Set a new password', $link]
+                );
+                if (send_email($row['email'], APP_NAME . ' — password reset', $html, "Reset: $link", $uid)) {
+                    $emailedTo = $row['email'];
+                }
+            }
             audit('user.password_reset', 'user', $uid);
-            $row = q1("SELECT username FROM users WHERE id=?", [$uid]);
             $_SESSION['_temp_pw'] = ['username' => $row['username'] ?? '?', 'password' => $tmp];
-            flash('Password reset. Share the new temporary password.');
+            flash($emailedTo
+                ? 'Password reset. Emailed reset link to ' . $emailedTo . '; temp password shown below as backup.'
+                : 'Password reset. Share the new temporary password below.');
         }
         redirect('users.php');
     }

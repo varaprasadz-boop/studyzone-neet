@@ -48,10 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button class="btn full" type="submit" style="margin-top:20px">Sign in</button>
       </form>
       <div class="form-foot">
-        <a href="?forgot=1" onclick="document.getElementById('fp').style.display='block';return false">Forgot password?</a>
-      </div>
-      <div id="fp" style="display:<?php echo isset($_GET['forgot'])?'block':'none'; ?>;margin-top:14px;padding:12px 14px;border:1px dashed var(--line);border-radius:var(--r-2);background:var(--panel2);color:var(--muted);font-size:.86rem;line-height:1.5">
-        Self-service reset isn't enabled yet. Ask your tutor — they can reset your password from <b>Users → Reset PW</b> and share the new one with you.
+        <a href="forgot.php">Forgot password?</a>
       </div>
     </div>
   </main>

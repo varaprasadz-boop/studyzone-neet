@@ -260,6 +260,43 @@ $tables = [
   evidence VARCHAR(255) DEFAULT NULL,
   INDEX(user_id), INDEX(kind)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+/* ---- Phase 2 email / password-reset / email-verification foundation ---- */
+"password_resets" => "CREATE TABLE IF NOT EXISTS password_resets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  token CHAR(64) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  used_at DATETIME DEFAULT NULL,
+  ip VARCHAR(45) DEFAULT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX(user_id), INDEX(expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"email_verifications" => "CREATE TABLE IF NOT EXISTS email_verifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  token CHAR(64) NOT NULL UNIQUE,
+  kind ENUM('signup','change','guardian') NOT NULL DEFAULT 'signup',
+  expires_at DATETIME NOT NULL,
+  used_at DATETIME DEFAULT NULL,
+  meta_json TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX(user_id), INDEX(kind)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"mail_log" => "CREATE TABLE IF NOT EXISTS mail_log (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  to_email VARCHAR(190) NOT NULL,
+  subject VARCHAR(255) NOT NULL,
+  driver VARCHAR(20) NOT NULL,
+  status ENUM('queued','sent','failed','logged') NOT NULL DEFAULT 'queued',
+  body_preview TEXT,
+  error TEXT,
+  user_id INT DEFAULT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX(to_email), INDEX(created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
 ];
 
 foreach ($tables as $name => $sql) {
