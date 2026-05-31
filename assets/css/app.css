@@ -1,9 +1,4 @@
-:root{
-  --bg:#f3eee3; --bg2:#ece5d6; --panel:#fffdf8; --panel2:#faf5ea;
-  --ink:#2d2a24; --muted:#6c655a; --dim:#9c9483; --line:#e5ddcb;
-  --gold:#b8893b; --acc:#3b5bdb; --green:#2f9e6e; --red:#d0533f; --amber:#c47b1e;
-  --disp:'Fraunces',serif; --body:'Spline Sans',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
-}
+/* Design tokens live in assets/css/tokens.css (loaded before this file). */
 *{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh}
@@ -13,7 +8,11 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1
   background:var(--panel);border-bottom:1px solid var(--line);padding:12px 16px;box-shadow:0 1px 6px rgba(60,50,30,.05)}
 .burger{font-size:1.4rem;background:none;border:none;cursor:pointer;color:var(--ink);line-height:1;padding:2px 4px}
 .brand{font-family:var(--disp);font-weight:700;font-size:1.15rem}
+.streak{display:inline-flex;align-items:center;gap:5px;background:rgba(196,123,30,.13);color:var(--gold);border-radius:var(--r-pill);padding:4px 11px 4px 9px;font-family:var(--mono);font-size:.78rem;margin-left:auto}
+.streak .icn{color:var(--gold);width:.95em;height:.95em}
+.streak b{font-family:var(--mono);font-size:.9rem;color:var(--ink);font-weight:700}
 .who{margin-left:auto;font-size:.82rem;color:var(--muted);text-align:right;line-height:1.2}
+.streak + .who{margin-left:14px}
 .who .role{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--gold)}
 
 /* drawer */

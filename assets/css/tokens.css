@@ -1,0 +1,62 @@
+/* ============================================================
+   Design tokens — Phase 1 "warm but grown-up" SaaS palette.
+   Imported first by app.css; everything else builds on these.
+   Honors prefers-reduced-motion.
+   ============================================================ */
+:root{
+  /* brand — calm teal, layered on the existing cream surfaces */
+  --brand-50:#eefaf6;  --brand-100:#d5f1e5;  --brand-200:#aae2cf;  --brand-300:#74cdb1;
+  --brand-400:#3fb393;  --brand-500:#1a9479;  --brand-600:#10765f;  --brand-700:#0d5d4d;
+  --brand-800:#0c4940;  --brand-900:#0a3a34;
+
+  /* warm neutrals — the existing cream stays the surface */
+  --bg:#f3eee3;          --bg2:#ece5d6;
+  --panel:#fffdf8;       --panel2:#faf5ea;
+  --ink:#2d2a24;         --muted:#6c655a;     --dim:#9c9483;     --line:#e5ddcb;
+
+  /* accents kept for legacy class compatibility */
+  --acc:var(--brand-500); --acc-soft:rgba(26,148,121,.10);
+  --gold:#b8893b;
+  --green:#2f9e6e;  --red:#d0533f;  --amber:#c47b1e;
+
+  /* type — unchanged on purpose */
+  --disp:'Fraunces',serif;
+  --body:'Spline Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+
+  /* spacing scale (use in new components) */
+  --s-1:4px;  --s-2:8px;  --s-3:12px;  --s-4:16px;
+  --s-5:24px; --s-6:32px; --s-7:48px;  --s-8:64px;
+
+  /* radii */
+  --r-1:6px;  --r-2:10px; --r-3:16px; --r-pill:999px;
+
+  /* shadow — layered, calm */
+  --shadow-sm:0 1px 2px rgba(60,50,30,.05), 0 1px 1px rgba(60,50,30,.04);
+  --shadow-md:0 4px 12px rgba(60,50,30,.08), 0 2px 4px rgba(60,50,30,.05);
+  --shadow-lg:0 14px 40px rgba(60,50,30,.14), 0 6px 14px rgba(60,50,30,.07);
+
+  /* motion */
+  --ease-out:cubic-bezier(.2,.8,.2,1);
+  --dur-fast:120ms;
+  --dur:200ms;
+}
+
+@media(prefers-reduced-motion:reduce){
+  :root{ --dur-fast:0ms; --dur:0ms; }
+  *{ animation-duration:0ms !important; transition-duration:0ms !important; }
+}
+
+/* tablet breakpoint — between mobile drawer (<760) and the existing
+   wide layout. Tightens tile / row sizing on iPad-ish widths. */
+@media(min-width:520px) and (max-width:760px){
+  .grid{ grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); }
+  .wrap{ padding:24px 20px 90px; }
+}
+
+/* icon utility — used by the <use> sprite. Inherits color, scales with font. */
+.icn{ width:1.05em; height:1.05em; stroke:currentColor; fill:none;
+      stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+      vertical-align:-.18em; flex:0 0 auto; }
+.icn.lg{ width:1.5em; height:1.5em; }
+.icn.xl{ width:2.2em; height:2.2em; }

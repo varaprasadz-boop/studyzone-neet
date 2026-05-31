@@ -1,43 +1,96 @@
 <?php
-require_once __DIR__ . '/includes/lib.php';      // brings in auth + ob_start safety net
+require_once __DIR__ . '/includes/lib.php';
 require_once __DIR__ . '/includes/ai.php';
 $ACTIVE = 'dashboard'; $PAGE = 'Dashboard';
 require __DIR__ . '/includes/header.php';
-$admin = is_admin();
-// quick counts for a live feel
-$cChapters = (int)db()->query("SELECT COUNT(*) c FROM chapters")->fetch()['c'];
-$cQuestions= (int)db()->query("SELECT COUNT(*) c FROM questions WHERE status='published'")->fetch()['c'];
-$cTests    = (int)db()->query("SELECT COUNT(*) c FROM tests")->fetch()['c'];
+
+$admin   = is_admin() || has_permission('users.manage');
+$canEdit = has_permission('study.edit') || has_permission('question.publish');
+$uid     = $u['id'];
+
+/* live counts (admin sees totals; student sees personal) */
+$cChapters  = qcount("SELECT COUNT(*) FROM chapters");
+$cQuestions = qcount("SELECT COUNT(*) FROM questions WHERE status='published'");
+$cTests     = qcount("SELECT COUNT(*) FROM tests");
+
+/* student-side quick stats */
+ensure_sr();
+ensure_study_items();
+$dueCards = qcount(
+   "SELECT COUNT(*) FROM (
+      SELECT si.id, si.chapter_id
+      FROM study_items si
+      LEFT JOIN flashcard_reviews fr ON fr.user_id=? AND fr.chapter_id=si.chapter_id AND fr.card_index=si.id
+      WHERE si.explanation IS NOT NULL AND si.explanation <> ''
+        AND (fr.id IS NULL OR fr.due_date <= CURRENT_DATE)
+    ) x", [$uid]);
+$todaySec = qcount("SELECT COALESCE(SUM(active_seconds),0) FROM activity_log WHERE user_id=? AND day=CURRENT_DATE", [$uid]);
+$lastAtt  = q1("SELECT a.score, a.total, t.name FROM attempts a JOIN tests t ON t.id=a.test_id
+                WHERE a.student_id=? AND a.status='completed' ORDER BY a.id DESC LIMIT 1", [$uid]);
+$streak   = (int)user_streak($uid);
 ?>
 <div class="phead">
   <h1>Hi <?php echo e(explode(' ', $u['name'])[0]); ?> 👋</h1>
-  <p><?php echo $admin ? 'Manage study material, papers, tests and reports.' : 'Study, practise and track your progress.'; ?></p>
+  <p><?php echo $admin ? 'Manage users, content and tests — and see how your students are doing.' : 'Pick up where you left off.'; ?></p>
 </div>
 
-<div class="grid">
-  <a class="tile" href="study.php" style="--tc:#3b5bdb"><span class="ic">📘</span><h3>Study Material</h3>
-    <p><?php echo $admin?'Bulk-upload chapter notes':'Notes &amp; flashcards by chapter'; ?></p></a>
-  <a class="tile" href="questionbank.php" style="--tc:#0f8a7e"><span class="ic">🗂️</span><h3>Question Bank</h3>
-    <p><?php echo $admin?'Upload &amp; extract papers':$cQuestions.' questions'; ?></p></a>
-  <a class="tile" href="examzone.php" style="--tc:#c2683a"><span class="ic">📝</span><h3>Exam Zone</h3>
-    <p><?php echo $admin?'Generate tests':$cTests.' tests available'; ?></p></a>
-  <a class="tile" href="reports.php" style="--tc:#4a8c3f"><span class="ic">📊</span><h3>Reports</h3>
-    <p><?php echo $admin?'Student analytics':'Your progress'; ?></p></a>
-</div>
-
-<div class="toolbar" style="margin-top:18px">
-  <?php if ($admin): ?>
-    <a class="btn ghost sm" href="selftest.php">🩺 Self-test</a>
-    <a class="btn ghost sm" href="export.php">💾 Backup database</a>
+<div class="statcards" style="margin-bottom:18px">
+  <div class="statcard"><div class="n" style="color:var(--gold);display:flex;justify-content:center;align-items:center;gap:6px"><?php echo icon('flame','lg'); ?><?php echo $streak; ?></div><div class="l"><?php echo $streak===1?'day streak':'day streak'; ?></div></div>
+  <?php if (!$admin): ?>
+    <div class="statcard"><div class="n" style="color:var(--brand-500);display:flex;justify-content:center;align-items:center;gap:6px"><?php echo icon('clock','lg'); ?><?php echo $dueCards; ?></div><div class="l">cards due</div></div>
+    <div class="statcard"><div class="n"><?php echo fmt_hms($todaySec); ?></div><div class="l">studied today</div></div>
+    <?php if ($lastAtt): ?>
+    <div class="statcard"><div class="n" style="color:var(--green)"><?php echo (int)$lastAtt['score']; ?></div><div class="l">last score · <?php echo e($lastAtt['name']); ?></div></div>
+    <?php endif; ?>
   <?php else: ?>
-    <a class="btn ghost sm" href="study_review.php">🔁 Flashcard review</a>
-    <a class="btn ghost sm" href="examzone.php">🎯 Practice mistakes</a>
+    <div class="statcard"><div class="n"><?php echo $cChapters; ?></div><div class="l">chapters</div></div>
+    <div class="statcard"><div class="n"><?php echo $cQuestions; ?></div><div class="l">questions</div></div>
+    <div class="statcard"><div class="n"><?php echo $cTests; ?></div><div class="l">tests</div></div>
   <?php endif; ?>
 </div>
 
-<div class="note" style="margin-top:8px">
-  <b>All phases live:</b> Study Material (bulk-uploaded chapter notes &amp; flashcards), Question Bank (AI-extracted from paper photos),
-  Exam Zone (timed tests with NEET marking &amp; reshuffled options) and Reports (scores, accuracy and idle-free time).
-  <?php if ($admin): ?><br><br><b>Reminders:</b> change the default passwords in <a href="account.php">Account</a><?php echo ai_enabled()?'':', and add your <code>ANTHROPIC_API_KEY</code> in <code>includes/config.php</code> to enable paper extraction'; ?>.<?php endif; ?>
+<div class="grid">
+  <a class="tile" href="study.php" style="--tc:var(--brand-500)">
+    <span class="ic"><?php echo icon('book-open','xl'); ?></span><h3>Study Material</h3>
+    <p><?php echo $canEdit ? 'Bulk-upload chapter notes' : 'Notes &amp; flashcards by chapter'; ?></p></a>
+  <?php if (has_permission('study.view') || has_permission('study.edit')): ?>
+  <a class="tile" href="questionbank.php" style="--tc:var(--brand-600)">
+    <span class="ic"><?php echo icon('file-text','xl'); ?></span><h3>Question Bank</h3>
+    <p><?php echo $canEdit ? 'Upload &amp; extract papers' : $cQuestions . ' questions'; ?></p></a>
+  <?php endif; ?>
+  <?php if (has_permission('test.attempt') || has_permission('test.create')): ?>
+  <a class="tile" href="examzone.php" style="--tc:var(--gold)">
+    <span class="ic"><?php echo icon('list-checks','xl'); ?></span><h3>Exam Zone</h3>
+    <p><?php echo $canEdit ? 'Generate tests' : $cTests . ' tests available'; ?></p></a>
+  <?php endif; ?>
+  <?php if (has_permission('reports.view_self') || has_permission('reports.view_all')): ?>
+  <a class="tile" href="reports.php" style="--tc:var(--green)">
+    <span class="ic"><?php echo icon('bar-chart','xl'); ?></span><h3>Reports</h3>
+    <p><?php echo has_permission('reports.view_all') ? 'Student analytics' : 'Your progress'; ?></p></a>
+  <?php endif; ?>
 </div>
+
+<div class="toolbar" style="margin-top:22px">
+<?php if ($admin): ?>
+  <a class="btn ghost sm" href="users.php"><?php echo icon('users'); ?> Users</a>
+  <a class="btn ghost sm" href="selftest.php"><?php echo icon('shield'); ?> Self-test</a>
+  <a class="btn ghost sm" href="export.php"><?php echo icon('download'); ?> Backup</a>
+<?php else: ?>
+  <a class="btn ghost sm" href="study_review.php"><?php echo icon('zap'); ?> Flashcard review<?php echo $dueCards?' ('.$dueCards.')':''; ?></a>
+  <a class="btn ghost sm" href="examzone.php"><?php echo icon('award'); ?> Practice mistakes</a>
+<?php endif; ?>
+</div>
+
+<?php
+$defaultsActive = q1("SELECT 1 FROM users WHERE username='appa' AND password_hash IS NOT NULL");
+$onlyTwo        = qcount("SELECT COUNT(*) FROM users") <= 2;
+if ($admin && $onlyTwo):
+?>
+  <div class="note" style="margin-top:18px">
+    <b>Heads up:</b> only the seeded <code>appa</code> / <code>son</code> accounts exist.
+    Create real users — and restrict each user to specific classes/subjects — in
+    <a href="users.php">Users</a>. The defaults can be disabled afterwards.
+    <?php if (!ai_enabled()): ?><br><br>Add your <code>ANTHROPIC_API_KEY</code> in <code>includes/config.php</code> to enable paper extraction.<?php endif; ?>
+  </div>
+<?php endif; ?>
 <?php require __DIR__.'/includes/footer.php'; ?>

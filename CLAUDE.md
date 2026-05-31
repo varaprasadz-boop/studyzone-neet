@@ -25,12 +25,13 @@ A private NEET (India medical entrance) study app for two users — a tutor/admi
 4. renders, then `require includes/footer.php`.
 
 **Includes layer:**
-- `db.php` — `db()` returns a singleton PDO (exceptions on, assoc fetch, real prepares).
-- `auth.php` — sessions, `current_user()`, `is_admin()`, `require_login()`/`require_admin()`, CSRF (`csrf_field()`, `csrf_ok()`, `require_csrf()`), `json_out()`, and `e()` (HTML escape).
-- `lib.php` — query helpers `q1/qa/qcount`, `flash()`/`flash_render()`, `redirect()`, study-content load/save, `resolve_subject_id/resolve_chapter_id`, `question_image_html()`, `ensure_sr()`, `NEET_CORRECT/WRONG/SKIP` constants, `fmt_hms()`.
-- `ai.php` — Anthropic client. `ai_enabled()`, `ai_call($messages,$system,$maxTokens)`, `ai_image_block($path)`, `ai_json($text)` (tolerant JSON parse). Uses prompt caching on the system prompt. **Prompts must instruct the model to return only JSON and to write math as LaTeX in `$…$`.**
-- `chart.php` — dependency-free inline-SVG charts (`chart_bars/chart_line/chart_hbars`). No JS chart libs.
-- `header.php`/`footer.php` — shared shell; KaTeX is loaded here (math renders via `window.__renderMath`). `header.php` emits `data-screen/data-subject/data-chapter` on `<body>` for time tracking.
+- `db.php` — `db()` returns a singleton PDO (exceptions on, assoc fetch, real prepares). Friendly error if `config.php` is missing.
+- `auth.php` — sessions, `current_user()`, `is_admin()` (now `has_role('superadmin')`), `require_login()`/`require_admin()` (now a perm shim), CSRF (`csrf_field()`, `csrf_ok()`, `require_csrf()`), `json_out()`, `e()`. **Phase 1 RBAC helpers:** `has_role($code)`, `has_permission($code)`, `require_permission($code)`, `clear_perm_cache()` — both `roles_codes` and `perm_codes` are session-cached per request; clear after self-edits. `attempt_login` honors `users.status` and seeds `must_change_password`. `require_login` redirects to `account.php` while `must_change_password = 1` (skipped on `/api/` paths).
+- `lib.php` — query helpers `q1/qa/qcount`, `flash()`/`flash_render()`, `redirect()`, study-content load/save, `resolve_subject_id/resolve_chapter_id`, `question_image_html()`, `ensure_sr()` / `ensure_study_items()`, `NEET_CORRECT/WRONG/SKIP`, `fmt_hms()`. **Phase 1 additions:** `scoped_subject_ids/scoped_chapter_ids/scoped_class_ids` + `scope_clause('col', $ids)` (returns `AND col IN (...)` or `''`), `audit($action, $entity, $id, $meta)` (never blocks on write fail), `user_streak($uid)` (session-cached), `gen_temp_password()`. **First line of lib.php starts an `ob_start()` safety net** so a late `header()` (e.g. a new RBAC redirect after `header.php` output) still works.
+- `icons.php` — `icon($name, $extra)` emits `<svg class="icn …"><use href="assets/icons/sprite.svg#$name"/></svg>`. Sprite is `assets/icons/sprite.svg` (Lucide-style line icons). Use this in new UI instead of Unicode emoji.
+- `ai.php` — Anthropic client. `ai_enabled()`, `ai_call($messages,$system,$maxTokens,$timeout)`, `ai_image_block($path)`, `ai_json($text)`. Prompt caching on the system prompt. **Prompts must instruct the model to return only JSON and to write math as LaTeX in `$…$`.**
+- `chart.php` — dependency-free inline-SVG charts (`chart_bars/chart_line/chart_hbars`).
+- `header.php`/`footer.php` — shared shell; KaTeX loaded here (math renders via `window.__renderMath`). Header loads `tokens.css` **before** `app.css` (brand teal lives in tokens). Nav is built from permissions, not the legacy `role === 'superadmin'` branch. Topbar shows a streak badge when `user_streak()` > 0. `<body>` carries `data-screen/data-role/data-subject/data-chapter`.
 
 **API endpoints (`api/`)** return JSON via `json_out()`, guard with `csrf_ok()`, and never emit HTML. Long AI jobs are deliberately split into **per-item AJAX loops** driven by client JS (one chapter → `study_ai.php`; one page → `paper_ai.php`) to stay under shared-hosting execution limits — don't refactor these into one big synchronous request.
 
@@ -49,7 +50,16 @@ A private NEET (India medical entrance) study app for two users — a tutor/admi
 - **Uploaded paper images** live in `uploads/papers/{paperId}/pN.ext`, blocked from direct web access by `uploads/.htaccess`, and served only through the login-gated `api/file.php`. Questions reference them via `image_ref`; `question_image_html()` renders the figure inline.
 - **Time tracking:** `assets/js/app.js` counts engaged seconds (idle lock at 5 min, idle time never sent), POSTing deltas to `api/track.php` which upserts `activity_log` per user/day/screen/chapter. Reports read from there.
 
+### Phase 1 RBAC / scoping / audit
+- **Roles + permissions live in `roles` / `permissions` / `role_permissions` / `user_roles`.** Page guards: prefer `require_permission('study.edit')` over `require_admin()`. The `require_admin()` shim still works (it checks the `superadmin` role OR the `users.manage` permission).
+- **Per-user scoping** uses `user_scopes(scope_type ENUM('class','subject','chapter','student','tenant'), scope_id)`. Class + subject scopes intersect. Any page that filters by `subject_id` / `chapter_id` should inject `scope_clause('subject_id', scoped_subject_ids())` — see [study.php](study.php) and [questionbank.php](questionbank.php). Admins (`users.manage`) and scope-free users get `null` (no narrowing).
+- **Deep-link guard pattern:** when a single resource is loaded by id (e.g. `study_chapter.php?chapter=N`), if it isn't in the scoped id set, treat it as not-found rather than emitting a 403 — same UX as a stale link, doesn't leak existence.
+- **Tenant_id** is on every content/user/attempt table (defaults to 1). Phase 1 is single-tenant; future B2B onboarding will use this column.
+- **Audit log** (`audit_log`) is for security events (logins, role changes, deletes, downloads). The older `activity_log` is time-on-screen only — don't confuse them. Call `audit('action.kind', 'entity', $id, $meta=[])`; failures are swallowed.
+- **Force-change-password:** `require_login()` redirects to `account.php` when `must_change_password = 1`, except on `/api/` paths.
+
 ### Gotchas
 - `e()` escapes output, but `$…$` survives escaping so KaTeX still renders escaped text. Question/option text is escaped; generated study `concepts`/`flashcards` are echoed as raw HTML (admin-authored) — keep that trust boundary in mind.
 - In strings sent to the AI, write LaTeX with **single-quoted PHP strings** (or escape `$`) so `$v`, `$cell` etc. aren't interpreted as PHP variables.
 - AI features degrade gracefully when `ANTHROPIC_API_KEY` is blank (manual entry paths); don't assume the key exists.
+- The `ob_start()` in `lib.php` is a safety net for the page lifecycle. Streaming endpoints (`export.php`, `api/file.php`) must `while (ob_get_level()) ob_end_clean();` before they start sending body bytes.

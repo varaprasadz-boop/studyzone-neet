@@ -237,6 +237,34 @@ function scope_clause($col, $ids) {
    Phase 1 — audit log helper. Best-effort: never fatals a request
    on a write failure (audit table might not exist on very old installs).
    ============================================================ */
+/* Daily-active streak ending today (or yesterday, if no activity yet today).
+   Counts consecutive distinct days in activity_log. Session-cached for ~10 min. */
+function user_streak($userId, $maxAgeSec = 600) {
+    if (isset($_SESSION['_streak'][$userId], $_SESSION['_streak_at'][$userId])
+        && (time() - (int)$_SESSION['_streak_at'][$userId]) < $maxAgeSec) {
+        return (int)$_SESSION['_streak'][$userId];
+    }
+    $rows = qa("SELECT day FROM activity_log WHERE user_id=? AND active_seconds > 0
+                GROUP BY day ORDER BY day DESC LIMIT 60", [(int)$userId]);
+    $streak = 0;
+    $today  = date('Y-m-d');
+    $yest   = date('Y-m-d', strtotime('-1 day'));
+    $cursor = null;
+    foreach ($rows as $r) {
+        $d = $r['day'];
+        if ($cursor === null) {
+            if ($d === $today || $d === $yest) { $streak = 1; $cursor = $d; }
+            else break;
+        } else {
+            $prev = date('Y-m-d', strtotime($cursor . ' -1 day'));
+            if ($d === $prev) { $streak++; $cursor = $d; } else break;
+        }
+    }
+    $_SESSION['_streak'][$userId]    = $streak;
+    $_SESSION['_streak_at'][$userId] = time();
+    return $streak;
+}
+
 /* Readable random temp-password (no look-alike chars). */
 function gen_temp_password($len = 10) {
     $chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789';
