@@ -256,6 +256,13 @@ textarea:focus{outline:none;border-color:var(--acc)}
 .sect h2{font-family:var(--disp);font-weight:700;font-size:1.25rem}
 .sect p{color:var(--muted);font-size:.86rem}
 
+/* Empty-state illustration wrapper */
+.illus{margin:0 auto 14px;display:block}
+.illus svg{display:block;width:100%;height:auto}
+.note.empty{text-align:center;padding:32px 18px}
+.note.empty .illus{margin-bottom:18px}
+.note.empty b{display:block;font-family:var(--disp);font-size:1.15rem;color:var(--ink);margin-bottom:6px}
+
 /* Dashboard: badges (student) + recent activity (admin) */
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
 .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--r-pill);

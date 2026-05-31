@@ -69,7 +69,7 @@ require __DIR__.'/includes/header.php';
 
 <div class="sect"><h2>Pages</h2><p>Extraction reads each page and files questions as drafts. Re-extracting a page replaces its drafts.</p></div>
 <div class="toolbar">
-  <button class="btn green" type="button" id="extractAll" <?php echo ai_enabled()?'':'disabled'; ?>>⚡ Extract all pages</button>
+  <button class="btn green" type="button" id="extractAll" <?php echo ai_enabled()?'':'disabled'; ?>><?php echo icon('zap'); ?> Extract all pages</button>
   <a class="btn ghost sm" href="question_edit.php?paper=<?php echo $paperId; ?>">+ Add question manually</a>
 </div>
 <?php if (!ai_enabled()): ?><div class="note" style="margin-bottom:12px">AI extraction is off (no API key). Add questions manually instead.</div><?php endif; ?>

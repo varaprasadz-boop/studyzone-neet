@@ -67,7 +67,7 @@ require __DIR__.'/includes/header.php';
 <?php echo flash_render(); ?>
 
 <div class="toolbar">
-  <a class="btn sm" href="study_upload.php?chapter=<?php echo $chapId; ?>">⬆ Bulk upload (Excel/CSV)</a>
+  <a class="btn sm" href="study_upload.php?chapter=<?php echo $chapId; ?>"><?php echo icon('upload'); ?> Bulk upload (Excel/CSV)</a>
   <a class="btn sm ghost" href="study_chapter.php?chapter=<?php echo $chapId; ?>">View</a>
   <?php if ($items): ?>
   <span class="spacer"></span>

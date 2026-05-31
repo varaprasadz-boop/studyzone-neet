@@ -76,18 +76,22 @@ require __DIR__.'/includes/header.php';
 <div class="toolbar">
 <?php if ($admin): ?>
   <a class="btn" href="test_new.php">+ Generate new test</a>
-  <a class="btn ghost" href="test_new.php?mock=1">⚡ Full NEET mock</a>
+  <a class="btn ghost" href="test_new.php?mock=1"><?php echo icon('zap'); ?> Full NEET mock</a>
 <?php else: ?>
   <form method="post" style="display:inline"><?php echo csrf_field(); ?>
     <input type="hidden" name="action" value="practice">
-    <button class="btn green" type="submit" <?php echo $mistakeCount?'':'disabled'; ?>>🎯 Practice my mistakes (<?php echo $mistakeCount; ?>)</button>
+    <button class="btn green" type="submit" <?php echo $mistakeCount?'':'disabled'; ?>><?php echo icon('award'); ?> Practice my mistakes (<?php echo $mistakeCount; ?>)</button>
   </form>
-  <a class="btn ghost" href="study_review.php">🔁 Flashcard review</a>
+  <a class="btn ghost" href="study_review.php"><?php echo icon('zap'); ?> Flashcard review</a>
 <?php endif; ?>
 </div>
 
 <?php if (!$tests): ?>
-  <div class="note"><?php echo $admin?'No tests yet. Generate one from the question bank.':'No tests available yet — your tutor will add them.'; ?></div>
+  <div class="note empty">
+    <?php echo illus('empty'); ?>
+    <b>No tests yet</b>
+    <?php echo $admin?'Generate one from the published question bank above.':'Your tutor will publish tests here soon.'; ?>
+  </div>
 <?php endif; ?>
 
 <div class="list">

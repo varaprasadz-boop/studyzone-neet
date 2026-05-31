@@ -118,7 +118,11 @@ require __DIR__.'/includes/header.php';
   <?php endif; ?>
 
   <?php if (!$chs): ?>
-    <div class="note"><?php echo $admin ? 'No chapters yet — add one above.' : 'No chapters yet.'; ?></div>
+    <div class="note empty">
+      <?php echo illus('empty'); ?>
+      <b>No chapters yet</b>
+      <?php echo $admin ? 'Add one above to get started.' : 'Your tutor will add chapters here soon.'; ?>
+    </div>
   <?php else: ?>
     <div class="list">
     <?php foreach ($chs as $i => $ch):
@@ -141,7 +145,7 @@ require __DIR__.'/includes/header.php';
               <span class="pill">soon</span>
             <?php endif; ?>
             <?php if ($admin): ?>
-              <a class="btn sm ghost" href="study_upload.php?chapter=<?php echo $ch['id']; ?>">⬆ Bulk upload</a>
+              <a class="btn sm ghost" href="study_upload.php?chapter=<?php echo $ch['id']; ?>"><?php echo icon('upload'); ?> Bulk upload</a>
               <a class="btn sm ghost" href="study_edit.php?chapter=<?php echo $ch['id']; ?>">Manage</a>
               <form method="post" style="display:inline"><?php echo csrf_field(); ?><input type="hidden" name="subject" value="<?php echo $subjId; ?>"><input type="hidden" name="action" value="move_up"><input type="hidden" name="chapter" value="<?php echo $ch['id']; ?>"><button class="btn sm ghost" type="submit" <?php echo $i===0?'disabled':''; ?>>↑</button></form>
               <form method="post" style="display:inline"><?php echo csrf_field(); ?><input type="hidden" name="subject" value="<?php echo $subjId; ?>"><input type="hidden" name="action" value="move_down"><input type="hidden" name="chapter" value="<?php echo $ch['id']; ?>"><button class="btn sm ghost" type="submit" <?php echo $i===count($chs)-1?'disabled':''; ?>>↓</button></form>

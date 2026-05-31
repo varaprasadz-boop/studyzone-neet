@@ -82,7 +82,7 @@ $cur['opts'] = array_pad(array_slice((array)$cur['opts'], 0, 4), 4, '');
 require __DIR__.'/includes/header.php';
 ?>
 <div class="crumbs"><a href="questionbank.php">Question Bank</a> <?php if($paperId):?>› <a href="paper_review.php?paper=<?php echo $paperId;?>">Review</a><?php endif;?> › <span><?php echo $q?'Edit':'New'; ?></span></div>
-<div class="phead"><h1><?php echo $q?'✏ Edit question':'＋ New question'; ?></h1></div>
+<div class="phead"><h1><?php echo $q ? icon('edit','lg').' Edit question' : icon('plus','lg').' New question'; ?></h1></div>
 <?php if ($err): ?><div class="err"><?php echo e($err); ?></div><?php endif; ?>
 
 <form method="post" id="qform">

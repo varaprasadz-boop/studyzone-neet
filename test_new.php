@@ -95,7 +95,7 @@ require __DIR__.'/includes/header.php';
   NEET marking. Drawn at random from your published bank.
   <form method="post" style="margin-top:10px"><?php echo csrf_field(); ?>
     <input type="hidden" name="action" value="mock">
-    <button class="btn green" type="submit">⚡ Generate full mock now</button>
+    <button class="btn green" type="submit"><?php echo icon('zap'); ?> Generate full mock now</button>
     <a class="btn ghost sm" href="test_new.php">Custom test instead</a>
   </form>
 </div>

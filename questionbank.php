@@ -102,7 +102,11 @@ $rows = qa($sql, $args);
 ?>
 <div class="hint" style="margin-bottom:10px"><?php echo count($rows); ?> published question(s)</div>
 <?php if (!$rows): ?>
-  <div class="note">No published questions match. <?php echo $admin?'Publish some from a paper review.':'Check back soon.'; ?></div>
+  <div class="note empty">
+    <?php echo illus('empty'); ?>
+    <b>No published questions match</b>
+    <?php echo $admin?'Upload a paper or publish drafts from a paper review.':'Check back soon.'; ?>
+  </div>
 <?php endif; ?>
 
 <div class="list">

@@ -55,8 +55,15 @@ require __DIR__.'/includes/header.php';
 <?php endif; ?>
 
 <?php if (!$items): ?>
-  <div class="note">No study material yet.
-    <?php if ($admin): ?> <a href="study_upload.php?chapter=<?php echo $chapId; ?>">Bulk upload →</a> or <a href="study_edit.php?chapter=<?php echo $chapId; ?>">add by hand →</a><?php endif; ?>
+  <div class="note empty">
+    <?php echo illus('empty'); ?>
+    <b>No study material yet</b>
+    <?php if ($admin): ?>
+      <a href="study_upload.php?chapter=<?php echo $chapId; ?>">Bulk upload →</a> or
+      <a href="study_edit.php?chapter=<?php echo $chapId; ?>">add by hand →</a>
+    <?php else: ?>
+      Your tutor will publish notes for this chapter soon.
+    <?php endif; ?>
   </div>
 <?php else: ?>
   <?php if (count($groups) > 1): ?>
