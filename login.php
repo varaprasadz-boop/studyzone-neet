@@ -49,6 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </form>
       <div class="form-foot">
         <a href="forgot.php">Forgot password?</a>
+        <?php if (setting_get('signup_open', '0') === '1'): ?>
+          &nbsp;·&nbsp; <a href="register.php">Create account</a>
+        <?php endif; ?>
       </div>
     </div>
   </main>

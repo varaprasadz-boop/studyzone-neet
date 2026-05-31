@@ -58,6 +58,17 @@ A private NEET (India medical entrance) study app for two users — a tutor/admi
 - **Audit log** (`audit_log`) is for security events (logins, role changes, deletes, downloads). The older `activity_log` is time-on-screen only — don't confuse them. Call `audit('action.kind', 'entity', $id, $meta=[])`; failures are swallowed.
 - **Force-change-password:** `require_login()` redirects to `account.php` when `must_change_password = 1`, except on `/api/` paths.
 
+### Phase 2 — email, password reset, registration
+- **Mail abstraction** (`includes/mail.php`). `send_email($to, $subject, $html, $text='', $userId=null)` drives by `MAIL_DRIVER` (`'mail'` = PHP `mail()`; `'log'` = record-only fallback when `MAIL_FROM` is blank). Every send writes a `mail_log` row. `app_url($path)` returns an absolute URL (APP_URL constant or scheme+HTTP_HOST). `gen_token()` = 64-char hex random; `render_html_email()` wraps a snippet in a calm branded HTML shell.
+- **Public flows** (`forgot.php`, `reset.php`, `verify.php`, `register.php`) own their own minimal HTML shell (login-shell) — they do NOT use `header.php`. POST handlers and `header()` redirects always precede any output.
+- **Password reset:** `password_resets` table; tokens valid 1 hour, single-use. `forgot.php` is rate-limited to ≤5/hour/IP. `reset.php` invalidates all other open tokens for that user on success.
+- **Email verification:** `email_verifications` table with `kind ENUM('signup','change','guardian')`. `verify.php` consumes tokens; on a signup token it flips `users.status` from `pending` → `active`; on a guardian token it records a `user_consents(kind='guardian')` row AND activates the under-18 account.
+- **Public registration** (`register.php`) is gated by setting `signup_open` (default `'0'` = invite-only). Use `setting_get/setting_set` helpers. Under-18 sign-ups send a guardian double-opt-in email (India DPDP). Per-IP rate limit is ≤3 signups/hour via `signup_attempts`.
+- **hCaptcha** (`includes/captcha.php`) — `captcha_widget()` / `captcha_verify($token, $ip)` are no-ops when `HCAPTCHA_SITE_KEY`/`SECRET` are blank.
+- **Admin user create / password reset** in `users.php` now also issue a `password_resets` token and email a "set your password" link when the user has an email on file. The temp password is still shown to admin as fallback.
+- **Plans stub:** `plans` table seeded with a single `free` row (placeholder for Phase 3 Razorpay).
+- **Settings page** (`settings.php`, admin) toggles `signup_open` and surfaces email/captcha readiness.
+
 ### Visual surface (Phase 1 SaaS look)
 - Brand is **teal** (`--brand-500`); tokens live in `assets/css/tokens.css` and are loaded BEFORE `app.css` by `header.php`. `app.css` no longer redefines tokens.
 - Icons: use `icon($name)` from `includes/icons.php` (Lucide-style sprite at `assets/icons/sprite.svg`) instead of Unicode emoji. Add new symbols to that one sprite file.

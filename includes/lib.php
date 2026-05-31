@@ -336,6 +336,40 @@ function gen_temp_password($len = 10) {
     return $out;
 }
 
+/* Simple key/value settings store (Phase 2 toggles, etc.). */
+function setting_get($key, $default = null) {
+    $r = q1("SELECT v FROM settings WHERE k=?", [$key]);
+    return $r ? $r['v'] : $default;
+}
+function setting_set($key, $value) {
+    db()->prepare("INSERT INTO settings (k, v) VALUES (?,?) ON DUPLICATE KEY UPDATE v=VALUES(v)")
+        ->execute([$key, (string)$value]);
+}
+
+/* Runtime guard for Phase 2 M2 tables (signup_attempts + plans + signup_open
+   default) — for installs whose install.php was deleted after setup. */
+function ensure_phase2_m2() {
+    db()->exec("CREATE TABLE IF NOT EXISTS signup_attempts (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      ip VARCHAR(45) DEFAULT NULL, email VARCHAR(190) DEFAULT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      INDEX(ip), INDEX(created_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    db()->exec("CREATE TABLE IF NOT EXISTS plans (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      code VARCHAR(40) NOT NULL UNIQUE,
+      name VARCHAR(80) NOT NULL,
+      price_inr INT NOT NULL DEFAULT 0,
+      `interval` ENUM('month','year','lifetime') NOT NULL DEFAULT 'lifetime',
+      trial_days INT DEFAULT 0,
+      features_json TEXT,
+      active TINYINT DEFAULT 1,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    db()->exec("INSERT IGNORE INTO plans (code, name, price_inr, `interval`, trial_days, active) VALUES ('free','Free',0,'lifetime',0,1)");
+    db()->exec("INSERT IGNORE INTO settings (k, v) VALUES ('signup_open', '0')");
+}
+
 function audit($action, $entity = null, $entityId = null, $meta = []) {
     try {
         $uid = current_user()['id'] ?? null;

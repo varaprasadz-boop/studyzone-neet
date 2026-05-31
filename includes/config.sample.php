@@ -26,6 +26,12 @@ date_default_timezone_set(APP_TZ);
 // blank, links fall back to scheme + HTTP_HOST from the current request.
 define('APP_URL', '');                                 // e.g. https://study.yourdomain.com
 
+// ----- hCaptcha (optional — used by public registration) -----
+// Get free keys at https://www.hcaptcha.com — leave both blank to disable
+// the captcha (helper is then a no-op).
+define('HCAPTCHA_SITE_KEY', '');
+define('HCAPTCHA_SECRET',   '');
+
 // ----- Email (Phase 2) -----
 // Driver: 'mail' uses PHP mail() (works on Hostinger); 'log' only writes to
 // the mail_log table without sending — useful in dev or before MAIL_FROM is set.

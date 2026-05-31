@@ -87,6 +87,7 @@ $streak   = (int)user_streak($uid);
 <div class="toolbar" style="margin-top:22px">
 <?php if ($admin): ?>
   <a class="btn ghost sm" href="users.php"><?php echo icon('users'); ?> Users</a>
+  <a class="btn ghost sm" href="settings.php"><?php echo icon('settings'); ?> Settings</a>
   <a class="btn ghost sm" href="selftest.php"><?php echo icon('shield'); ?> Self-test</a>
   <a class="btn ghost sm" href="export.php"><?php echo icon('download'); ?> Backup</a>
 <?php else: ?>

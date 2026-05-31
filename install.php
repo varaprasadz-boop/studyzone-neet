@@ -297,6 +297,27 @@ $tables = [
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   INDEX(to_email), INDEX(created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+/* ---- Phase 2 M2 — registration + plans foundation ---- */
+"signup_attempts" => "CREATE TABLE IF NOT EXISTS signup_attempts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ip VARCHAR(45) DEFAULT NULL,
+  email VARCHAR(190) DEFAULT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX(ip), INDEX(created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+"plans" => "CREATE TABLE IF NOT EXISTS plans (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(40) NOT NULL UNIQUE,
+  name VARCHAR(80) NOT NULL,
+  price_inr INT NOT NULL DEFAULT 0,
+  `interval` ENUM('month','year','lifetime') NOT NULL DEFAULT 'lifetime',
+  trial_days INT DEFAULT 0,
+  features_json TEXT,
+  active TINYINT DEFAULT 1,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
 ];
 
 foreach ($tables as $name => $sql) {
@@ -470,6 +491,13 @@ if (col_exists($pdo, 'users', 'role')) {
     );
     $messages[] = "Backfilled user_roles from legacy users.role";
 }
+
+/* 3g. Phase 2 seeds — single Free plan + invite-only default. */
+$pdo->prepare("INSERT IGNORE INTO plans (code, name, price_inr, `interval`, trial_days, active)
+               VALUES (?,?,?,?,?,?)")
+    ->execute(['free', 'Free', 0, 'lifetime', 0, 1]);
+$pdo->prepare("INSERT IGNORE INTO settings (k, v) VALUES (?, ?)")
+    ->execute(['signup_open', '0']);
 
 $messages[] = "Migrations + RBAC seed complete (idempotent).";
 
