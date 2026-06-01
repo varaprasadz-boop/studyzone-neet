@@ -1,0 +1,251 @@
+Topic,Sub-topic,Question,Explanation,Image
+Genetics,Introduction,"Define genetics, heredity and variation.","SHORT ANSWER: Genetics is the branch of biology dealing with inheritance and variation. Heredity is the transmission of characters from parents to offspring; variation is the differences among individuals of a species.
+
+LONG ANSWER: Genetics (term coined by Bateson) studies how traits are passed across generations and why offspring differ from parents and from one another. Heredity ensures continuity of characters through genes carried on chromosomes, while variation (due to recombination, mutation and environment) provides the raw material for evolution.
+
+NEET FOCUS: Father of genetics = Gregor Mendel; the term 'genetics' was coined by W. Bateson.",
+Genetics,Mendel,Why did Mendel choose the garden pea (Pisum sativum) for his experiments?,"SHORT ANSWER: Because the pea plant has clear contrasting traits, is normally self-pollinating, has a short life cycle, produces many offspring, and can be easily cross-pollinated.
+
+LONG ANSWER: Mendel selected seven pairs of clear-cut contrasting characters (e.g. tall/dwarf, round/wrinkled seeds). The flowers are bisexual and self-fertilising, so pure lines are easily maintained, yet artificial cross-pollination is simple. A short generation time and large numbers of offspring allowed reliable statistical analysis.
+
+NEET FOCUS: Mendel studied 7 pairs of contrasting traits in pea. Self-pollination keeps lines pure; emasculation allows controlled crosses.",
+Genetics,Mendel Terms,"Define the terms allele, homozygous, heterozygous, genotype and phenotype.","SHORT ANSWER: Alleles are alternative forms of a gene. Homozygous = both alleles identical (TT or tt); heterozygous = two different alleles (Tt). Genotype = genetic make-up; phenotype = observable trait.
+
+LONG ANSWER: A gene may exist in different versions (alleles) occupying the same locus on homologous chromosomes. An organism with identical alleles is homozygous (pure/true-breeding); with different alleles it is heterozygous (hybrid). The genotype (e.g. Tt) determines the phenotype (e.g. tall), though dominance can mask a recessive allele.
+
+NEET FOCUS: Same allele on both chromosomes -> homozygous; dominant allele masks recessive in heterozygote so phenotype follows the dominant.",
+Genetics,Law of Dominance,State Mendel's Law of Dominance.,"SHORT ANSWER: In a heterozygote, one allele (the dominant) expresses itself and masks the effect of the other (the recessive); characters are controlled by discrete units called factors (genes) occurring in pairs.
+
+LONG ANSWER: When two pure-breeding parents differing in one trait are crossed, the F1 resembles only one parent (the dominant trait). The recessive trait reappears in the F2. This law explains the 3:1 phenotypic ratio of the monohybrid cross and the existence of carriers.
+
+NEET FOCUS: Law of Dominance explains why F1 shows only the dominant trait and why a 3:1 (not 1:1) F2 phenotypic ratio appears.",
+Genetics,Law of Segregation,State and explain Mendel's Law of Segregation.,"SHORT ANSWER: The two alleles of a gene separate (segregate) during gamete formation so that each gamete carries only one allele; they reunite randomly at fertilisation. It is the 'law of purity of gametes'.
+
+LONG ANSWER: During meiosis the paired alleles of a heterozygote separate into different gametes, so a gamete is always pure for a character (carries one allele only). At fertilisation, random fusion of gametes restores the diploid condition. This explains the reappearance of the recessive trait in F2 in a 3:1 ratio (genotypic 1:2:1).
+
+NEET FOCUS: This is the only Mendel law with NO exceptions - alleles always segregate cleanly. Genotypic ratio 1:2:1, phenotypic 3:1.",
+Genetics,Law of Independent Assortment,State Mendel's Law of Independent Assortment.,"SHORT ANSWER: When two pairs of contrasting traits are considered together, the alleles of one gene assort independently of the alleles of another, giving new combinations. Demonstrated by the dihybrid cross (9:3:3:1).
+
+LONG ANSWER: In a dihybrid cross (e.g. round yellow x wrinkled green), each gene pair segregates independently during gamete formation, producing four gamete types in equal proportion. The F2 shows a 9:3:3:1 phenotypic ratio. This law holds only for genes on different chromosomes (or far apart on the same chromosome).
+
+NEET FOCUS: Independent assortment gives 9:3:3:1 in F2. It FAILS for linked genes (genes close together on the same chromosome).",
+Genetics,Monohybrid Cross,Describe a monohybrid cross and its F2 ratios.,"SHORT ANSWER: A cross involving a single pair of contrasting traits (e.g. Tall TT x dwarf tt). F1 all tall (Tt); F2 phenotypic ratio 3 tall : 1 dwarf; genotypic ratio 1 TT : 2 Tt : 1 tt.
+
+LONG ANSWER: Crossing homozygous tall (TT) with dwarf (tt) gives all tall F1 (Tt). Self-pollinating F1 yields F2 with three genotypes - TT, Tt, tt in 1:2:1 - and two phenotypes (tall:dwarf) in 3:1, because Tt also appears tall. A test cross confirms the genotype.
+
+NEET FOCUS: Monohybrid F2: phenotypic 3:1, genotypic 1:2:1. Out of 3 talls, 1 is pure (TT) and 2 are hybrids (Tt).",monohybrid_cross.png
+Genetics,Dihybrid Cross,Describe a dihybrid cross and explain the 9:3:3:1 ratio.,"SHORT ANSWER: A cross involving two pairs of traits (e.g. RRYY round-yellow x rryy wrinkled-green). F1 all round-yellow (RrYy); F2 phenotypic ratio 9 round-yellow : 3 round-green : 3 wrinkled-yellow : 1 wrinkled-green.
+
+LONG ANSWER: The F1 dihybrid (RrYy) produces four gamete types (RY, Ry, rY, ry) in equal numbers because the two genes assort independently. Random fusion gives 16 combinations in the F2 that group into the 9:3:3:1 phenotypic ratio. The two new (recombinant) phenotypes confirm independent assortment.
+
+NEET FOCUS: 9:3:3:1 = parental (9 + 1 = 10) and recombinant (3 + 3 = 6) types. A 9:3:3:1 ratio is the hallmark of independent assortment.",dihybrid_cross.png
+Genetics,Test Cross,What is a test cross and why is it useful?,"SHORT ANSWER: A test cross is a cross of an individual showing the dominant phenotype with the homozygous recessive parent, to determine whether the dominant individual is homozygous or heterozygous.
+
+LONG ANSWER: If the dominant individual is homozygous (TT), all offspring show the dominant trait. If heterozygous (Tt), the offspring appear in a 1:1 ratio of dominant to recessive. Thus the test cross reveals the unknown genotype directly from the offspring ratio.
+
+NEET FOCUS: Test cross with tt -> all dominant means TT; 1:1 ratio means Tt. (A back cross is a cross with either parent type.)",
+Genetics,Back Cross,Distinguish between a test cross and a back cross.,"SHORT ANSWER: A back cross is a cross of F1 with either parent. A test cross is specifically a cross of F1 with the homozygous recessive parent (a special back cross used to find the genotype).
+
+LONG ANSWER: Every test cross is a back cross, but not every back cross is a test cross. Crossing F1 with the dominant parent is a back cross but cannot reveal the genotype; crossing F1 with the recessive parent (test cross) reveals it through the 1:1 ratio.
+
+NEET FOCUS: All test crosses are back crosses; the reverse is not true. Test cross uses the recessive parent only.",
+Genetics,Incomplete Dominance,Explain incomplete dominance with an example.,"SHORT ANSWER: In incomplete dominance, the heterozygote shows an intermediate (blended) phenotype, e.g. in Mirabilis jalapa (4 o'clock plant), red (RR) x white (rr) gives pink (Rr) in F1.
+
+LONG ANSWER: Neither allele is completely dominant, so the F1 hybrid is intermediate between the two parents. In snapdragon/4 o'clock plant, RR (red) x rr (white) gives Rr (pink). The F2 ratio is 1 red : 2 pink : 1 white - phenotypic ratio = genotypic ratio (1:2:1).
+
+NEET FOCUS: Incomplete dominance -> F2 phenotypic ratio equals genotypic ratio 1:2:1 (not 3:1). The heterozygote is a new intermediate phenotype.",
+Genetics,Codominance,Explain codominance with the example of human ABO blood groups.,"SHORT ANSWER: In codominance, both alleles express fully and independently in the heterozygote (neither masks the other), e.g. allele I^A and I^B in AB blood group both expressed, giving both A and B antigens.
+
+LONG ANSWER: Unlike incomplete dominance (a blend), codominance shows both phenotypes simultaneously. In the AB blood group, I^A and I^B are codominant, so the red cells carry both A and B antigens. The gene I has three alleles (I^A, I^B, i) - an example of multiple allelism too.
+
+NEET FOCUS: Codominance -> both alleles expressed (AB blood group). Distinguish from incomplete dominance (a blended intermediate).",
+Genetics,Multiple Alleles,What are multiple alleles? Give an example.,"SHORT ANSWER: When a gene exists in more than two allelic forms in a population, they are called multiple alleles. Example: the ABO blood group gene I has three alleles - I^A, I^B and i.
+
+LONG ANSWER: Although an individual diploid carries only two alleles of a gene, the population may have many. The I gene gives six genotypes (I^A I^A, I^A i, I^B I^B, I^B i, I^A I^B, ii) producing four blood groups (A, B, AB, O). I^A and I^B are dominant over i and codominant to each other.
+
+NEET FOCUS: ABO blood group = classic multiple allele + codominance example. Blood group O genotype is ii (recessive).",
+Genetics,Pleiotropy,What is pleiotropy? Give an example.,"SHORT ANSWER: Pleiotropy is the phenomenon where a single gene controls or affects multiple phenotypic traits. Example: the gene for phenylketonuria (PKU) or for sickle-cell anaemia, and starch synthesis in pea.
+
+LONG ANSWER: A pleiotropic gene influences several apparently unrelated characters because its product takes part in many pathways. In pea, a single gene affecting starch synthesis influences both seed shape (round/wrinkled) and starch grain size. In humans, phenylketonuria affects mental development and other traits.
+
+NEET FOCUS: Pleiotropy = one gene, many effects (opposite of polygenic inheritance where many genes affect one trait).",
+Genetics,Polygenic Inheritance,What is polygenic inheritance? Give an example.,"SHORT ANSWER: Polygenic (quantitative) inheritance is the control of a single trait by many genes, each adding a small effect, producing continuous variation. Example: human skin colour and height; kernel colour in wheat.
+
+LONG ANSWER: The phenotype depends on the total number of contributing (dominant) alleles, so the trait varies continuously and shows a normal (bell-shaped) distribution influenced by the environment. In wheat grain colour, three gene pairs give a range from dark red to white.
+
+NEET FOCUS: Polygenic inheritance -> continuous variation (skin colour, height). Phenotype reflects the additive number of effective alleles.",
+Genetics,Chromosomal Theory,State the chromosomal theory of inheritance.,"SHORT ANSWER: Proposed by Sutton and Boveri, it states that Mendelian factors (genes) are located on chromosomes, and the behaviour of chromosomes during meiosis (segregation and independent assortment) parallels the behaviour of Mendel's factors.
+
+LONG ANSWER: Sutton and Boveri noted that chromosomes occur in pairs, separate during meiosis, and assort independently - exactly mirroring Mendel's laws of segregation and independent assortment. They concluded that genes are carried on chromosomes. T.H. Morgan's work on Drosophila later provided experimental proof of this theory.
+
+NEET FOCUS: Sutton & Boveri proposed the chromosomal theory; Morgan provided experimental proof using Drosophila. Genes are on chromosomes.",
+Genetics,Chromosome-Gene Parallel,List the parallels between gene behaviour and chromosome behaviour during inheritance.,"SHORT ANSWER: Both genes and chromosomes occur in pairs; both segregate at gamete formation so a gamete has only one of each pair; and both pairs assort independently of other pairs.
+
+LONG ANSWER: Chromosomes and Mendelian factors behave identically: (i) both are present in homologous pairs in diploid cells, (ii) both members of a pair separate during meiosis (segregation), and (iii) different pairs distribute independently (independent assortment). This parallel was the basis of the chromosomal theory.
+
+NEET FOCUS: The chromosomal-gene parallel (pairing, segregation, independent assortment) is the conceptual link between Mendelism and cytology.",
+Genetics,Drosophila,Why did Morgan choose Drosophila melanogaster (fruit fly) for genetic studies?,"SHORT ANSWER: Because it has a short life cycle (~2 weeks), produces many offspring, can be grown on simple synthetic medium, shows clear hereditary variations, has only 4 pairs of chromosomes, and males and females are easily distinguished.
+
+LONG ANSWER: The fruit fly breeds rapidly with large progeny, allowing statistical study; it is cheap and easy to culture; it has many easily observable mutant traits (eye colour, wing shape); and its small chromosome number (2n = 8) simplifies linkage analysis. These features made it ideal for studying linkage and crossing over.
+
+NEET FOCUS: Drosophila: 2n = 8 (4 pairs), short life cycle, large progeny - the model organism Morgan used to prove linkage.",
+Genetics,Linkage,Define linkage. What did Morgan observe?,"SHORT ANSWER: Linkage is the tendency of genes located close together on the same chromosome to be inherited together and not assort independently. Morgan observed this while studying two genes in Drosophila.
+
+LONG ANSWER: Morgan crossed flies differing in two traits and found that the genes did not show the expected 9:3:3:1; instead parental combinations were far more frequent than recombinant ones. He concluded the genes were physically linked on the same chromosome and tended to stay together during inheritance.
+
+NEET FOCUS: Linked genes deviate from independent assortment - parental types outnumber recombinant types. Coined by Morgan and Castle.",
+Genetics,Linkage Types,Distinguish between complete and incomplete linkage.,"SHORT ANSWER: Complete linkage: linked genes are always inherited together (no recombinants), seen when genes are very close. Incomplete linkage: some recombinants are produced due to crossing over, seen when genes are farther apart.
+
+LONG ANSWER: In complete linkage the two genes never separate, so only parental types appear in the offspring (rare; e.g. male Drosophila shows no crossing over). In incomplete linkage, crossing over between the two loci occasionally separates them, producing a small proportion of recombinant types alongside the parental majority.
+
+NEET FOCUS: Complete linkage -> only parental types. Incomplete linkage -> mostly parental + few recombinants. Male Drosophila shows complete linkage (no crossing over).",
+Genetics,Morgan Drosophila Cross,Explain Morgan's dihybrid cross in Drosophila showing linkage.,"SHORT ANSWER: Morgan crossed yellow-bodied white-eyed females with wild-type males and analysed F2. Genes on the same chromosome (X) stayed together, so recombinant frequencies were low; tightly linked genes (e.g. white, yellow) gave fewer recombinants than loosely linked ones (e.g. white, miniature).
+
+LONG ANSWER: When Morgan studied two X-linked genes together, the F2 did not fit 9:3:3:1; parental combinations greatly exceeded recombinants. He further found that the degree of recombination depended on the distance between genes - closely placed genes (white-yellow) recombined ~1.3%, while farther genes (white-miniature) recombined ~37.2%. This led to the idea that recombination frequency measures gene distance.
+
+NEET FOCUS: Morgan's key conclusion - recombination frequency is proportional to the distance between linked genes (basis of genetic mapping).",morgan_linkage.png
+Genetics,Recombination,Define recombination and recombination frequency.,"SHORT ANSWER: Recombination is the formation of new combinations of alleles (non-parental types) in offspring, mainly due to crossing over. Recombination frequency = (number of recombinants / total offspring) x 100.
+
+LONG ANSWER: During meiosis, crossing over between homologous chromosomes exchanges segments, producing recombinant gametes with new allele combinations. The proportion of recombinant offspring (recombination frequency) measures how often crossing over occurs between two loci and therefore reflects the distance between them.
+
+NEET FOCUS: Recombination frequency = % recombinants. It is directly proportional to the map distance between two genes; 1% recombination = 1 map unit (centimorgan).",
+Genetics,Crossing Over,What is crossing over and what is its significance?,"SHORT ANSWER: Crossing over is the exchange of corresponding segments between non-sister chromatids of homologous chromosomes during pachytene of meiosis I, at points called chiasmata. It produces recombinant gametes.
+
+LONG ANSWER: During pachytene, homologous chromosomes pair and exchange equivalent parts, recombining linked alleles. This generates genetic variation, helps separate linked genes, and provides the basis for constructing genetic (linkage) maps. Its frequency between two loci increases with their physical distance.
+
+NEET FOCUS: Crossing over occurs in pachytene of prophase I at chiasmata; it is the physical basis of recombination of linked genes and a source of variation.",
+Genetics,Linkage Map,"What is a genetic (linkage) map, and who first constructed one?","SHORT ANSWER: A genetic map shows the linear order and relative distances of genes on a chromosome, based on recombination frequencies. The first such map was constructed by Alfred Sturtevant (Morgan's student).
+
+LONG ANSWER: Since recombination frequency is proportional to the distance between genes, the percentage of recombinants gives the relative spacing of loci. Sturtevant used recombination data from Drosophila to arrange genes linearly along the chromosome, founding the technique of genetic mapping. Distances are measured in map units (centimorgans).
+
+NEET FOCUS: Sturtevant prepared the first gene map; 1 map unit (centimorgan) = 1% recombination frequency.",
+Genetics,Linkage Group,What is a linkage group?,"SHORT ANSWER: A linkage group is the set of all genes located on a single chromosome that tend to be inherited together. The number of linkage groups in a species equals its haploid chromosome number.
+
+LONG ANSWER: All genes physically present on one chromosome form one linkage group because they are transmitted as a unit (subject to crossing over). Therefore the number of linkage groups in an organism equals the number of chromosome types - i.e. the haploid (n) number. Drosophila (2n = 8) has 4 linkage groups.
+
+NEET FOCUS: Number of linkage groups = haploid chromosome number (n). Drosophila has 4; humans have 23 linkage groups.",
+Genetics,Linkage vs Crossing Over,Distinguish between linkage and crossing over.,"SHORT ANSWER: Linkage keeps genes on the same chromosome together (reduces new combinations); crossing over separates linked genes (creates new/recombinant combinations). They have opposite effects on variation.
+
+LONG ANSWER: Linkage tends to preserve parental gene combinations because linked genes travel together. Crossing over, by exchanging chromosome segments, breaks linkage and produces recombinant types. The closer two genes lie, the stronger the linkage and the lower the crossing-over frequency, and vice versa.
+
+NEET FOCUS: Linkage and crossing over are antagonistic - linkage maintains parental types, crossing over generates recombinants. Strength of linkage is inversely related to distance.",
+Genetics,Sex Determination XY,Explain the XY type of sex determination in humans.,"SHORT ANSWER: In humans, females are XX (homogametic) and males are XY (heterogametic). The male produces two types of sperm (X or Y); the egg always carries X. The sperm decides the sex of the child.
+
+LONG ANSWER: Of the 23 pairs of human chromosomes, 22 are autosomes and one pair is sex chromosomes. A female (XX) forms only X-bearing eggs, while a male (XY) forms X- and Y-bearing sperm in equal numbers. Fertilisation by an X-sperm gives a girl (XX); a Y-sperm gives a boy (XY). Hence the father determines the child's sex.
+
+NEET FOCUS: In humans the MALE is heterogametic (XY); the sperm (X or Y) determines sex. Theoretical sex ratio = 1:1.",
+Genetics,Sex Determination ZW,Describe the ZW and XO types of sex determination.,"SHORT ANSWER: In birds (ZW type) the female is heterogametic (ZW) and the male homogametic (ZZ). In some insects (XO type) females are XX and males are XO (one sex chromosome missing); the male is heterogametic.
+
+LONG ANSWER: ZW system (birds, some reptiles): the female ZW produces two egg types, so the female determines sex. XO system (grasshoppers, bugs): males have a single X (no Y), females have XX; males produce sperm with or without X. Both differ from the human XY system in which sex chromosome decides sex.
+
+NEET FOCUS: Birds -> ZW (female heterogametic). Grasshopper -> XO (male heterogametic, no Y). Honeybee -> haplodiploidy (males haploid).",
+Genetics,Sex-Linked Inheritance,What is sex-linked inheritance? Give examples.,"SHORT ANSWER: Inheritance of genes located on sex chromosomes (mostly the X chromosome) is sex-linked inheritance. Examples: colour blindness and haemophilia (X-linked recessive in humans).
+
+LONG ANSWER: X-linked recessive traits appear more often in males because they have only one X (hemizygous) - a single recessive allele is expressed. Females need both X alleles recessive to show the trait but can be carriers. Such traits typically pass from carrier mother to son (criss-cross inheritance).
+
+NEET FOCUS: Colour blindness and haemophilia are X-linked recessive - commoner in males; carrier mothers pass them to sons (criss-cross inheritance).",
+Genetics,Haemophilia,Explain the inheritance of haemophilia.,"SHORT ANSWER: Haemophilia is an X-linked recessive disorder in which blood fails to clot due to a missing clotting factor. It is far more common in males; females are usually carriers.
+
+LONG ANSWER: The defective allele lies on the X chromosome. An affected male (X^h Y) inherits it from a carrier mother. A female is affected only if she inherits the allele on both X chromosomes (X^h X^h), which is rare because an affected father and carrier mother are both needed. Carrier females (X^H X^h) are symptom-free but pass it on.
+
+NEET FOCUS: Haemophilia = X-linked recessive 'bleeder's disease'. The 'royal disease' traced to Queen Victoria. Affected females are rare.",
+Genetics,Colour Blindness,Explain red-green colour blindness inheritance.,"SHORT ANSWER: Red-green colour blindness is an X-linked recessive defect of cone cells. Males (XY) need only one recessive allele to be colour blind; females need both X's defective, so it is rarer in females.
+
+LONG ANSWER: The gene lies on the X chromosome. A colour-blind man (X^c Y) passes X^c to all daughters (carriers) but not to sons. A carrier mother (X X^c) passes the defect to half her sons. Thus the condition is much commoner in males and skips generations through carrier females.
+
+NEET FOCUS: ~8% of men but <1% of women are red-green colour blind, because males are hemizygous for the X-linked recessive allele.",
+Genetics,Mutation,Define mutation and list its types.,"SHORT ANSWER: A mutation is a sudden, heritable change in the DNA/genetic material. Types: gene (point) mutations and chromosomal mutations (changes in structure or number).
+
+LONG ANSWER: Point/gene mutations alter the base sequence (substitution, insertion, deletion). Chromosomal mutations change chromosome structure (deletion, duplication, inversion, translocation) or number (aneuploidy, polyploidy). Mutations may be spontaneous or induced by mutagens (radiation, chemicals) and are a source of genetic variation and evolution.
+
+NEET FOCUS: Frame-shift mutations arise from insertion/deletion of bases (not multiples of three); point mutation = single base change (e.g. sickle-cell anaemia: GAG -> GTG).",
+Genetics,Sickle Cell Anaemia,Explain sickle-cell anaemia as a point mutation.,"SHORT ANSWER: Sickle-cell anaemia is an autosomal recessive disorder caused by a single base substitution (GAG -> GTG) in the beta-globin gene, replacing glutamic acid with valine at position 6, producing abnormal HbS that sickles RBCs.
+
+LONG ANSWER: The point mutation alters one amino acid in the haemoglobin beta chain. Under low oxygen, HbS polymerises, distorting red cells into a sickle shape that block vessels and break easily. Homozygotes (HbS HbS) are severely affected; heterozygotes (HbA HbS) carry the trait and are resistant to malaria.
+
+NEET FOCUS: Sickle-cell anaemia = autosomal recessive point mutation (Glu -> Val at 6th position of beta chain). Heterozygotes show malaria resistance (a balanced polymorphism).",
+Genetics,Mendelian Disorders,Name common Mendelian disorders in humans.,"SHORT ANSWER: Single-gene (Mendelian) disorders include haemophilia, colour blindness, sickle-cell anaemia, thalassemia, phenylketonuria, cystic fibrosis, and Huntington's disease.
+
+LONG ANSWER: Mendelian disorders result from alteration/mutation in a single gene and follow Mendelian inheritance. They may be autosomal (sickle-cell anaemia, thalassemia, PKU - recessive; Huntington's - dominant) or X-linked (haemophilia, colour blindness). They are traced through pedigree analysis.
+
+NEET FOCUS: Distinguish autosomal recessive (sickle-cell, PKU, thalassemia) from X-linked (haemophilia, colour blindness) and autosomal dominant (Huntington's, Myotonic dystrophy).",
+Genetics,Thalassemia,Distinguish thalassemia from sickle-cell anaemia.,"SHORT ANSWER: Thalassemia is an autosomal recessive disorder caused by reduced/absent synthesis of globin chains (a quantitative defect). Sickle-cell anaemia is caused by a structurally abnormal globin (a qualitative defect from a point mutation).
+
+LONG ANSWER: In thalassemia, mutation or deletion reduces the rate of synthesis of alpha or beta globin chains, leading to fewer normal haemoglobin molecules and anaemia. In sickle-cell anaemia the chains are made normally but are structurally faulty (HbS). Thus thalassemia = quantitative problem; sickle-cell = qualitative problem.
+
+NEET FOCUS: Thalassemia = quantitative defect (less globin); sickle-cell = qualitative defect (abnormal globin). Both autosomal recessive.",
+Genetics,Chromosomal Disorders,What are chromosomal disorders? Give the example of Down's syndrome.,"SHORT ANSWER: Chromosomal disorders are caused by the absence, excess or abnormal arrangement of chromosomes. Down's syndrome is caused by trisomy of chromosome 21 (an extra chromosome 21).
+
+LONG ANSWER: They arise from aneuploidy (failure of chromosome separation/non-disjunction during meiosis) or polyploidy. In Down's syndrome (trisomy 21), the individual has 47 chromosomes and shows short stature, characteristic facial features, and intellectual disability. Other examples include Klinefelter's and Turner's syndromes.
+
+NEET FOCUS: Down's = trisomy of 21 (47 chromosomes). Caused by non-disjunction; risk rises with maternal age.",
+Genetics,Klinefelter Turner,Describe Klinefelter's and Turner's syndromes.,"SHORT ANSWER: Klinefelter's syndrome = XXY (47, extra X) - phenotypically male, sterile, with some feminine features. Turner's syndrome = XO (45, one X missing) - phenotypically female, sterile, short, with undeveloped ovaries.
+
+LONG ANSWER: Both result from non-disjunction of sex chromosomes. Klinefelter's (44 + XXY) individuals are males with gynaecomastia and reduced fertility. Turner's (44 + XO) individuals are females lacking a second sex chromosome, showing short stature and rudimentary ovaries. Both are sterile.
+
+NEET FOCUS: Klinefelter -> XXY (extra X, male). Turner -> XO (missing X, female). Both due to aneuploidy from non-disjunction.",
+Genetics,Non-disjunction,What is non-disjunction and what does it cause?,"SHORT ANSWER: Non-disjunction is the failure of homologous chromosomes (meiosis I) or sister chromatids (meiosis II) to separate during cell division, producing gametes with an extra or missing chromosome - leading to aneuploidy.
+
+LONG ANSWER: When chromosomes fail to segregate, one gamete receives both members (n+1) and the other none (n-1). Fertilisation then gives trisomic (2n+1) or monosomic (2n-1) zygotes. This is the cause of Down's syndrome (trisomy 21), Klinefelter's (XXY) and Turner's (XO).
+
+NEET FOCUS: Non-disjunction -> aneuploidy (trisomy/monosomy). Underlies Down's, Klinefelter's and Turner's syndromes.",
+Genetics,Pedigree Analysis,What is pedigree analysis and why is it used?,"SHORT ANSWER: Pedigree analysis is the study of inheritance of a trait across several generations of a family using a standardised chart of symbols. It is used to trace the pattern of inheritance of genetic traits in humans.
+
+LONG ANSWER: Since controlled crosses are impossible in humans, geneticists analyse family trees to determine whether a trait is dominant or recessive, autosomal or sex-linked, and to assess the risk of transmission. Squares represent males, circles females, and shaded symbols affected individuals.
+
+NEET FOCUS: Pedigree symbols: square = male, circle = female, shaded = affected. Used to deduce autosomal vs X-linked and dominant vs recessive inheritance.",
+Genetics,Punnett Square,What is a Punnett square?,"SHORT ANSWER: A Punnett square is a grid devised by R.C. Punnett used to predict the genotypes and phenotypes of offspring from a genetic cross by showing all possible gamete combinations.
+
+LONG ANSWER: Gametes of one parent are written across the top and those of the other down the side; the boxes show the resulting offspring genotypes. It provides a quick visual way to derive expected ratios (e.g. 3:1 in a monohybrid, 9:3:3:1 in a dihybrid cross).
+
+NEET FOCUS: Punnett square is a checkerboard for predicting offspring genotype/phenotype ratios. Devised by Reginald Punnett.",punnett_square.png
+Genetics,Polyploidy,Define polyploidy and aneuploidy.,"SHORT ANSWER: Polyploidy is the presence of more than two complete chromosome sets (e.g. 3n, 4n). Aneuploidy is the gain or loss of one or a few chromosomes (e.g. 2n+1, 2n-1) due to non-disjunction.
+
+LONG ANSWER: Polyploidy involves whole extra sets and is common in plants (often increasing vigour and yield); it is usually lethal in animals. Aneuploidy involves individual chromosomes and causes disorders like Down's, Turner's and Klinefelter's syndromes. Both are types of numerical chromosomal aberrations.
+
+NEET FOCUS: Polyploidy = extra whole sets (common in plants); aneuploidy = a few extra/missing chromosomes (causes human syndromes).",
+Genetics,Mendel Rediscovery,Who rediscovered Mendel's work and when?,"SHORT ANSWER: Mendel's work (published 1866) was rediscovered independently in 1900 by three scientists: Hugo de Vries, Carl Correns and Erich von Tschermak.
+
+LONG ANSWER: Mendel's laws were ignored for ~34 years. In 1900 three botanists independently arrived at similar conclusions and acknowledged Mendel's priority, reviving interest in his work. This rediscovery launched modern genetics and was soon supported by the chromosomal theory.
+
+NEET FOCUS: Rediscovered in 1900 by de Vries, Correns and von Tschermak - 34 years after Mendel's 1866 publication.",
+Genetics,Why Mendel Succeeded,Give the reasons Mendel succeeded where earlier hybridisers failed.,"SHORT ANSWER: He studied one or two clearly contrasting traits at a time, used pure-breeding lines, kept careful quantitative (statistical) records over generations, and chose a suitable self-pollinating plant.
+
+LONG ANSWER: Earlier workers looked at many vague traits together and did not count offspring. Mendel isolated discrete, easily scored characters, maintained true-breeding parents, raised large numbers, and applied mathematics to the ratios. His controlled, quantitative method let him deduce the underlying laws.
+
+NEET FOCUS: Mendel's mathematical/statistical analysis of discrete traits in pure lines is the key reason for his success.",
+Genetics,Wild Type,What is meant by wild type and mutant in genetics?,"SHORT ANSWER: Wild type is the normal, most common phenotype/allele found in a natural population; a mutant is a variant arising from a mutation that differs from the wild type.
+
+LONG ANSWER: The wild-type allele usually produces a functional product and is taken as the standard reference. Mutant alleles result from changes in the wild-type gene and may be dominant or recessive. In Drosophila, red eyes are wild type while white eyes are a mutant studied by Morgan.
+
+NEET FOCUS: Red eye in Drosophila = wild type; white eye = mutant (the trait Morgan used to discover sex linkage).",
+Genetics,ABO Blood Cross,"If a man of blood group AB marries a woman of blood group O, what blood groups can their children have?","SHORT ANSWER: The children can be blood group A (I^A i) or B (I^B i), in a 1:1 ratio. They cannot be AB or O.
+
+LONG ANSWER: AB father is I^A I^B; O mother is ii. Gametes: father gives I^A or I^B; mother gives i only. Offspring genotypes: I^A i (group A) and I^B i (group B), each 50%. No child can be AB (would need both I^A and I^B) or O (would need ii).
+
+NEET FOCUS: AB x O -> 50% A and 50% B; never AB or O. A classic blood-group genetics MCQ.",
+Genetics,Number of Gametes,How many types of gametes does an individual with genotype AaBbCc produce?,"SHORT ANSWER: 2^n types, where n = number of heterozygous gene pairs. Here n = 3, so 2^3 = 8 types of gametes.
+
+LONG ANSWER: Each heterozygous pair contributes two allele choices that assort independently, so the number of distinct gametes = 2^(number of heterozygous pairs). For AaBbCc (three heterozygous pairs), 2 x 2 x 2 = 8 gamete types. Homozygous pairs do not increase the variety.
+
+NEET FOCUS: Gamete types = 2^(heterozygous pairs). Count only heterozygous loci. AaBbCC would give 2^2 = 4 types.",
+Genetics,F2 Genotype Number,"In a dihybrid cross, how many genotypes and phenotypes appear in F2?","SHORT ANSWER: F2 of a dihybrid cross shows 9 genotypes and 4 phenotypes (phenotypic ratio 9:3:3:1; genotypic ratio 1:2:1:2:4:2:1:2:1).
+
+LONG ANSWER: With two heterozygous gene pairs, the F1 (RrYy) self-cross gives 3 x 3 = 9 genotype classes and 2 x 2 = 4 phenotype classes. In general for n heterozygous pairs there are 3^n genotypes and 2^n phenotypes (assuming complete dominance and independent assortment).
+
+NEET FOCUS: Genotypes = 3^n, phenotypes = 2^n (n = heterozygous pairs). Dihybrid: 3^2 = 9 genotypes, 2^2 = 4 phenotypes.",
+Genetics,Variation Sources,List the main sources of genetic variation in sexually reproducing organisms.,"SHORT ANSWER: (1) Crossing over (recombination) during meiosis, (2) independent assortment of chromosomes, (3) random fertilisation, and (4) mutation.
+
+LONG ANSWER: Sexual reproduction shuffles alleles through crossing over and independent assortment of chromosomes during meiosis, and through the random union of gametes at fertilisation. Mutation introduces entirely new alleles. Together these generate the variation on which natural selection acts.
+
+NEET FOCUS: Recombination + independent assortment + random fertilisation reshuffle existing alleles; mutation creates new ones. All four fuel variation.",
+Genetics,Lethal Genes,What are lethal genes? Give an example of an altered ratio they produce.,"SHORT ANSWER: Lethal genes cause death of the carrier, usually in the homozygous condition, altering normal Mendelian ratios. Example: yellow body colour in mice - the homozygous (YY) dies, giving a 2:1 ratio instead of 3:1.
+
+LONG ANSWER: A dominant lethal allele kills homozygous dominants before birth, so a cross of two heterozygotes (Yy x Yy) yields surviving offspring in a 2 yellow (Yy) : 1 non-yellow (yy) ratio rather than 3:1, because the YY class dies. Such genes modify expected Mendelian ratios.
+
+NEET FOCUS: A recessive-lethal in the dominant phenotype converts 3:1 into 2:1 among survivors (e.g. yellow mice, AA lethal).",
+Genetics,Epistasis,What is epistasis?,"SHORT ANSWER: Epistasis is a gene interaction in which one gene (the epistatic gene) masks or suppresses the expression of another gene (the hypostatic gene) at a different locus, modifying the dihybrid ratio.
+
+LONG ANSWER: Unlike dominance (between alleles of the same gene), epistasis is interaction between alleles of different genes. It alters the classical 9:3:3:1 dihybrid ratio into modified ratios such as 12:3:1 (dominant epistasis), 9:3:4 (recessive epistasis) or 9:7. It explains many coat-colour and flower-colour patterns.
+
+NEET FOCUS: Epistasis = inter-genic masking (different loci); modifies 9:3:3:1 into 12:3:1, 9:3:4, 9:7 etc. Distinguish from dominance (intra-genic).",

@@ -1,0 +1,296 @@
+Topic,Sub-topic,Question,Explanation,Image
+Electrochemistry,Redox Basics,Define oxidation and reduction in terms of electrons and oxidation number.,"SHORT ANSWER: Oxidation is loss of electrons (increase in oxidation number); reduction is gain of electrons (decrease in oxidation number). Remember 'OIL RIG' - Oxidation Is Loss, Reduction Is Gain.
+
+LONG ANSWER: In a redox reaction one species is oxidised (loses electrons, oxidation number rises) and another is reduced (gains electrons, oxidation number falls). The two processes always occur together because the electrons lost by one species are gained by the other. Oxidation and reduction are complementary half-reactions.
+
+NEET FOCUS: OIL RIG - Oxidation Is Loss, Reduction Is Gain (of electrons). Oxidation number increases on oxidation, decreases on reduction.",
+Electrochemistry,Oxidant Reductant,Define oxidising agent (oxidant) and reducing agent (reductant).,"SHORT ANSWER: An oxidising agent accepts electrons (and is itself reduced); a reducing agent donates electrons (and is itself oxidised).
+
+LONG ANSWER: The oxidant brings about oxidation of another species by taking its electrons, so the oxidant's own oxidation number decreases (it is reduced). The reductant brings about reduction of another species by giving electrons, so its own oxidation number increases (it is oxidised). Strong oxidants (e.g. F2, KMnO4) gain electrons readily; strong reductants (e.g. Li, Na) lose them readily.
+
+NEET FOCUS: Oxidant = electron acceptor = gets reduced. Reductant = electron donor = gets oxidised. A common trap is mixing up which one is reduced.",
+Electrochemistry,Oxidation Number,State the main rules for assigning oxidation numbers.,"SHORT ANSWER: Free elements = 0; monatomic ion = its charge; O usually -2 (peroxides -1); H usually +1 (metal hydrides -1); F always -1; sum of oxidation numbers = 0 for a neutral molecule, = charge for an ion.
+
+LONG ANSWER: Oxidation number is the apparent charge an atom would have if bonding electrons were assigned to the more electronegative atom. Group 1 metals = +1, group 2 = +2. In a compound the algebraic sum equals the overall charge. These rules let us track electron transfer in redox reactions.
+
+NEET FOCUS: Oxygen is -2 except in peroxides (-1), superoxides (-1/2), and OF2 (+2). Hydrogen is +1 except in metal hydrides (-1).",
+Electrochemistry,Balancing Half Reaction,Outline the ion-electron (half-reaction) method of balancing a redox equation.,"SHORT ANSWER: Split into oxidation and reduction half-reactions; balance atoms other than O and H; balance O with H2O and H with H+ (in acidic medium); balance charge with electrons; equalise electrons and add the halves.
+
+LONG ANSWER: (1) Write the two half-reactions. (2) Balance all atoms except O and H. (3) Add H2O to balance O and H+ to balance H (in acidic solution; in basic medium add OH- to both sides afterwards). (4) Add electrons to balance charge. (5) Multiply each half-reaction so electrons cancel, then add them and simplify.
+
+NEET FOCUS: In acidic medium balance O with H2O then H with H+; in basic medium, neutralise H+ by adding equal OH- to both sides. Electrons lost = electrons gained.",
+Electrochemistry,Balancing Example,Balance (acidic medium): MnO4^- + Fe^2+ -> Mn^2+ + Fe^3+.,"SHORT ANSWER: MnO4^- + 8H+ + 5Fe^2+ -> Mn^2+ + 4H2O + 5Fe^3+.
+
+LONG ANSWER: Reduction half: MnO4^- + 8H+ + 5e- -> Mn^2+ + 4H2O (Mn goes +7 to +2). Oxidation half: Fe^2+ -> Fe^3+ + e-. Multiply the iron half by 5 to balance the 5 electrons, then add: MnO4^- + 8H+ + 5Fe^2+ -> Mn^2+ + 4H2O + 5Fe^3+. Charge and atoms now balance.
+
+NEET FOCUS: MnO4^- in acidic medium gains 5 electrons (Mn^7+ -> Mn^2+). This 1:5 ratio with Fe^2+ is a classic permanganate titration result.",
+Electrochemistry,Disproportionation,What is a disproportionation reaction? Give an example.,"SHORT ANSWER: A disproportionation reaction is one in which the same element in a single oxidation state is simultaneously oxidised and reduced. Example: 2H2O2 -> 2H2O + O2; or 3Cl2 + 6OH- -> 5Cl- + ClO3- + 3H2O.
+
+LONG ANSWER: Here one species acts as both oxidant and reductant. In H2O2 decomposition, oxygen (-1) goes partly to -2 (reduced, in water) and partly to 0 (oxidised, in O2). For disproportionation, the element must have at least three oxidation states with the intermediate one being involved.
+
+NEET FOCUS: Disproportionation needs an intermediate oxidation state. Examples: H2O2, Cl2 in base, Cu+ (2Cu+ -> Cu + Cu^2+), P4 in base.",
+Electrochemistry,Electrochemical Cell,What is an electrochemical (galvanic/voltaic) cell?,"SHORT ANSWER: A galvanic cell is a device that converts chemical energy of a spontaneous redox reaction into electrical energy. Example: the Daniell cell (Zn-Cu).
+
+LONG ANSWER: It consists of two half-cells, each an electrode dipped in an electrolyte, connected by an external wire and a salt bridge. A spontaneous redox reaction drives electrons through the external circuit, producing current. The anode is where oxidation occurs and the cathode where reduction occurs.
+
+NEET FOCUS: Galvanic cell - chemical to electrical energy (spontaneous, E_cell positive). Electrolytic cell - electrical to chemical energy (non-spontaneous).",
+Electrochemistry,Daniell Cell,Describe the construction and working of the Daniell cell.,"SHORT ANSWER: The Daniell cell has a zinc electrode in ZnSO4 solution (anode) and a copper electrode in CuSO4 solution (cathode), joined by a salt bridge. Zn is oxidised (Zn -> Zn^2+ + 2e-) and Cu^2+ is reduced (Cu^2+ + 2e- -> Cu); standard EMF = 1.1 V.
+
+LONG ANSWER: Electrons flow from the zinc anode through the external wire to the copper cathode. At the anode zinc dissolves; at the cathode copper is deposited. The salt bridge maintains electrical neutrality by allowing ion flow. Net reaction: Zn + Cu^2+ -> Zn^2+ + Cu. The cell notation is Zn | Zn^2+ || Cu^2+ | Cu.
+
+NEET FOCUS: Daniell cell EMF = 1.1 V. Anode (Zn) = negative terminal (oxidation); cathode (Cu) = positive terminal (reduction). Electrons flow Zn -> Cu externally.",daniell_cell.png
+Electrochemistry,Anode Cathode,"In a galvanic cell, identify the anode and cathode and their signs.","SHORT ANSWER: Anode = electrode where oxidation occurs = negative terminal. Cathode = electrode where reduction occurs = positive terminal. Electrons flow from anode to cathode in the external circuit.
+
+LONG ANSWER: In a galvanic (spontaneous) cell, the anode releases electrons (oxidation) and is the negative pole; the cathode consumes electrons (reduction) and is the positive pole. Conventional current flows from cathode to anode externally (opposite to electrons). In an electrolytic cell the signs are reversed.
+
+NEET FOCUS: Galvanic cell - anode negative, cathode positive. Electrolytic cell - anode positive, cathode negative. Oxidation is ALWAYS at the anode.",
+Electrochemistry,Salt Bridge,What is a salt bridge and what are its functions?,"SHORT ANSWER: A salt bridge is a U-tube filled with an inert electrolyte (e.g. KCl, KNO3) in a gel (agar-agar) connecting the two half-cells. It completes the circuit and maintains electrical neutrality of the solutions.
+
+LONG ANSWER: Functions: (1) it completes the internal circuit allowing ion flow between half-cells; (2) it maintains electrical neutrality by supplying ions as cations accumulate at the cathode and anions at the anode; (3) it prevents liquid junction potential and prevents direct mixing of the two solutions. The electrolyte ions should have nearly equal mobility (KCl ideal).
+
+NEET FOCUS: Salt bridge - completes circuit + maintains neutrality + minimises liquid junction potential. KCl is used because K+ and Cl- have nearly equal ionic mobilities.",salt_bridge.png
+Electrochemistry,Electrode Potential,Define electrode potential.,"SHORT ANSWER: Electrode potential is the tendency of an electrode to lose or gain electrons (i.e. to get oxidised or reduced) when in contact with its ion solution. It arises from the potential difference at the electrode-solution interface.
+
+LONG ANSWER: When a metal is dipped in a solution of its ions, an equilibrium is set up (M <=> M^n+ + ne-), producing a potential difference at the interface. The tendency to undergo reduction is the reduction potential; to undergo oxidation, the oxidation potential. By IUPAC convention, electrode potentials are reported as reduction potentials.
+
+NEET FOCUS: By convention, 'electrode potential' means REDUCTION potential. Oxidation potential = - (reduction potential).",
+Electrochemistry,Standard Electrode Potential,Define standard electrode potential.,"SHORT ANSWER: Standard electrode potential (E degree) is the electrode potential measured under standard conditions - 1 M ion concentration (unit activity), 1 bar pressure for gases, and 298 K - relative to the standard hydrogen electrode (taken as 0 V).
+
+LONG ANSWER: It is the reduction potential of a half-cell when all species are in their standard states, measured against the SHE whose potential is defined as exactly zero. A more positive E degree means a stronger tendency to be reduced (stronger oxidising agent). Values are tabulated as the electrochemical series.
+
+NEET FOCUS: Standard conditions = 1 M, 1 bar, 298 K. SHE is the reference (E degree = 0.00 V). More positive E degree -> stronger oxidant.",
+Electrochemistry,SHE,Describe the standard hydrogen electrode (SHE).,"SHORT ANSWER: The SHE consists of a platinised platinum electrode in 1 M H+ solution with pure H2 gas bubbled at 1 bar pressure and 298 K. Its standard electrode potential is taken as exactly 0.00 V (the reference electrode).
+
+LONG ANSWER: Half-reaction: 2H+ (1 M) + 2e- <=> H2 (1 bar), assigned E degree = 0. The platinum is coated with platinum black to adsorb H2 and catalyse the equilibrium. All other standard electrode potentials are measured relative to the SHE - it acts as anode or cathode depending on the other electrode.
+
+NEET FOCUS: SHE = reference electrode, E degree = 0.00 V. Conditions: 1 M H+, 1 bar H2, 298 K, platinised Pt. Used to assign all other electrode potentials.",she.png
+Electrochemistry,Cell Potential,Define cell potential (EMF) and give the formula in terms of electrode potentials.,"SHORT ANSWER: Cell potential (EMF) is the potential difference between the two electrodes when no current flows. E degree_cell = E degree_cathode - E degree_anode (both as reduction potentials).
+
+LONG ANSWER: The EMF is the driving force that pushes electrons through the external circuit. Using standard reduction potentials, E degree_cell = E degree_cathode - E degree_anode. A positive E degree_cell indicates a spontaneous (galvanic) reaction; a negative value indicates a non-spontaneous reaction that requires an external source (electrolytic).
+
+NEET FOCUS: E degree_cell = E degree_cathode - E degree_anode (reduction potentials). Positive E_cell -> spontaneous. For Daniell cell = 0.34 - (-0.76) = 1.10 V.",
+Electrochemistry,Cell Notation,State the IUPAC conventions for representing a galvanic cell.,"SHORT ANSWER: The anode (oxidation) is written on the left and the cathode (reduction) on the right; a single vertical line is a phase boundary and a double vertical line is the salt bridge. Example: Zn | Zn^2+ (1M) || Cu^2+ (1M) | Cu.
+
+LONG ANSWER: Reading left to right: anode metal | anode ion solution || cathode ion solution | cathode metal. The single line marks an electrode-electrolyte interface; the double line marks the salt bridge. Concentrations are written in brackets. The EMF is positive when the cell as written is spontaneous.
+
+NEET FOCUS: Left = anode (oxidation), right = cathode (reduction). || = salt bridge, | = phase boundary. E_cell = E_right - E_left.",
+Electrochemistry,Electrochemical Series,What is the electrochemical series and what does it tell us?,"SHORT ANSWER: The electrochemical series is the arrangement of elements/electrodes in order of their standard reduction potentials. It indicates relative oxidising/reducing strengths and the feasibility of redox reactions.
+
+LONG ANSWER: Species with high positive E degree (e.g. F2, Au) are strong oxidising agents (easily reduced); those with low/negative E degree (e.g. Li, K, Na) are strong reducing agents (easily oxidised). The series predicts displacement reactions (a metal displaces ions of a metal below it), reactivity, and which metal acts as anode/cathode.
+
+NEET FOCUS: Higher (more positive) E degree -> stronger oxidant. Li has the most negative E degree (strongest reducing agent in solution); F2 the most positive (strongest oxidant).",
+Electrochemistry,Reactivity Prediction,"Using standard potentials, will zinc displace copper from CuSO4 solution? Explain.","SHORT ANSWER: Yes. Zn (E degree = -0.76 V) is a stronger reducing agent than Cu (E degree = +0.34 V), so zinc is oxidised and copper ions are reduced: Zn + Cu^2+ -> Zn^2+ + Cu. E degree_cell = +1.10 V (positive = spontaneous).
+
+LONG ANSWER: A metal can displace the ions of another metal lying below it in the electrochemical series. Since zinc has a more negative reduction potential, it loses electrons more readily than copper, reducing Cu^2+ to Cu metal while itself dissolving as Zn^2+. The positive cell potential confirms the reaction is feasible.
+
+NEET FOCUS: A metal displaces ions of any metal with a higher (more positive) reduction potential. Zn displaces Cu; Cu cannot displace Zn.",
+Electrochemistry,Nernst Equation,State the Nernst equation for an electrode/cell.,"SHORT ANSWER: For a reduction M^n+ + ne- -> M: E = E degree - (RT/nF) ln([M]/[M^n+]); at 298 K, E = E degree - (0.0591/n) log([products]/[reactants]).
+
+LONG ANSWER: The Nernst equation gives the electrode/cell potential at non-standard concentrations. At 298 K, substituting R, F and converting to log base 10 gives the factor 0.0591/n. For a full cell, E_cell = E degree_cell - (0.0591/n) log Q, where Q is the reaction quotient. It shows how potential changes with concentration.
+
+NEET FOCUS: At 298 K the factor is 0.0591/n (volts). E_cell decreases as product-ion concentration rises (Q increases). At equilibrium E_cell = 0.",
+Electrochemistry,EMF Gibbs,Relate the standard cell potential to the Gibbs free energy change.,"SHORT ANSWER: delta G degree = -nF E degree_cell, where n = number of electrons transferred and F = Faraday constant (96500 C/mol). A positive E degree_cell gives a negative delta G degree (spontaneous reaction).
+
+LONG ANSWER: The maximum electrical work obtainable from a cell equals the decrease in Gibbs free energy: w_max = -delta G = nFE_cell. Therefore delta G degree = -nF E degree_cell. This links the thermodynamic spontaneity (sign of delta G) directly to the measurable cell potential. E degree_cell can also give the equilibrium constant via delta G degree = -RT ln K.
+
+NEET FOCUS: delta G degree = -nFE degree_cell. Positive E_cell -> negative delta G -> spontaneous. Also E degree_cell = (0.0591/n) log K at 298 K.",
+Electrochemistry,Conductance,"Define conductance, conductivity and molar conductivity.","SHORT ANSWER: Conductance (G = 1/R) is the ease of current flow (unit: siemens). Conductivity (kappa) is conductance of a 1 m cube of solution (unit: S/m). Molar conductivity (Lambda_m = kappa/c) is the conductance of all ions from 1 mole of electrolyte.
+
+LONG ANSWER: Conductance is the reciprocal of resistance. Conductivity kappa = G x (l/A), where l/A is the cell constant. Molar conductivity Lambda_m = kappa x 1000/c (c in mol/L) accounts for the amount of electrolyte. On dilution, kappa decreases (fewer ions per volume) but Lambda_m increases (ions move more freely).
+
+NEET FOCUS: On dilution: conductivity (kappa) decreases, molar conductivity (Lambda_m) increases. Distinguish the two opposite trends - a classic trap.",
+Electrochemistry,Kohlrausch,State Kohlrausch's law of independent migration of ions.,"SHORT ANSWER: At infinite dilution, the molar conductivity of an electrolyte is the sum of the independent contributions of its cation and anion: Lambda degree_m = lambda degree_+ + lambda degree_-.
+
+LONG ANSWER: Each ion migrates independently of the others at infinite dilution and contributes a fixed amount to the total molar conductivity, regardless of the partner ion. This law allows calculation of limiting molar conductivities of weak electrolytes (which cannot be measured directly) and the degree of dissociation alpha = Lambda_m / Lambda degree_m.
+
+NEET FOCUS: Lambda degree_m = nu+ lambda degree+ + nu- lambda degree-. Used to find Lambda degree_m of weak electrolytes (e.g. acetic acid) and degree of dissociation.",
+Electrochemistry,Faraday Laws,State Faraday's two laws of electrolysis.,"SHORT ANSWER: First law: the mass deposited/liberated at an electrode is proportional to the charge passed (m = Zit, where Z = electrochemical equivalent). Second law: for the same charge, the masses of different substances deposited are proportional to their equivalent masses.
+
+LONG ANSWER: First law: m proportional to Q = I x t. Second law: when the same quantity of electricity passes through different electrolytes, the amounts deposited are in the ratio of their chemical equivalents (equivalent mass = molar mass/valency). One faraday (96500 C) deposits one gram-equivalent of any substance.
+
+NEET FOCUS: 1 Faraday = 96500 C deposits 1 gram-equivalent. Moles deposited = (I x t)/(n x F), where n = electrons per ion.",
+Electrochemistry,Electrolytic Cell,Distinguish a galvanic cell from an electrolytic cell.,"SHORT ANSWER: A galvanic cell converts chemical energy to electrical energy (spontaneous, E_cell positive). An electrolytic cell converts electrical energy to chemical energy (non-spontaneous, driven by an external source).
+
+LONG ANSWER: In a galvanic cell the anode is negative and cathode positive; the redox reaction is spontaneous. In an electrolytic cell an external battery forces a non-spontaneous reaction; the anode is positive and cathode negative. Electrolysis is used in electroplating, metal refining and extraction.
+
+NEET FOCUS: Galvanic - spontaneous, anode (-). Electrolytic - non-spontaneous, anode (+). In BOTH, oxidation is at the anode and reduction at the cathode.",
+Electrochemistry,Batteries,Distinguish primary and secondary batteries with examples.,"SHORT ANSWER: Primary batteries are non-rechargeable (irreversible reaction), e.g. dry cell (Leclanche), mercury cell. Secondary batteries are rechargeable (reversible reaction), e.g. lead-acid battery, nickel-cadmium and lithium-ion cells.
+
+LONG ANSWER: In a primary cell the electrode reaction occurs only once and the cell is discarded when exhausted. In a secondary cell the reaction can be reversed by passing current (charging), so it can be reused. The lead-storage battery (used in vehicles) uses Pb and PbO2 electrodes in H2SO4.
+
+NEET FOCUS: Dry cell, mercury cell = primary (non-rechargeable). Lead-acid, Ni-Cd, Li-ion = secondary (rechargeable). Lead-acid uses Pb/PbO2 in H2SO4.",
+Electrochemistry,Fuel Cell,What is a fuel cell? Give an example.,"SHORT ANSWER: A fuel cell is a galvanic cell that directly converts the chemical energy of a continuously supplied fuel (e.g. H2) and oxidant (O2) into electrical energy. Example: the hydrogen-oxygen fuel cell.
+
+LONG ANSWER: Unlike ordinary batteries, fuel cells are fed fuel and oxidant from outside and run as long as supply continues. In the H2-O2 fuel cell, H2 is oxidised at the anode and O2 reduced at the cathode (in KOH), producing water and electricity with high efficiency and no pollution. Used in spacecraft (Apollo).
+
+NEET FOCUS: H2-O2 fuel cell - product is water, pollution-free, high efficiency. Used in the Apollo space programme.",
+Electrochemistry,Corrosion,What is corrosion and how can it be prevented?,"SHORT ANSWER: Corrosion is the slow electrochemical oxidation of a metal by its environment (e.g. rusting of iron: hydrated iron(III) oxide). Prevented by barrier coatings (paint, grease), galvanisation (zinc coating), and cathodic (sacrificial) protection.
+
+LONG ANSWER: During rusting, parts of the iron surface act as anode (Fe -> Fe^2+) and others as cathode (O2 reduction), with water as electrolyte, forming rust (Fe2O3.xH2O). Prevention methods stop the electrochemical cell: coating excludes air/water; galvanising and sacrificial anodes (Mg, Zn) corrode preferentially, protecting the iron.
+
+NEET FOCUS: Rust = hydrated ferric oxide (Fe2O3.xH2O). Sacrificial protection uses a more reactive metal (Zn, Mg) as the anode to protect iron.",
+Electrochemistry,EMF Numerical,"Calculate the standard EMF of a cell: Mg | Mg^2+ || Ag+ | Ag, given E degree(Mg^2+/Mg) = -2.37 V and E degree(Ag+/Ag) = +0.80 V.","SHORT ANSWER: E degree_cell = E degree_cathode - E degree_anode = 0.80 - (-2.37) = +3.17 V.
+
+LONG ANSWER: Silver has the higher (more positive) reduction potential, so it is the cathode (reduction: Ag+ + e- -> Ag) and magnesium is the anode (oxidation: Mg -> Mg^2+ + 2e-). E degree_cell = E degree_cathode - E degree_anode = 0.80 - (-2.37) = 3.17 V. The positive value confirms a spontaneous cell.
+
+NEET FOCUS: Identify the cathode as the electrode with the higher reduction potential, then E_cell = E_cathode - E_anode. Don't multiply potentials by stoichiometric coefficients - potential is intensive.",
+Electrochemistry,Intensive Potential,Why is electrode potential not multiplied by the number of moles when balancing?,"SHORT ANSWER: Because electrode potential is an intensive property - it depends on the nature of the electrode and conditions, not on the amount of substance or how the equation is multiplied.
+
+LONG ANSWER: When a half-reaction is multiplied by a factor to balance electrons, the standard potential E degree stays the same, even though delta G (an extensive quantity) scales with n. This is because E degree reflects the energy per unit charge, not the total energy. So in E degree_cell = E degree_cathode - E degree_anode, the tabulated values are used directly.
+
+NEET FOCUS: E degree is intensive (per charge) - never multiply it by stoichiometric coefficients. delta G = -nFE degree is extensive (scales with n).",
+Electrochemistry,Concentration Cell,What is a concentration cell?,"SHORT ANSWER: A concentration cell is a galvanic cell in which both electrodes are of the same material but the electrolytes differ in concentration; EMF arises solely from the concentration difference. E degree_cell = 0.
+
+LONG ANSWER: Since both half-cells are chemically identical, the standard cell potential is zero, and the EMF depends only on the ratio of concentrations via the Nernst equation: E_cell = (0.0591/n) log(C2/C1). Electrons flow so as to equalise the two concentrations; the cell runs until they are equal (E = 0).
+
+NEET FOCUS: In a concentration cell E degree_cell = 0 and E_cell = (0.0591/n) log(C_cathode/C_anode). Current flows to equalise concentrations.",
+Electrochemistry,Strong Weak Electrolyte,Differentiate strong and weak electrolytes by their conductance behaviour on dilution.,"SHORT ANSWER: Strong electrolytes are almost fully ionised; their molar conductivity increases only slightly on dilution and can be extrapolated to Lambda degree_m. Weak electrolytes ionise partially; their molar conductivity increases sharply on dilution and cannot be reliably extrapolated.
+
+LONG ANSWER: For strong electrolytes (NaCl, KCl), Lambda_m rises gradually due to reduced inter-ionic attraction, following Debye-Huckel-Onsager behaviour, so a plot vs sqrt(c) is linear. For weak electrolytes (acetic acid), dilution greatly increases the degree of dissociation, causing a steep, non-linear rise; their Lambda degree_m is found using Kohlrausch's law.
+
+NEET FOCUS: Strong electrolyte - small linear increase in Lambda_m (extrapolate vs sqrt c). Weak electrolyte - steep rise; Lambda degree_m via Kohlrausch's law. Degree of dissociation alpha = Lambda_m/Lambda degree_m.",
+Haloalkanes & Haloarenes,Classification,How are haloalkanes and haloarenes classified?,"SHORT ANSWER: They are alkyl/aryl halides classified by (i) number of halogens (mono-, di-, poly-), (ii) hybridisation of the C bearing the halogen, and (iii) for monohalides, as primary (1 degree), secondary (2 degree) or tertiary (3 degree).
+
+LONG ANSWER: Haloalkanes (R-X) have halogen on an sp3 carbon; haloarenes (Ar-X) have halogen on an sp2 carbon of an aromatic ring. Further subtypes include allylic (X on carbon next to C=C), benzylic (X on carbon attached to ring), and vinylic/aryl (X on sp2 carbon). The 1 degree/2 degree/3 degree classification depends on how many carbons are attached to the carbon bearing the halogen.
+
+NEET FOCUS: Allylic/benzylic halides are very reactive (stable carbocation); vinyl/aryl halides are unreactive (partial double-bond character of C-X). Know these reactivity orders.",
+Haloalkanes & Haloarenes,Nomenclature,State the IUPAC naming rules for haloalkanes.,"SHORT ANSWER: Name the halogen as a substituent prefix (fluoro/chloro/bromo/iodo) with the lowest locant on the longest carbon chain; e.g. CH3CHClCH3 = 2-chloropropane.
+
+LONG ANSWER: Choose the longest chain containing the maximum substituents, number it to give the halogen the lowest set of locants, and list substituents alphabetically. Common names use 'alkyl halide' (e.g. isopropyl chloride). Dihalides on the same carbon are 'gem' (geminal); on adjacent carbons are 'vic' (vicinal).
+
+NEET FOCUS: gem-dihalide = both halogens on the SAME carbon; vic-dihalide = on ADJACENT carbons. CHCl3 = trichloromethane (chloroform).",
+Haloalkanes & Haloarenes,C-X Bond,"Why is the C-X bond polar, and how does bond strength vary down the halogens?","SHORT ANSWER: The C-X bond is polar because the halogen is more electronegative than carbon, giving carbon a partial positive charge. C-X bond strength decreases from C-F to C-I as the bond length increases.
+
+LONG ANSWER: The electronegativity difference makes the carbon electrophilic (delta+), so it is attacked by nucleophiles. As we go F -> Cl -> Br -> I, the halogen's size increases, the bond becomes longer and weaker, so C-I breaks most easily and C-F is the strongest/hardest to break. Reactivity in substitution: R-I > R-Br > R-Cl > R-F.
+
+NEET FOCUS: Bond strength C-F > C-Cl > C-Br > C-I; reactivity in nucleophilic substitution is the reverse: R-I > R-Br > R-Cl. The carbon is electrophilic (delta+).",
+Haloalkanes & Haloarenes,Preparation,List the main methods of preparing haloalkanes.,"SHORT ANSWER: From alcohols (with HX, PCl5, PCl3 or SOCl2), from alkanes by free-radical halogenation, from alkenes by addition of HX or halogens, and by halogen exchange (Finkelstein and Swarts reactions).
+
+LONG ANSWER: (1) Alcohols + HX/PX3/PCl5/SOCl2 -> alkyl halides (SOCl2 preferred, gives pure product + gaseous by-products). (2) Alkanes undergo free-radical substitution with X2/UV (mixtures). (3) Alkenes add HX (Markovnikov) or X2. (4) Finkelstein: R-Cl/Br + NaI (in acetone) -> R-I. (5) Swarts: R-X + AgF/Hg2F2 -> R-F.
+
+NEET FOCUS: Finkelstein -> alkyl iodides (NaI/acetone). Swarts -> alkyl fluorides (metal fluoride). SOCl2 gives the purest alkyl chloride from an alcohol.",
+Haloalkanes & Haloarenes,SN1 SN2,Distinguish between SN1 and SN2 nucleophilic substitution mechanisms.,"SHORT ANSWER: SN2 is a one-step, bimolecular reaction (rate depends on substrate and nucleophile) with inversion of configuration, favoured by 1 degree halides. SN1 is a two-step, unimolecular reaction (rate depends on substrate only) via a carbocation, giving racemisation, favoured by 3 degree halides.
+
+LONG ANSWER: In SN2, the nucleophile attacks the carbon from the side opposite the leaving group in a single concerted step, inverting the configuration (Walden inversion); rate = k[substrate][Nu]. In SN1, the C-X bond first breaks to form a carbocation (slow step), then the nucleophile attacks; rate = k[substrate]. SN1 gives a racemic mixture because the planar carbocation can be attacked from either face. Reactivity: SN2 favours 1 degree > 2 degree > 3 degree; SN1 favours 3 degree > 2 degree > 1 degree.
+
+NEET FOCUS: SN2 -> 1 degree halide, inversion, one step, strong nucleophile, polar aprotic solvent. SN1 -> 3 degree halide, racemisation, carbocation, polar protic solvent.",
+Haloalkanes & Haloarenes,Carbocation Stability,Give the order of carbocation stability and its relevance to SN1.,"SHORT ANSWER: Carbocation stability: 3 degree > 2 degree > 1 degree > methyl (due to +I and hyperconjugation). More stable carbocations form faster, so 3 degree halides react fastest by the SN1 mechanism.
+
+LONG ANSWER: Alkyl groups release electrons (inductive effect) and provide hyperconjugation, stabilising the positive charge - hence tertiary carbocations are most stable. Since the rate-determining step of SN1 is carbocation formation, substrates that give stable carbocations (3 degree, allylic, benzylic) undergo SN1 readily.
+
+NEET FOCUS: Stability 3 degree > 2 degree > 1 degree > CH3+; allylic and benzylic cations are extra stable (resonance). This governs SN1 reactivity.",
+Haloalkanes & Haloarenes,Haloarene Inertness,Why are haloarenes (aryl halides) less reactive than haloalkanes toward nucleophilic substitution?,"SHORT ANSWER: Because of (i) resonance giving the C-X bond partial double-bond character (shorter, stronger), (ii) the sp2 carbon holding electrons more tightly, and (iii) repulsion between the nucleophile and the electron-rich ring.
+
+LONG ANSWER: In haloarenes the lone pair on the halogen delocalises into the ring, giving the C-X bond double-bond character that makes it difficult to break. The carbon is sp2 hybridised (more electronegative, holds the bonding pair tightly), and the aromatic pi-cloud repels approaching nucleophiles. These factors make aryl halides very unreactive in ordinary nucleophilic substitution.
+
+NEET FOCUS: Aryl halide inertness = resonance (partial C=X) + sp2 carbon + ring-nucleophile repulsion. Reactivity needs strong conditions or electron-withdrawing groups (e.g. -NO2) at ortho/para positions.",
+Haloalkanes & Haloarenes,Polyhalogen,Describe important polyhalogen compounds and their uses.,"SHORT ANSWER: Polyhalogen compounds contain more than one halogen. Examples: dichloromethane (solvent), chloroform (CHCl3 - earlier anaesthetic), iodoform (CHI3 - antiseptic), carbon tetrachloride (CCl4 - solvent/fire extinguisher), and freons (refrigerants).
+
+LONG ANSWER: CH2Cl2 is a paint remover/solvent. CHCl3 was used as an anaesthetic but is now mainly a solvent; it is stored in dark bottles because it oxidises in air/light to poisonous phosgene (COCl2). CCl4 is used as a solvent and was used in fire extinguishers. Freons (CFCs) were refrigerants but are now restricted as they deplete the ozone layer. DDT was a famous insecticide.
+
+NEET FOCUS: Chloroform forms poisonous phosgene (COCl2) on exposure to air & light - stored in dark bottles with a little ethanol. Freons (CFCs) deplete ozone; DDT is a persistent insecticide.",
+Haloalkanes & Haloarenes,Elimination,What is the dehydrohalogenation (elimination) reaction of haloalkanes?,"SHORT ANSWER: Heating a haloalkane with alcoholic KOH removes a molecule of HX (beta-elimination) to form an alkene; this is dehydrohalogenation, following Saytzeff's rule.
+
+LONG ANSWER: The base removes a hydrogen from the beta-carbon and the halogen leaves, forming a carbon-carbon double bond. By Saytzeff's (Zaitsev's) rule, the more substituted (more stable) alkene is the major product. Note: alcoholic KOH gives elimination (alkene) whereas aqueous KOH gives substitution (alcohol).
+
+NEET FOCUS: Alcoholic KOH -> elimination (alkene); aqueous KOH -> substitution (alcohol). Saytzeff rule: the more substituted alkene predominates.",
+"Alcohols, Phenols & Ethers",Classification,How are alcohols classified?,"SHORT ANSWER: Alcohols are classified by the number of -OH groups (mono-, di-, tri-hydric) and by the carbon bearing -OH as primary (1 degree), secondary (2 degree) or tertiary (3 degree).
+
+LONG ANSWER: A monohydric alcohol has one -OH (e.g. ethanol); a dihydric (glycol) has two; a trihydric (glycerol) has three. In a 1 degree alcohol the -OH carbon is attached to one other carbon, in 2 degree to two, and in 3 degree to three. Alcohols can also be aliphatic or aromatic (e.g. benzyl alcohol, where -OH is on a side chain, not on the ring like phenol).
+
+NEET FOCUS: 1 degree/2 degree/3 degree depends on the C bearing -OH. Note: benzyl alcohol (-OH on side chain) is an alcohol; phenol (-OH on ring) is NOT.",
+"Alcohols, Phenols & Ethers",Functional Groups,"Identify the functional groups and general formulae of alcohols, phenols and ethers.","SHORT ANSWER: Alcohol: R-OH (hydroxyl on aliphatic/sp3 carbon). Phenol: Ar-OH (hydroxyl directly on an aromatic ring). Ether: R-O-R' (an oxygen linking two carbons).
+
+LONG ANSWER: Alcohols and phenols both contain the hydroxyl (-OH) group, but in phenols it is attached directly to the aromatic ring carbon (sp2), which makes phenol acidic. Ethers have the C-O-C linkage and may be simple (symmetrical, both R the same) or mixed (different R groups). All three involve oxygen but show distinct chemistry.
+
+NEET FOCUS: Phenol = -OH on aromatic ring (sp2 C). Alcohol = -OH on sp3 C. Ether = C-O-C. Phenol is far more acidic than alcohol due to resonance.",
+"Alcohols, Phenols & Ethers",Nomenclature,"State the IUPAC nomenclature of alcohols, phenols and ethers.","SHORT ANSWER: Alcohols: replace -e of the alkane with -ol (e.g. ethanol). Phenols: named as substituted phenols. Ethers: named as alkoxyalkanes (smaller group as alkoxy substituent), e.g. CH3OC2H5 = methoxyethane.
+
+LONG ANSWER: For alcohols, choose the longest chain containing -OH, number for the lowest locant to -OH, and add -ol. Phenol is the base name for hydroxybenzene; substituents are given locants (e.g. 2-nitrophenol). For ethers, the larger alkyl group is the parent chain and the smaller R-O- group is named as an alkoxy prefix.
+
+NEET FOCUS: Ether = alkoxyalkane (e.g. ethoxyethane = diethyl ether). Alcohols suffix '-ol'; -OH gets the lowest locant.",
+"Alcohols, Phenols & Ethers",Prep from Alkene,How are alcohols prepared from alkenes? (acid-catalysed hydration and hydroboration),"SHORT ANSWER: (1) Acid-catalysed hydration: alkene + H2O (dilute H2SO4) -> alcohol, following Markovnikov's rule. (2) Hydroboration-oxidation: alkene + B2H6 then H2O2/OH- -> alcohol with anti-Markovnikov orientation.
+
+LONG ANSWER: In acid-catalysed hydration, the alkene is protonated to the more stable carbocation (Markovnikov), then water adds, so -OH goes to the more substituted carbon. In hydroboration-oxidation, BH3 adds with boron on the less hindered carbon; oxidation replaces B with OH, giving the anti-Markovnikov alcohol without rearrangement.
+
+NEET FOCUS: Acid hydration -> Markovnikov (-OH on more substituted C). Hydroboration-oxidation -> anti-Markovnikov (-OH on less substituted C), syn addition, no rearrangement.",
+"Alcohols, Phenols & Ethers",Prep from Carbonyl,How are alcohols prepared by reduction of carbonyl compounds?,"SHORT ANSWER: Aldehydes are reduced to primary alcohols and ketones to secondary alcohols, using H2/catalyst (Ni, Pt, Pd) or hydride reagents like NaBH4 or LiAlH4.
+
+LONG ANSWER: Catalytic hydrogenation or metal-hydride reduction adds hydrogen across the C=O group. RCHO -> RCH2OH (1 degree alcohol); R2CO -> R2CHOH (2 degree alcohol). NaBH4 is a mild reducing agent (reduces aldehydes/ketones but not esters/acids), while LiAlH4 is a strong reducing agent that also reduces acids and esters.
+
+NEET FOCUS: Aldehyde -> 1 degree alcohol; ketone -> 2 degree alcohol. NaBH4 = mild (carbonyl only); LiAlH4 = strong (also reduces -COOH and esters).",
+"Alcohols, Phenols & Ethers",Prep from Acids,How are alcohols obtained by reduction of carboxylic acids and esters?,"SHORT ANSWER: Carboxylic acids and esters are reduced to primary alcohols using lithium aluminium hydride (LiAlH4), a powerful reducing agent (catalytic H2 does not reduce -COOH easily).
+
+LONG ANSWER: RCOOH + LiAlH4 -> RCH2OH (primary alcohol). Esters (RCOOR') are similarly reduced by LiAlH4 to give the corresponding primary alcohol RCH2OH plus R'OH. Because the carboxyl group is resistant to mild reducing agents, the strong hydride LiAlH4 (or B2H6) is required.
+
+NEET FOCUS: -COOH and esters -> 1 degree alcohol with LiAlH4. NaBH4 and H2/Ni do NOT reduce carboxylic acids - a frequent distinguishing point.",
+"Alcohols, Phenols & Ethers",Grignard,How are alcohols prepared using Grignard reagents?,"SHORT ANSWER: A Grignard reagent (R-MgX) adds to a carbonyl compound, and the product on hydrolysis gives an alcohol: formaldehyde -> 1 degree alcohol, other aldehydes -> 2 degree alcohol, ketones -> 3 degree alcohol.
+
+LONG ANSWER: The nucleophilic carbon of R-MgX attacks the electrophilic carbonyl carbon, forming an alkoxide that is hydrolysed (dilute acid) to the alcohol. HCHO gives a primary alcohol; an aldehyde RCHO gives a secondary alcohol; a ketone gives a tertiary alcohol. Grignard reagents must be kept absolutely dry, as water destroys them.
+
+NEET FOCUS: Grignard + HCHO -> 1 degree; + RCHO -> 2 degree; + ketone -> 3 degree alcohol; + CO2 -> carboxylic acid. Grignard reagents react with any acidic H (water, alcohol), so moisture must be excluded.",
+"Alcohols, Phenols & Ethers",Acidity,"Compare the acidity of alcohols, water and phenols.","SHORT ANSWER: Acidity order: phenol > water > alcohol. Phenols are far more acidic than alcohols because the phenoxide ion is resonance-stabilised, whereas the alkoxide is destabilised by the electron-donating alkyl group.
+
+LONG ANSWER: When the -OH loses a proton, phenol gives a phenoxide ion in which the negative charge is delocalised into the ring (resonance), making the loss easy - hence phenol is acidic (pKa ~10). In alcohols, the alkyl group pushes electron density onto the oxygen (+I effect), destabilising the alkoxide and reducing acidity below even water. So phenol > water > 1 degree > 2 degree > 3 degree alcohol.
+
+NEET FOCUS: Acidity: phenol > water > alcohol. Among alcohols: 1 degree > 2 degree > 3 degree (alkyl +I destabilises alkoxide). Phenoxide is resonance-stabilised.",
+"Alcohols, Phenols & Ethers",Phenol Substituent,How do electron-withdrawing and electron-donating groups affect the acidity of phenol?,"SHORT ANSWER: Electron-withdrawing groups (e.g. -NO2) at ortho/para positions increase phenol's acidity (stabilise phenoxide); electron-donating groups (e.g. -CH3, -OCH3) decrease acidity.
+
+LONG ANSWER: An electron-withdrawing substituent disperses the negative charge of the phenoxide ion, stabilising it and making proton loss easier - so nitrophenols are stronger acids than phenol (picric acid, 2,4,6-trinitrophenol, is highly acidic). Electron-donating groups intensify the negative charge, destabilising the phenoxide and lowering acidity.
+
+NEET FOCUS: -NO2 (especially at o/p) sharply increases phenol acidity (picric acid). -CH3/-OCH3 decrease it. Effect is strongest from ortho/para positions (resonance).",
+"Alcohols, Phenols & Ethers",O-H Reactions,Describe reactions of alcohols and phenols involving the O-H bond.,"SHORT ANSWER: Both react with active metals (Na, K) to liberate H2 forming alkoxides/phenoxides; both undergo esterification with acids/acid chlorides; phenols give a characteristic violet colour with neutral FeCl3.
+
+LONG ANSWER: Reaction with sodium: 2R-OH + 2Na -> 2R-ONa + H2 (alcohols react less vigorously than water; phenols form sodium phenoxide). Esterification: R-OH + R'COOH -> ester + water (acid-catalysed; faster with acid chlorides/anhydrides). The FeCl3 test (violet/blue colour) distinguishes phenols from alcohols. Phenols are also acidic enough to react with NaOH (alcohols do not).
+
+NEET FOCUS: Phenol reacts with NaOH (forms phenoxide) but alcohols do NOT - a key distinction. FeCl3 gives a violet colour with phenols. Both release H2 with Na.",
+"Alcohols, Phenols & Ethers",Esterification,What is esterification? Write the general reaction.,"SHORT ANSWER: Esterification is the acid-catalysed reaction of an alcohol with a carboxylic acid to form an ester and water: R-OH + R'COOH <=> R'COOR + H2O.
+
+LONG ANSWER: The reaction is reversible and catalysed by conc. H2SO4 (which also absorbs water, shifting equilibrium toward the ester). It proceeds faster with acid chlorides or anhydrides than with the acid itself. Esters have pleasant fruity smells and are used in flavours and perfumes. The reverse reaction is hydrolysis (or saponification with a base).
+
+NEET FOCUS: R-OH + R'COOH -(H2SO4)-> ester + water (reversible). Acid chlorides/anhydrides esterify faster. Reverse = hydrolysis/saponification.",
+"Alcohols, Phenols & Ethers",Dehydration,How does dehydration of alcohols give alkenes or ethers?,"SHORT ANSWER: Alcohols dehydrate with conc. H2SO4: at high temperature (~443 K) giving an alkene (intramolecular), and at lower temperature (~413 K, excess alcohol) giving an ether (intermolecular).
+
+LONG ANSWER: Heating ethanol with excess conc. H2SO4 at 443 K removes water within one molecule to give ethene (alkene). At ~413 K with excess ethanol, two molecules combine with loss of one water to give diethyl ether (this is the industrial Williamson-type/acidic ether synthesis). Ease of dehydration of alcohols: 3 degree > 2 degree > 1 degree.
+
+NEET FOCUS: 443 K -> alkene; 413 K (excess alcohol) -> ether. Dehydration ease: 3 degree > 2 degree > 1 degree (more stable carbocation/alkene).",
+"Alcohols, Phenols & Ethers",Oxidation,"What are the oxidation products of primary, secondary and tertiary alcohols?","SHORT ANSWER: 1 degree alcohols -> aldehydes -> carboxylic acids; 2 degree alcohols -> ketones; 3 degree alcohols resist oxidation (only under drastic conditions, with C-C cleavage).
+
+LONG ANSWER: Primary alcohols oxidise (KMnO4, K2Cr2O7) first to aldehydes, then further to carboxylic acids; mild reagents (PCC) stop at the aldehyde. Secondary alcohols give ketones (which resist further oxidation). Tertiary alcohols have no H on the -OH carbon, so they resist oxidation except under strong conditions that break carbon-carbon bonds.
+
+NEET FOCUS: 1 degree -> aldehyde -> acid; 2 degree -> ketone; 3 degree -> no easy oxidation. PCC stops a 1 degree alcohol at the aldehyde stage (mild oxidant).",
+"Alcohols, Phenols & Ethers",Williamson,Describe the Williamson ether synthesis.,"SHORT ANSWER: Williamson synthesis prepares ethers by reacting an alkyl halide with a sodium alkoxide (or phenoxide): R-ONa + R'-X -> R-O-R' + NaX. It is an SN2 reaction.
+
+LONG ANSWER: The alkoxide ion acts as a nucleophile and displaces the halide from the alkyl halide (SN2). It is the best general method, especially for unsymmetrical ethers. To avoid elimination, the alkyl halide should be primary (3 degree halides give alkenes instead); the alkoxide may be bulky/secondary or tertiary.
+
+NEET FOCUS: Williamson = alkoxide + 1 degree alkyl halide (SN2). Use primary halide to avoid elimination. Can make aryl alkyl ethers using phenoxide + alkyl halide.",
+"Alcohols, Phenols & Ethers",Ether Cleavage,How do ethers react with HI/HBr (cleavage of C-O bond)?,"SHORT ANSWER: Ethers are cleaved by hot concentrated HI/HBr: R-O-R' + HX -> R-X + R'-OH (then possibly R'-X). The smaller/less hindered alkyl group usually forms the alkyl halide.
+
+LONG ANSWER: Protonation of the ether oxygen is followed by nucleophilic attack of the halide ion. With excess HX both fragments may become alkyl halides. For mixed ethers with one methyl or primary group, the halide attacks the less hindered carbon (SN2); for tertiary/aryl groups, the cleavage follows SN1 or forms phenol (the aryl-oxygen bond does not break, so an aryl alkyl ether gives phenol + alkyl halide).
+
+NEET FOCUS: Anisole (C6H5-O-CH3) + HI -> phenol + CH3I (the aryl-O bond is NOT cleaved). With dialkyl ethers, the smaller group forms the iodide.",
+"Alcohols, Phenols & Ethers",Distinguish Alcohols,"How can primary, secondary and tertiary alcohols be distinguished (Lucas test)?","SHORT ANSWER: The Lucas test (conc. HCl + anhydrous ZnCl2) distinguishes them by the time to form a cloudy alkyl chloride: 3 degree alcohols react immediately, 2 degree in ~5 minutes, and 1 degree alcohols do not react at room temperature.
+
+LONG ANSWER: The reaction proceeds via a carbocation (SN1), so tertiary alcohols (most stable carbocation) turn cloudy at once, secondary alcohols within a few minutes, and primary alcohols only on heating. The cloudiness is due to the insoluble alkyl chloride formed. Victor Meyer's test also distinguishes them.
+
+NEET FOCUS: Lucas test (HCl + ZnCl2): 3 degree -> immediate turbidity; 2 degree -> turbidity in ~5 min; 1 degree -> no reaction at room temperature. Based on carbocation stability (SN1).",
+"Alcohols, Phenols & Ethers",Kolbe Reimer,Name two important electrophilic substitution reactions of phenol (Kolbe and Reimer-Tiemann).,"SHORT ANSWER: Kolbe's reaction: sodium phenoxide + CO2 (under pressure) -> salicylic acid (o-hydroxybenzoic acid). Reimer-Tiemann reaction: phenol + CHCl3/NaOH -> salicylaldehyde (o-hydroxybenzaldehyde).
+
+LONG ANSWER: In Kolbe's reaction, the phenoxide ion attacks carbon dioxide and after acidification gives ortho-hydroxybenzoic acid (a precursor of aspirin). In the Reimer-Tiemann reaction, chloroform with NaOH generates dichlorocarbene, which attacks the phenoxide ring at the ortho position; hydrolysis gives 2-hydroxybenzaldehyde. The phenolic -OH is strongly ortho/para-directing and ring-activating.
+
+NEET FOCUS: Kolbe -> salicylic acid (with CO2). Reimer-Tiemann -> salicylaldehyde (with CHCl3/NaOH, via dichlorocarbene). -OH is o/p-directing and activating.",
+"Alcohols, Phenols & Ethers",Ethanol Industrial,How is ethanol manufactured industrially (fermentation)?,"SHORT ANSWER: Ethanol is produced industrially by fermentation of sugars (from molasses/starch) using enzymes in yeast: C6H12O6 -(zymase)-> 2 C2H5OH + 2 CO2.
+
+LONG ANSWER: Starch is first hydrolysed to glucose (by diastase/maltase from malt), then the enzyme zymase in yeast converts glucose to ethanol and carbon dioxide. The dilute alcohol is concentrated by fractional distillation (rectified spirit ~95%). Anhydrous (absolute) alcohol is obtained by removing the remaining water using azeotrope-breaking methods.
+
+NEET FOCUS: Fermentation: glucose -(zymase)-> ethanol + CO2. Invertase converts sucrose to glucose/fructose; zymase converts glucose to ethanol. Rectified spirit ~95% ethanol.",
+"Alcohols, Phenols & Ethers",Boiling Point,Why do alcohols have higher boiling points than ethers or hydrocarbons of comparable mass?,"SHORT ANSWER: Because alcohols form intermolecular hydrogen bonds through their -OH groups, which require extra energy to break, whereas ethers and hydrocarbons cannot hydrogen bond among themselves.
+
+LONG ANSWER: The -OH hydrogen of one alcohol molecule bonds to the oxygen of another, creating an extensive hydrogen-bonded network and raising the boiling point well above that of ethers and alkanes of similar molar mass. Ethers lack an O-H hydrogen, so they have only weak dipole-dipole/van der Waals forces and lower boiling points. Boiling point of alcohols also rises with chain length and falls with branching.
+
+NEET FOCUS: Alcohols H-bond -> high boiling points; ethers cannot self H-bond -> low boiling points (close to alkanes). Branching lowers boiling point (less surface contact).",
+"Alcohols, Phenols & Ethers",Glycerol Glycol,Identify ethylene glycol and glycerol and one use of each.,"SHORT ANSWER: Ethylene glycol (ethane-1,2-diol) is a dihydric alcohol used as antifreeze and in polyester (PET) manufacture. Glycerol (propane-1,2,3-triol) is a trihydric alcohol used in cosmetics, medicines and to make nitroglycerine (explosive).
+
+LONG ANSWER: Ethylene glycol's two -OH groups make it highly soluble and high-boiling, ideal as a radiator antifreeze and as a monomer for polyethylene terephthalate. Glycerol's three -OH groups make it a sweet, viscous, hygroscopic liquid used as a moisturiser, sweetener and as the basis of trinitroglycerine (dynamite) and alkyd resins.
+
+NEET FOCUS: Ethylene glycol = antifreeze + PET. Glycerol = nitroglycerine/dynamite, cosmetics. Both are polyhydric alcohols (more -OH = higher boiling point & solubility).",

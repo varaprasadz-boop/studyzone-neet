@@ -1,0 +1,34 @@
+{
+  "botany-genetics": {
+    "title": "Botany — Genetics (Principles of Inheritance and Variation)",
+    "class": "Class 12",
+    "subject": "Botany",
+    "csv": "study-botany-genetics.csv",
+    "topic_to_chapter": {
+      "Genetics": "Principles of Inheritance and Variation"
+    },
+    "strip_image": true
+  },
+  "chemistry-prep": {
+    "title": "Chemistry — Electrochemistry + Haloalkanes + Alcohols/Phenols/Ethers",
+    "class": "Class 12",
+    "subject": "Chemistry",
+    "csv": "study-chemistry-prep.csv",
+    "topic_to_chapter": {
+      "Electrochemistry": "Electrochemistry",
+      "Haloalkanes & Haloarenes": "Haloalkanes and Haloarenes",
+      "Alcohols, Phenols & Ethers": "Alcohols Phenols and Ethers"
+    },
+    "strip_image": true
+  },
+  "zoology-evolution": {
+    "title": "Zoology — Evolution",
+    "class": "Class 12",
+    "subject": "Zoology",
+    "csv": "study-zoology-evolution.csv",
+    "topic_to_chapter": {
+      "Evolution": "Evolution"
+    },
+    "strip_image": true
+  }
+}

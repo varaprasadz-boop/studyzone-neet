@@ -1,0 +1,186 @@
+Topic,Sub-topic,Question,Explanation,Image
+Evolution,Origin of Universe,State the Big Bang theory of the origin of the universe.,"SHORT ANSWER: The Big Bang theory proposes that the universe originated about 13.7 billion years ago from a single, extremely hot and dense point (singularity) that exploded and expanded, gradually cooling to form galaxies, stars and planets.
+
+LONG ANSWER: The huge explosion caused space itself to expand; temperatures fell, allowing hydrogen and helium to form, then galaxies and stars. The Earth formed about 4.5 billion years ago. The theory is supported by the observed expansion of the universe and cosmic microwave background radiation.
+
+NEET FOCUS: Big Bang ~13.7 billion years ago; Earth formed ~4.5 billion years ago. Universe is still expanding.",
+Evolution,Origin of Life,Differentiate between abiogenesis and biogenesis.,"SHORT ANSWER: Abiogenesis (spontaneous generation) is the now-disproved idea that life arises from non-living matter. Biogenesis is the established principle that living organisms arise only from pre-existing living organisms.
+
+LONG ANSWER: Early thinkers believed life arose spontaneously (e.g. maggots from rotting meat). Experiments by Redi, Spallanzani and finally Louis Pasteur (swan-necked flask) disproved this and established biogenesis. However, the very first life must have arisen from chemicals (chemical evolution) - a special, one-time abiogenesis under early-Earth conditions.
+
+NEET FOCUS: Pasteur's swan-necked flask experiment disproved spontaneous generation and supported biogenesis. The first life still required chemical evolution.",
+Evolution,Oparin-Haldane,State the Oparin-Haldane theory of chemical evolution.,"SHORT ANSWER: Oparin and Haldane independently proposed that the first life arose by chemical evolution: simple inorganic molecules in the primitive reducing atmosphere combined to form organic molecules, then complex molecules, and finally the first cells, using energy from lightning, UV and heat.
+
+LONG ANSWER: The early atmosphere lacked free oxygen and contained CH4, NH3, H2 and water vapour. Energy sources drove the formation of simple organic compounds (amino acids, sugars) that accumulated in the oceans forming a 'primordial soup' or 'hot dilute soup'. These aggregated into coacervates/protobionts, eventually giving rise to the first living cells.
+
+NEET FOCUS: Oparin-Haldane = chemical evolution in a reducing atmosphere; life arose from non-living organic molecules ('primordial soup'). Oxygen was ABSENT initially.",
+Evolution,Miller-Urey,Describe the Miller-Urey experiment and its significance.,"SHORT ANSWER: Stanley Miller and Harold Urey (1953) recreated primitive-Earth conditions in a flask - a mixture of CH4, NH3, H2 and water vapour with electric sparks (simulating lightning) - and obtained amino acids and other organic molecules, supporting chemical evolution.
+
+LONG ANSWER: They circulated the gas mixture past electric discharges for about a week. On analysis they found amino acids (like glycine and alanine), sugars and other organics formed abiotically. This provided experimental evidence that organic molecules - the building blocks of life - could form from simple gases under early-Earth conditions, supporting the Oparin-Haldane hypothesis.
+
+NEET FOCUS: Miller-Urey produced amino acids from CH4 + NH3 + H2 + water vapour + electric sparks - experimental support for chemical evolution.",miller_urey.png
+Evolution,Lamarckism,State the theory of inheritance of acquired characters (Lamarckism).,"SHORT ANSWER: Lamarck proposed that organisms evolve through 'use and disuse' of organs and the inheritance of characters acquired during an individual's lifetime. Example: the long neck of the giraffe from stretching to reach high foliage.
+
+LONG ANSWER: According to Lamarck, organs used more become better developed and those unused degenerate, and these acquired modifications are passed to offspring, driving evolution over generations. The theory was disproved by Weismann's germplasm theory and the fact that somatic (acquired) changes are not inherited.
+
+NEET FOCUS: Lamarckism = use & disuse + inheritance of acquired characters. Disproved by Weismann (cutting mice tails for generations did not shorten offspring tails).",
+Evolution,Darwinism,State the main postulates of Darwin's theory of natural selection.,"SHORT ANSWER: (1) Organisms over-reproduce; (2) populations show variation; (3) there is a struggle for existence due to limited resources; (4) individuals with favourable variations survive and reproduce more (survival of the fittest / natural selection); (5) over generations this leads to new species.
+
+LONG ANSWER: Darwin (and Wallace) argued that more offspring are produced than can survive, creating competition. Heritable variations that confer an advantage allow some individuals to survive and reproduce better, so favourable traits accumulate over generations - natural selection. Given enough time this produces adaptation and new species. Published in 'On the Origin of Species' (1859).
+
+NEET FOCUS: Darwinism keywords - overproduction, variation, struggle for existence, survival of the fittest, natural selection. Darwin and Wallace proposed it jointly.",
+Evolution,Darwin Finches,How do Darwin's finches illustrate evolution?,"SHORT ANSWER: Darwin's finches of the Galapagos Islands evolved from a common ancestral seed-eating finch into many species with different beak shapes suited to different diets - an example of adaptive radiation by natural selection.
+
+LONG ANSWER: From one original mainland species, finches diversified on different islands; their beaks adapted to available food (seeds, insects, cactus). This divergence from a common ancestor into many forms occupying different niches is adaptive radiation. It provided Darwin with key evidence for evolution by natural selection.
+
+NEET FOCUS: Darwin's finches = adaptive radiation (divergent evolution) from a common ancestor on the Galapagos Islands.",
+Evolution,Natural vs Artificial Selection,Distinguish between natural selection and artificial selection.,"SHORT ANSWER: Natural selection is the differential survival and reproduction of organisms with favourable traits in nature. Artificial selection is the deliberate selection and breeding of organisms by humans for desired traits.
+
+LONG ANSWER: In natural selection, the environment 'selects' the better-adapted variants over many generations without human intervention. In artificial selection (selective breeding), humans choose which individuals breed - producing crop varieties, livestock breeds and pets in a relatively short time. Darwin used artificial selection of pigeons to argue for natural selection.
+
+NEET FOCUS: Artificial selection (humans choose) is fast and directed; natural selection (environment chooses) is slow and undirected. Both change allele frequencies.",
+Evolution,Variation Importance,Why is variation important for evolution?,"SHORT ANSWER: Variation provides the raw material on which natural selection acts; without heritable variation there would be no differences for selection to favour, and evolution could not occur.
+
+LONG ANSWER: Heritable variations (from mutation, recombination and gene flow) make individuals differ in fitness. Natural selection preserves advantageous variants and eliminates disadvantageous ones, gradually changing the population. Greater variation increases a population's ability to adapt to changing environments.
+
+NEET FOCUS: Variation is the raw material of evolution. Mutation and recombination generate it; natural selection sorts it.",
+Evolution,Mutation Theory,State de Vries' mutation theory of evolution.,"SHORT ANSWER: Hugo de Vries proposed that evolution occurs by sudden, large, discontinuous heritable changes called mutations (saltation), rather than by Darwin's slow accumulation of minor variations. Based on his work on the evening primrose (Oenothera).
+
+LONG ANSWER: De Vries observed large inheritable variations appearing suddenly in Oenothera lamarckiana and called them mutations. He argued that such single-step large changes (saltation) create new species directly, in contrast to Darwin's gradualism. Modern synthesis accepts mutation as the source of variation but views evolution as gradual.
+
+NEET FOCUS: de Vries - mutation (saltation = single large step) drives evolution; studied Oenothera (evening primrose). Contrasts with Darwin's gradualism.",
+Evolution,Evidence Homology,What is homology? How does it support evolution?,"SHORT ANSWER: Homologous organs have the same basic structure and origin but perform different functions, indicating descent from a common ancestor (divergent evolution). Example: forelimbs of humans, whales, bats and cheetahs.
+
+LONG ANSWER: Despite different functions (grasping, swimming, flying, running), these forelimbs share the same arrangement of bones (humerus, radius, ulna, carpals etc.), revealing a common ancestral plan modified for different uses. Such homology is anatomical evidence of divergent evolution from a shared ancestor.
+
+NEET FOCUS: Homologous organs = same structure, different function = divergent evolution (adaptive radiation). Example: vertebrate forelimbs; thorns and tendrils in plants.",
+Evolution,Evidence Analogy,What is analogy? How is it different from homology?,"SHORT ANSWER: Analogous organs have different structures and origins but perform the same function, resulting from convergent evolution. Example: wings of birds and insects; eyes of octopus and mammals.
+
+LONG ANSWER: Analogous structures arise in unrelated organisms facing similar environmental demands, evolving similar functions independently (convergent evolution). They indicate that similar selection pressures can produce similar adaptations even without common ancestry - the opposite of homology.
+
+NEET FOCUS: Analogous organs = different structure, same function = convergent evolution. Examples: bird wing vs insect wing; flippers of penguins and dolphins; sweet potato (root) vs potato (stem).",
+Evolution,Evidence Fossils,How do fossils provide evidence for evolution?,"SHORT ANSWER: Fossils are the preserved remains or impressions of past organisms in rocks. Their study (palaeontology) shows a sequence of life forms over time and reveals transitional forms linking older and newer groups.
+
+LONG ANSWER: Fossils in successive rock strata show simpler organisms in older layers and more complex ones in newer layers, indicating gradual change. Transitional fossils (e.g. Archaeopteryx, a link between reptiles and birds) demonstrate evolutionary connections. Radioactive dating gives their ages. Fossils are the most direct evidence of evolution.
+
+NEET FOCUS: Archaeopteryx = connecting link between reptiles and birds (feathers + reptilian teeth/tail). Fossils are direct palaeontological evidence.",
+Evolution,Evidence Embryology,What embryological evidence supports evolution?,"SHORT ANSWER: Early embryos of different vertebrates (fish, reptile, bird, mammal) closely resemble one another and show common features like gill slits, suggesting descent from a common ancestor.
+
+LONG ANSWER: Von Baer noted that vertebrate embryos pass through similar early stages before diverging into their adult forms. The presence of transient ancestral structures (e.g. pharyngeal/gill slits in human embryos) reflects shared ancestry. (Haeckel's strong 'recapitulation' claim is now considered an overstatement, but embryonic similarity remains valid evidence.)
+
+NEET FOCUS: Vertebrate embryos share features (e.g. gill slits) early in development - embryological evidence of common ancestry. Haeckel's recapitulation theory is now discredited in its strong form.",
+Evolution,Vestigial Organs,What are vestigial organs? Give examples in humans.,"SHORT ANSWER: Vestigial organs are reduced, non-functional (or much reduced) structures that were functional in ancestors. Human examples: vermiform appendix, nictitating membrane (plica semilunaris), wisdom teeth, ear muscles, body hair, coccyx.
+
+LONG ANSWER: These remnants indicate descent from ancestors in which the organs were functional, providing anatomical evidence of evolution. The appendix corresponds to a functional caecum in herbivores; the coccyx represents a reduced tail. Their existence is hard to explain except by common descent with modification.
+
+NEET FOCUS: Common human vestigial organs - appendix, coccyx (tail bone), nictitating membrane, wisdom teeth, ear muscles, body hair. Evidence of evolution.",
+Evolution,Molecular Evidence,How does molecular biology provide evidence for evolution?,"SHORT ANSWER: Similarities in DNA, RNA, proteins and the universal genetic code among organisms indicate common ancestry; the degree of difference in these molecules reflects evolutionary distance.
+
+LONG ANSWER: All organisms use the same genetic code and similar biochemical pathways, suggesting a single origin of life. Comparing sequences (e.g. cytochrome c, haemoglobin, rRNA) shows that closely related species have more similar molecules than distantly related ones, allowing construction of molecular phylogenies (molecular clocks).
+
+NEET FOCUS: Universal genetic code + similar macromolecules = strong molecular evidence of common ancestry. Greater sequence similarity = closer relationship.",
+Evolution,Industrial Melanism,Explain industrial melanism in the peppered moth as evidence of natural selection.,"SHORT ANSWER: Before industrialisation, light-coloured peppered moths (Biston betularia) were common on lichen-covered trees; after soot darkened the trees, dark (melanic) moths became commoner because they were better camouflaged from predators - a demonstration of natural selection in action.
+
+LONG ANSWER: Pollution killed lichens and blackened tree trunks. Light moths became conspicuous to birds and were eaten, while dark moths survived and reproduced, raising the frequency of the dark form. When pollution was controlled, light moths increased again. This rapid shift directly illustrates directional natural selection.
+
+NEET FOCUS: Peppered moth (Biston betularia) - selection favoured dark moths in polluted areas - observed evidence of natural selection (directional selection).",
+Evolution,Adaptive Radiation,Define adaptive radiation with an example.,"SHORT ANSWER: Adaptive radiation is the evolution of many diverse species from a single ancestral species, each adapted to a different niche, over a relatively short time. Examples: Darwin's finches and Australian marsupials.
+
+LONG ANSWER: When a single ancestral form colonises a new region with many vacant niches, it diversifies into multiple species, each specialised for a particular habitat or food (divergent evolution). Darwin's finches (beak diversity) and the radiation of marsupials in Australia into forms paralleling placental mammals are classic examples.
+
+NEET FOCUS: Adaptive radiation = divergence into many niches from one ancestor (Darwin's finches, Australian marsupials). When two such radiations look alike -> convergent evolution.",
+Evolution,Convergent Evolution,What is convergent evolution? Give an example.,"SHORT ANSWER: Convergent evolution is the independent evolution of similar features (analogous structures) in unrelated organisms due to similar environments/selection pressures. Example: Australian marsupials resembling placental mammals; eyes of octopus and mammals.
+
+LONG ANSWER: Different ancestral lineages exposed to similar conditions evolve comparable adaptations independently. The placental wolf and the marsupial Tasmanian wolf, or the streamlined bodies of fish, dolphins and penguins, are convergent. Such similarity is functional (analogy), not due to common ancestry.
+
+NEET FOCUS: Convergent evolution -> analogous organs (similar function, different ancestry). Divergent evolution -> homologous organs (common ancestry).",
+Evolution,Hardy-Weinberg,State the Hardy-Weinberg principle.,"SHORT ANSWER: In a large, randomly mating population, allele and genotype frequencies remain constant from generation to generation (genetic equilibrium) provided no evolutionary forces act. Expressed as p^2 + 2pq + q^2 = 1, with p + q = 1.
+
+LONG ANSWER: For a gene with two alleles of frequencies p and q (p + q = 1), the genotype frequencies are p^2 (homozygous dominant), 2pq (heterozygous) and q^2 (homozygous recessive). These remain stable across generations if the population is large, mating is random, and there is no mutation, migration, genetic drift or selection. Any deviation from equilibrium indicates evolution is occurring.
+
+NEET FOCUS: p^2 + 2pq + q^2 = 1 and p + q = 1. Equilibrium = no evolution; disturbance of equilibrium = evolution. Allele frequencies are conserved.",hardy_weinberg.png
+Evolution,H-W Conditions,List the conditions required for Hardy-Weinberg equilibrium.,"SHORT ANSWER: (1) Large population size, (2) random mating, (3) no mutation, (4) no gene migration (gene flow), (5) no genetic drift, and (6) no natural selection.
+
+LONG ANSWER: Only when all these conditions hold do allele and genotype frequencies stay constant. In reality, populations rarely meet all conditions, so allele frequencies change - i.e. evolution occurs. The five factors that disturb equilibrium (mutation, recombination/gene flow, genetic drift, natural selection, migration) are therefore the agents of evolutionary change.
+
+NEET FOCUS: Five factors disturbing H-W equilibrium = gene migration (gene flow), genetic drift, mutation, recombination, and natural selection.",
+Evolution,H-W Numerical,"In a population, the frequency of the recessive homozygote (q^2) for a trait is 0.04. Find the allele frequencies and the frequency of carriers.","SHORT ANSWER: q^2 = 0.04 -> q = 0.2; p = 1 - q = 0.8. Carriers (2pq) = 2 x 0.8 x 0.2 = 0.32 (32%).
+
+LONG ANSWER: Since q^2 = 0.04, q = sqrt(0.04) = 0.2 (recessive allele frequency). Then p = 1 - 0.2 = 0.8 (dominant allele frequency). Heterozygous carriers = 2pq = 2(0.8)(0.2) = 0.32. Homozygous dominant = p^2 = 0.64. Check: 0.64 + 0.32 + 0.04 = 1.
+
+NEET FOCUS: Always start from q^2 (the recessive phenotype) to get q, then p, then 2pq. Carriers (2pq) are often the most-tested quantity.",
+Evolution,Genetic Drift,What is genetic drift?,"SHORT ANSWER: Genetic drift is the random change in allele frequencies in a population due to chance events, especially significant in small populations; it can fix or eliminate alleles regardless of their fitness.
+
+LONG ANSWER: In small populations, random sampling of gametes can cause allele frequencies to fluctuate from generation to generation purely by chance, sometimes eliminating alleles or fixing others. Drift reduces genetic variation and can cause divergence between populations. It is a key non-selective mechanism of microevolution.
+
+NEET FOCUS: Genetic drift = random change in allele frequency; strong in SMALL populations; reduces variation; not based on fitness. Includes founder effect and bottleneck.",
+Evolution,Founder Effect,Explain the founder effect and bottleneck effect.,"SHORT ANSWER: Founder effect: when a few individuals establish a new population, their (non-representative) allele frequencies differ from the original population. Bottleneck effect: a drastic reduction in population size (disaster) leaves a small, less variable group whose allele frequencies differ from the original.
+
+LONG ANSWER: Both are special cases of genetic drift. In the founder effect, the small founding group carries only a sample of the parent population's alleles, so the new population may differ markedly. In the bottleneck effect, an event (disease, disaster, hunting) kills most individuals; the survivors' allele frequencies may not match the original, reducing genetic diversity.
+
+NEET FOCUS: Founder effect (few colonisers) and bottleneck (population crash) are forms of genetic drift that change allele frequencies and reduce variation.",
+Evolution,Gene Flow,What is gene flow (gene migration)?,"SHORT ANSWER: Gene flow is the transfer of alleles between populations through migration of individuals or gametes, which changes the allele frequencies of both the source and recipient populations.
+
+LONG ANSWER: When individuals move between populations and interbreed, they add or remove alleles, tending to make populations genetically more similar and counteracting divergence. High gene flow reduces differences between populations; restricted gene flow allows them to diverge and potentially speciate.
+
+NEET FOCUS: Gene flow homogenises populations (reduces differences); barriers to gene flow promote divergence and speciation. It disturbs H-W equilibrium.",
+Evolution,Types of Selection,Describe the three types of natural selection.,"SHORT ANSWER: (1) Stabilising selection favours intermediate phenotypes (reduces variation). (2) Directional selection favours one extreme (shifts the mean). (3) Disruptive selection favours both extremes (splits into two forms; can lead to speciation).
+
+LONG ANSWER: Stabilising selection eliminates extreme variants, keeping the population near the average (e.g. human birth weight). Directional selection shifts the population toward one extreme when the environment changes (e.g. peppered moth). Disruptive selection favours both extremes over the mean, possibly producing two distinct groups (e.g. bird beaks of two sizes), a step toward speciation.
+
+NEET FOCUS: Stabilising -> favours mean (unimodal, narrows). Directional -> favours one extreme (shifts). Disruptive -> favours both extremes (bimodal, splits). A classic graph-based MCQ.",selection_types.png
+Evolution,Speciation,What is speciation and reproductive isolation?,"SHORT ANSWER: Speciation is the formation of new species from existing ones. Reproductive isolation is the set of barriers (geographic, behavioural, temporal, etc.) that prevent interbreeding between populations, allowing them to diverge into separate species.
+
+LONG ANSWER: When populations are separated and prevented from exchanging genes, they accumulate independent genetic changes (by mutation, drift and selection) until they can no longer interbreed - becoming distinct species. Isolation may be pre-zygotic (preventing mating/fertilisation) or post-zygotic (sterile/inviable hybrids).
+
+NEET FOCUS: Reproductive isolation is essential for speciation. Allopatric speciation = via geographic barrier; sympatric speciation = within the same area.",
+Evolution,Allopatric Sympatric,Distinguish between allopatric and sympatric speciation.,"SHORT ANSWER: Allopatric speciation occurs when populations are separated by a geographical barrier and diverge. Sympatric speciation occurs within the same geographic area without physical separation (e.g. via polyploidy or niche divergence).
+
+LONG ANSWER: In allopatric speciation, a physical barrier (mountain, river, sea) splits a population; the isolated groups evolve independently until reproductively isolated. In sympatric speciation, divergence happens despite overlapping ranges, through mechanisms like chromosomal changes (polyploidy in plants), host-shifting, or strong disruptive selection.
+
+NEET FOCUS: Allopatric = geographic isolation (common); sympatric = same area, no geographic barrier (e.g. polyploidy in plants).",
+Evolution,Geological Eras,Name the major geological eras in order of decreasing age.,"SHORT ANSWER: From oldest to youngest: Proterozoic/Precambrian, Palaeozoic (ancient life), Mesozoic (age of reptiles/dinosaurs), and Cenozoic (age of mammals).
+
+LONG ANSWER: The Palaeozoic saw the rise of invertebrates, fishes, amphibians and early reptiles; the Mesozoic was dominated by reptiles (dinosaurs) and saw the origin of birds and mammals; the Cenozoic is the era of mammals, birds and flowering plants, including the appearance of humans. Each era is divided into periods.
+
+NEET FOCUS: Mesozoic = age of reptiles (dinosaurs); Cenozoic = age of mammals. Dinosaurs went extinct at the end of the Mesozoic.",
+Evolution,Human Evolution,Outline the main stages of human evolution.,"SHORT ANSWER: Dryopithecus/Ramapithecus -> Australopithecus -> Homo habilis -> Homo erectus -> Homo neanderthalensis -> Homo sapiens (modern humans).
+
+LONG ANSWER: Human ancestry traces from ape-like primates. Australopithecus walked upright; Homo habilis ('handy man') used stone tools; Homo erectus had a larger brain and used fire; Neanderthals buried their dead; modern Homo sapiens arose in Africa (~the last ~75,000-200,000 years) and spread worldwide, developing culture and language.
+
+NEET FOCUS: Order: Australopithecus -> H. habilis (tools) -> H. erectus (fire) -> Neanderthal -> H. sapiens. Brain size increased through the sequence.",
+Evolution,Microevolution Macroevolution,Distinguish between microevolution and macroevolution.,"SHORT ANSWER: Microevolution is small-scale change in allele frequencies within a population over a few generations. Macroevolution is large-scale evolutionary change (origin of new species and higher taxa) over long periods.
+
+LONG ANSWER: Microevolution involves changes within a species - shifts in allele frequencies driven by mutation, selection, drift and gene flow. Macroevolution encompasses the cumulative outcome of microevolution over geological time, producing new species, genera, and major body plans. The two are connected: macroevolution is microevolution writ large.
+
+NEET FOCUS: Microevolution = within-population allele frequency change (short term); macroevolution = speciation and above (long term).",
+Evolution,Modern Synthesis,What is the modern synthetic theory of evolution?,"SHORT ANSWER: The modern synthesis (neo-Darwinism) integrates Darwin's natural selection with Mendelian genetics and population genetics. It identifies mutation, recombination, gene flow, genetic drift and natural selection as the factors that change allele frequencies and drive evolution.
+
+LONG ANSWER: Developed by Fisher, Haldane, Wright, Dobzhansky and others, it explains evolution at the level of populations: variation arises from mutation and recombination, while natural selection, drift, gene flow and migration alter allele frequencies. It reconciled Darwinism with genetics, resolving earlier disputes between mutationists and selectionists.
+
+NEET FOCUS: Modern synthesis = Darwinian selection + Mendelian/population genetics. Variation by mutation & recombination; sorting by selection, drift, gene flow.",
+Evolution,Fitness,What is meant by 'fitness' in the Darwinian sense?,"SHORT ANSWER: Darwinian fitness is the relative reproductive success of an organism - its ability to survive and produce viable, fertile offspring that contribute to the next generation's gene pool.
+
+LONG ANSWER: Fitness is measured not by strength or size but by the number of offspring an individual leaves relative to others. The 'fittest' individuals are those whose heritable traits best suit the current environment, so their alleles increase in frequency over generations. Fitness is always relative to a particular environment.
+
+NEET FOCUS: 'Survival of the fittest' really means 'reproductive success'. Fitness = relative contribution to the next generation's gene pool, not physical strength.",
+Evolution,Coacervates,What are coacervates and protobionts?,"SHORT ANSWER: Coacervates (Oparin) and protobionts are aggregates of organic macromolecules bounded by a membrane-like boundary, considered precursors of the first cells in chemical evolution.
+
+LONG ANSWER: As organic molecules accumulated in the primitive ocean, they clustered into colloidal droplets (coacervates) that could take in materials, grow and divide in a primitive way. These pre-cellular structures, lacking true genetic machinery, are thought to represent a transitional stage between non-living organic aggregates and the first true cells.
+
+NEET FOCUS: Coacervates (Oparin) / protobionts = pre-cellular aggregates; an intermediate stage in the chemical origin of life.",
+Evolution,RNA World,What is the 'RNA world' hypothesis?,"SHORT ANSWER: The RNA world hypothesis proposes that RNA was the first genetic material in early life, able to both store information and act as a catalyst (ribozyme), before DNA and proteins took over these roles.
+
+LONG ANSWER: Because RNA can carry genetic information (like DNA) and catalyse reactions (like enzymes), it is thought that early life used RNA for both functions. Later, the more stable DNA became the store of information and proteins became the main catalysts, with RNA retaining an intermediary role (as in transcription/translation).
+
+NEET FOCUS: RNA was probably the first genetic material (RNA world); ribozymes show RNA can catalyse reactions. DNA later took over information storage as it is more stable.",
+Evolution,Analogous Examples,Give plant and animal examples of analogous and homologous structures.,"SHORT ANSWER: Homologous (divergent): vertebrate forelimbs; thorn (Bougainvillea) and tendril (Cucurbita) are homologous. Analogous (convergent): wings of bird and insect; sweet potato (modified root) and potato (modified stem) are analogous.
+
+LONG ANSWER: Homologous structures share a common developmental origin but differ in function, reflecting divergent evolution. Analogous structures perform the same function but differ in origin, reflecting convergent evolution. The plant examples are commonly tested: thorn vs tendril (both stem-derived = homologous); potato vs sweet potato (different organs, same storage function = analogous).
+
+NEET FOCUS: Plant homology - thorn & tendril; plant analogy - potato (stem) & sweet potato (root). Animal analogy - eyes of octopus and mammals.",
+Evolution,Hardy-Weinberg Equation Use,Why is the Hardy-Weinberg principle considered a 'null model' for evolution?,"SHORT ANSWER: Because it describes a non-evolving population (constant allele frequencies); any observed deviation from H-W expected frequencies signals that one or more evolutionary forces are acting, i.e. that evolution is occurring.
+
+LONG ANSWER: H-W provides the baseline expectation when no evolutionary force operates. By comparing actual genotype frequencies in a population with the values predicted by p^2 + 2pq + q^2, biologists can detect and quantify the effects of selection, drift, mutation, migration or non-random mating. Thus it is the reference against which evolution is measured.
+
+NEET FOCUS: H-W is the 'no-evolution' baseline. Deviation from p^2:2pq:q^2 reveals evolutionary change. This is a frequently tested conceptual point.",
