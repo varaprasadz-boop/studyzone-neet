@@ -362,27 +362,9 @@ if ($already === 0) {
     $messages[] = "Seeded subjects for both classes and syllabi";
 
     // Demo chapters under Class 12 + NCERT, bridged to the interactive hub already built
-    $c12 = null; foreach ($classRows as $c) if ($c['name'] === 'Class 12') $c12 = $c['id'];
-    $ncert = null; foreach ($sylRows as $s) if ($s['name'] === 'NCERT') $ncert = $s['id'];
-
-    $hub = 'NEET_PACE7_StudyHub.html';
-    $demoChapters = [
-        'Physics'   => ['Current Electricity', 'Ray Optics'],
-        'Chemistry' => ['Electrochemistry', 'Haloalkanes, Alcohols, Phenols & Ethers'],
-        'Botany'    => ['Principles of Inheritance & Linkage'],
-        'Zoology'   => ['Evolution'],
-    ];
-    $findSubj = $pdo->prepare("SELECT id FROM subjects WHERE class_id=? AND syllabus_id=? AND name=?");
-    $insChap  = $pdo->prepare("INSERT INTO chapters (subject_id, name, hub_file, sort) VALUES (?,?,?,?)");
-    foreach ($demoChapters as $subjName => $chaps) {
-        $findSubj->execute([$c12, $ncert, $subjName]);
-        $sid = $findSubj->fetch()['id'] ?? null;
-        if ($sid) {
-            foreach ($chaps as $i => $cn) $insChap->execute([$sid, $cn, $hub, $i]);
-        }
-    }
-    $messages[] = "Seeded demo Class-12 NCERT chapters linked to the interactive hub";
-
+    // (Legacy demo chapters that pointed at the interactive hub were
+    // removed — admin now creates real chapters and bulk-uploads study
+    // material via study_upload.php / study_import.php.)
     $pdo->prepare("INSERT INTO settings (k,v) VALUES ('installed', ?)")->execute([date('c')]);
     $seeded = true;
 } else {
@@ -498,6 +480,20 @@ $pdo->prepare("INSERT IGNORE INTO plans (code, name, price_inr, `interval`, tria
     ->execute(['free', 'Free', 0, 'lifetime', 0, 1]);
 $pdo->prepare("INSERT IGNORE INTO settings (k, v) VALUES (?, ?)")
     ->execute(['signup_open', '0']);
+
+/* 3h. Hub removal cleanup — drop any leftover demo chapters that
+   pointed at the standalone interactive hub (only if they have no
+   uploaded study items), then NULL the hub_file column on every
+   remaining chapter so the "Open hub" UI never surfaces. */
+if (col_exists($pdo, 'chapters', 'hub_file')) {
+    $n1 = $pdo->exec(
+        "DELETE FROM chapters
+         WHERE hub_file IS NOT NULL AND hub_file <> ''
+           AND id NOT IN (SELECT DISTINCT chapter_id FROM study_items WHERE chapter_id IS NOT NULL)"
+    );
+    $n2 = $pdo->exec("UPDATE chapters SET hub_file = NULL WHERE hub_file IS NOT NULL");
+    if ($n1 || $n2) $messages[] = "Hub cleanup: removed $n1 empty hub chapter(s), cleared hub_file on $n2 row(s)";
+}
 
 $messages[] = "Migrations + RBAC seed complete (idempotent).";
 

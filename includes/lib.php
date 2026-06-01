@@ -96,9 +96,8 @@ function chapter_item_count($chapterId) {
     return qcount("SELECT COUNT(*) FROM study_items WHERE chapter_id=?", [(int)$chapterId]);
 }
 
-/* Does this chapter have anything to study (hub file or uploaded items)? */
+/* Does this chapter have anything to study (uploaded study_items)? */
 function chapter_has_content($chapter) {
-    if (!empty($chapter['hub_file'])) return true;
     return chapter_item_count((int)$chapter['id']) > 0;
 }
 

@@ -18,9 +18,6 @@ $allowedChapIds = scoped_chapter_ids();
 if ($allowedChapIds !== null && $chap && !in_array((int)$chap['id'], $allowedChapIds, true)) $chap = null;
 if (!$chap) { require __DIR__.'/includes/header.php'; echo '<div class="note">Chapter not found.</div>'; require __DIR__.'/includes/footer.php'; exit; }
 
-// hub chapters open as the standalone interactive file
-if (!empty($chap['hub_file'])) { redirect('assets/hub/' . rawurlencode($chap['hub_file'])); }
-
 $admin = is_admin();
 $color = $chap['color'];
 $items = qa("SELECT * FROM study_items WHERE chapter_id=? ORDER BY sort, id", [$chapId]);

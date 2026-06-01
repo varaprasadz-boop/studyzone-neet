@@ -131,20 +131,17 @@ require __DIR__.'/includes/header.php';
   <?php else: ?>
     <div class="list">
     <?php foreach ($chs as $i => $ch):
-      $isHub = !empty($ch['hub_file']);
-      $items = $isHub ? 0 : chapter_item_count($ch['id']);
-      $hasContent = $isHub || $items > 0;
+      $items = chapter_item_count($ch['id']);
+      $hasContent = $items > 0;
     ?>
       <div class="row" style="display:block;cursor:default;border-left-color:<?php echo e($subj['color']); ?>">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
           <div style="flex:1;min-width:180px">
             <h3><?php echo e($ch['name']); ?></h3>
-            <p><?php echo $isHub ? 'Interactive hub' : ($items . ' item' . ($items==1?'':'s')); ?></p>
+            <p><?php echo $items . ' item' . ($items==1?'':'s'); ?></p>
           </div>
           <div class="btnrow" style="margin:0">
-            <?php if ($isHub): ?>
-              <a class="btn sm" href="assets/hub/<?php echo e($ch['hub_file']); ?>" target="_blank">Open hub</a>
-            <?php elseif ($hasContent): ?>
+            <?php if ($hasContent): ?>
               <a class="btn sm" href="study_chapter.php?chapter=<?php echo $ch['id']; ?>">View</a>
             <?php elseif (!$admin): ?>
               <span class="pill">soon</span>
