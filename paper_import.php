@@ -16,6 +16,23 @@ require_admin();
 
 $err = ''; $summary = null;
 
+// ---- "?bundle=NAME" pre-fill mode --------------------------------------
+// Reads imports/paper-<name>.json (questions) and imports/paper-<name>.meta.json
+// (exam name + date + note) and pre-populates the form. Admin just hits Submit.
+$bundleName = '';
+$bundleJson = '';
+$bundleMeta = ['exam_name' => '', 'exam_date' => '', 'note' => ''];
+if (isset($_GET['bundle']) && preg_match('/^[a-z0-9._-]+$/i', $_GET['bundle'])) {
+    $bundleName = $_GET['bundle'];
+    $jsonPath = __DIR__ . '/imports/paper-' . $bundleName . '.json';
+    $metaPath = __DIR__ . '/imports/paper-' . $bundleName . '.meta.json';
+    if (is_file($jsonPath)) $bundleJson = (string)@file_get_contents($jsonPath);
+    if (is_file($metaPath)) {
+        $m = json_decode((string)@file_get_contents($metaPath), true);
+        if (is_array($m)) $bundleMeta = array_merge($bundleMeta, $m);
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_csrf();
     $name = trim($_POST['exam_name'] ?? '');
@@ -122,20 +139,26 @@ require __DIR__.'/includes/header.php';
   <div class="btnrow"><a class="btn" href="paper_review.php?paper=<?php echo (int)$summary['paperId']; ?>">Open review →</a>
     <a class="btn ghost" href="questionbank.php">Question Bank</a></div>
 <?php else: ?>
+<?php if ($bundleName && $bundleJson): ?>
+  <div class="ok-msg" style="margin-bottom:12px">📦 Pre-loaded bundle <b><?php echo e($bundleName); ?></b> — review and click <b>Import</b>. Source: <code>imports/paper-<?php echo e($bundleName); ?>.json</code></div>
+<?php elseif ($bundleName && !$bundleJson): ?>
+  <div class="err" style="margin-bottom:12px">Bundle <code><?php echo e($bundleName); ?></code> not found. Looked for <code>imports/paper-<?php echo e($bundleName); ?>.json</code>.</div>
+<?php endif; ?>
 <form method="post" enctype="multipart/form-data">
   <?php echo csrf_field(); ?>
   <div class="row2">
-    <div class="field"><label>Exam name</label><input type="text" name="exam_name" required placeholder="e.g. PACE-7 (Sri Gosalites)"></div>
-    <div class="field"><label>Exam date</label><input type="date" name="exam_date" required></div>
+    <div class="field"><label>Exam name</label><input type="text" name="exam_name" value="<?php echo e($bundleMeta['exam_name']); ?>" required placeholder="e.g. PACE-7 (Sri Gosalites)"></div>
+    <div class="field"><label>Exam date</label><input type="date" name="exam_date" value="<?php echo e($bundleMeta['exam_date']); ?>" required></div>
   </div>
-  <div class="field"><label>Note <span class="hint">(optional)</span></label><input type="text" name="note"></div>
+  <div class="field"><label>Note <span class="hint">(optional)</span></label><input type="text" name="note" value="<?php echo e($bundleMeta['note']); ?>"></div>
   <div class="field">
-    <label>JSON file</label>
+    <label>JSON file <span class="hint">(or use the textarea below)</span></label>
     <label class="drop"><input type="file" name="json" accept=".json,application/json"><span>Tap to choose the .json</span></label>
   </div>
   <div class="field">
     <label>… or paste JSON</label>
-    <textarea name="json_text" rows="8" spellcheck="false" style="font-family:var(--mono);font-size:.8rem" placeholder='[{ "qtype":"mcq", "stem":"…", "options":["A","B","C","D"], "correct_index":1, … }]'></textarea>
+    <textarea name="json_text" rows="<?php echo $bundleJson ? 4 : 8; ?>" spellcheck="false" style="font-family:var(--mono);font-size:.8rem" placeholder='[{ "qtype":"mcq", "stem":"…", "options":["A","B","C","D"], "correct_index":1, … }]'><?php echo e($bundleJson); ?></textarea>
+    <?php if ($bundleJson): ?><div class="hint"><?php echo number_format(strlen($bundleJson)); ?> bytes loaded · ready to import</div><?php endif; ?>
   </div>
   <div class="field">
     <label>Page images <span class="hint">(optional — upload in booklet order: p1 = first page, p2 = second, …)</span></label>

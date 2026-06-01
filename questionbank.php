@@ -29,8 +29,11 @@ $papers   = qa("SELECT * FROM papers ORDER BY exam_date DESC, id DESC");
 
 <?php if ($admin): ?>
   <div class="toolbar">
-    <a class="btn" href="paper_new.php">+ Add new paper (upload images)</a>
-    <a class="btn ghost" href="question_edit.php">+ Add question manually</a>
+    <a class="btn" href="paper_new.php"><?php echo icon('upload'); ?> Add new paper (upload images)</a>
+    <a class="btn ghost" href="question_edit.php"><?php echo icon('plus'); ?> Add question manually</a>
+    <?php if (is_file(__DIR__ . '/imports/paper-pace7-2026-05-31.json')): ?>
+      <a class="btn ghost" href="paper_import.php?bundle=pace7-2026-05-31"><?php echo icon('download'); ?> Import PACE-7 bundle</a>
+    <?php endif; ?>
   </div>
   <?php if ($papers): ?>
   <div class="sect"><h2>Papers</h2></div>
